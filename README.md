@@ -12,9 +12,9 @@
 3. Use the provided Login and Signup processes within the system.
 
 ### Features
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+- User Registration and Profiles
+- Community News and Announcements
+- E-Baranggay Services
 - ...
 
 ### Contributors
