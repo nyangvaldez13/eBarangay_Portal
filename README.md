@@ -7,7 +7,7 @@
 - Frontend Development in Progress
 
 ### Getting Started
-1. Download the [ebarangay_portal](https://github.com/nyangvaldez13/eBarangay_Portal/tree/main/database%20file)file.
+1. Download the [ebarangay_portal](https://github.com/nyangvaldez13/eBarangay_Portal/tree/main/database%20file) file.
 2. Import the database file into your local PHPMyAdmin to access data.
 3. Use the provided Login and Signup processes within the system.
 
