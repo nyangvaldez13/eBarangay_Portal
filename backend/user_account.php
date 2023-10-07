@@ -44,7 +44,7 @@ if(isset($_POST['login'])){
             // Password is correct, set session and redirect
             $_SESSION['id'] = $row['id'];
             $_SESSION['email'] = $email;
-            header("Location: index.php"); // Redirect to the dashboard or another page
+            header("Location: index.php"); 
             exit();
         } else {
             echo '<script>alert("Incorrect password.")</script>';  
@@ -65,9 +65,9 @@ if (isset($_POST['signup'])) {
     $confirmPassword = $_POST['confirm-password'];
 
     if (
-        strlen($password) < 8 ||                // Minimum length of 8 characters
-        !preg_match('/\d/', $password) ||       // Contains at least one digit
-        !preg_match('/[A-Z]/', $password)       // Contains at least one uppercase letter
+        strlen($password) < 8 ||                
+        !preg_match('/\d/', $password) ||      
+        !preg_match('/[A-Z]/', $password)      
     ) {
         echo "<script>alert('Password complexity requirements not met.');</script>";
             echo "<script>location.href='../sign-up.php';</script>";
