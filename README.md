@@ -3,8 +3,8 @@
 ![landingpage](https://github.com/nyangvaldez13/eBarangay_Portal/assets/122779622/544bfb79-e5a2-4d25-ba73-216dc00a7575)
 
 ### Project Status
-- Current Progress: 20% Complete
-- Frontend Development in Progress
+- Current Progress: up to 40% Complete
+- Frontend and Backend Development in Progress
 
 ### Getting Started
 1. Download the [ebarangay_portal](https://github.com/nyangvaldez13/eBarangay_Portal/tree/main/database%20file) file.
