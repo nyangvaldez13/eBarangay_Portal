@@ -124,7 +124,23 @@ dropdownOptions.forEach((option) => {
 });
 
 //Request Section
+document.addEventListener("DOMContentLoaded", function() {
+    const requestButton = document.querySelector(".request-button-button");
+    const notifier = document.querySelector(".notifier");
+    
+    requestButton.addEventListener("click", function() {
 
+        notifier.style.display = "block";
+
+        notifier.style.top = "0";
+
+        setTimeout(function() {
+   
+            notifier.style.top = "-50px";
+        }, 3000); 
+    });
+});
+/*
 document.querySelector('.request-button-button').addEventListener('click', function() {
     // Send an AJAX request to your PHP script
     var xhr = new XMLHttpRequest();
@@ -152,7 +168,7 @@ document.querySelector('.request-button-button').addEventListener('click', funct
 
     // Send the AJAX request
     xhr.send();
-});
+});*/
 
 
 
