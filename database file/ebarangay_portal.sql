@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2023 at 11:19 AM
+-- Generation Time: Oct 13, 2023 at 11:17 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -45,6 +45,30 @@ CREATE TABLE `activity` (
 
 INSERT INTO `activity` (`activity_id`, `activity`, `title`, `date`, `time`, `place`, `image`, `heading`, `description`) VALUES
 (1, 'Event', 'Barangay Clean-Up Day', '2023-09-28', '2:00 PM - 4:00 PM', 'Tanghalang Onofre Pagsanghan', '', 'Join us for a day of community pride and environmental stewardship! ', 'The Barangay Clean-Up Day is a wonderful opportunity for residents to come together and make a positive impact on our environment.\r\n\r\nEvent Highlights:\r\nClean-up Activities: We\'ll provide gloves, bags, and other materials. Let\'s work together to clean up our streets, parks, and public areas.\r\nEnvironmental Awareness: Learn about sustainable practices and how we can reduce our ecological footprint.\r\nCommunity Bonding: Connect with your neighbors, build new friendships, and strengthen the sense of community in our barangay.\r\nPrizes and Giveaways: Participate in our friendly clean-up competition for a chance to win prizes and enjoy refreshments.\r\n\r\nHow to Participate:\r\nRegister: Sign up on the eBarangay Portal to confirm your participation.\r\nDress Accordingly: Wear comfortable clothing, closed-toe shoes, and don\'t forget your hat and sunscreen.\r\nArrive Early: Be at the meeting point on time to receive your clean-up supplies and instructions.\r\nHave Fun: Enjoy a rewarding day of making a positive impact on our barangay!');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brgy_cert_submission`
+--
+
+CREATE TABLE `brgy_cert_submission` (
+  `ID` int(5) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `age` int(3) NOT NULL,
+  `sex` set('Male','Female') NOT NULL,
+  `phone_no` int(11) NOT NULL,
+  `address` text NOT NULL,
+  `purpose` enum('Option 1','Option 2') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `brgy_cert_submission`
+--
+
+INSERT INTO `brgy_cert_submission` (`ID`, `firstname`, `lastname`, `age`, `sex`, `phone_no`, `address`, `purpose`) VALUES
+(0, 'Nina', 'Juntarciego', 21, 'Female', 2147483647, 'South Trinidad st.', '');
 
 -- --------------------------------------------------------
 
