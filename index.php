@@ -3,6 +3,22 @@
 
 <style>
 
+/* Notifier */
+.notifier {
+    display: none;
+    background-color: rgba(255, 255, 255, 0.74);
+    border-radius: 5px;
+    padding: 12px;
+    margin-top: 8px;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: top 0.5s;
+}
+
 .request{
     height: 100vh;
     padding: 20px;
@@ -125,6 +141,9 @@
     <?php
     require_once('partials/topnav.html');
     ?>
+
+    <!-- Notifier -->
+    <div class="notifier">Sign-in first to request a document</div>
 
     <!-- Home Section -->
     <section id="home" class="home">
@@ -323,7 +342,6 @@
                 <ul class="bullet-list">
                     <li>Barangay certificate</li>
                     <li>Business Permit</li>
-                    <li>Blotter</li>
                 </ul>
                 <div class="request-button-container">
                     <button class="request-button-button" data-target-page="request_mainpage.php" name="accessForm-button">Request</button>
@@ -400,34 +418,24 @@
     <!-- Scripts -->
     <script src="js/home/script.js"></script>
     <script>
-        document.querySelector('.request-button-button').addEventListener('click', function() {
-    // Send an AJAX request to your PHP script
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'check-signin.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    //Request Section
+    document.addEventListener("DOMContentLoaded", function() {
+    const requestButton = document.querySelector(".request-button-button");
+    const notifier = document.querySelector(".notifier");
+    
+    requestButton.addEventListener("click", function() {
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                // PHP script has responded
-                var response = xhr.responseText;
-                if (response === 'signed_in') {
-                    // User is signed in, navigate to the request form page
-                    window.location.href = 'request_mainpage.php';
-                } else {
-                    // User is not signed in, display an alert
-                    alert('Please sign in first to access the request form.');
-                }
-            } else {
-                // Handle AJAX errors
-                console.error('AJAX request error: ' + xhr.status);
-            }
-        }
-    };
+        notifier.style.display = "block";
 
-    // Send the AJAX request
-    xhr.send();
+        notifier.style.top = "0";
+
+        setTimeout(function() {
+   
+            notifier.style.top = "-50px";
+        }, 3000); 
+    });
 });
+
     </script>
 </body>
 </html>
