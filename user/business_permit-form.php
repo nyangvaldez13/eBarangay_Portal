@@ -7,17 +7,16 @@ $db = mysqli_connect("localhost", "root", "", "ebarangay_portal");
 session_start();
 
 if (isset($_POST['submit-button'])) {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $age = $_POST['age'];
-    $sex = $_POST['sex'];
+    $business = $_POST['business'];
+    $type = $_POST['type'];
+    $business_address = $_POST['business_address'];
+    $owner = $_POST['owner'];
+    $owner_address = $_POST['owner_address'];
     $phone_no = $_POST['phone_no'];
     $email = $_POST['email'];
-    $address = $_POST['address'];
-    $purpose = $_POST['purpose'];
 
     // Validate the form data (check for empty required fields)
-    if (empty($first_name) || empty($last_name) || empty($age) || empty($sex) || empty($phone_no) || empty($address) || empty($purpose)) {
+    if (empty($business) || empty($type) || empty($business_address) || empty($owner) || empty($owner_address) || empty($phone_no) || empty($email)) {
         // Display an error message and handle the error as needed
         echo "Please fill in all required fields.";
     } else {
@@ -27,8 +26,8 @@ if (isset($_POST['submit-button'])) {
         }
 
         // Sanitize data and use prepared statements to prevent SQL injection
-        $stmt = $db->prepare("INSERT INTO brgy_cert_submission (firstname, lastname, age, sex, phone_no, address, purpose) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssissss", $first_name, $last_name, $age, $sex, $phone_no, $address, $purpose);
+        $stmt = $db->prepare("INSERT INTO business_permit_submission (business, type, business_address, owner, owner_address, phone_no, email) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssissss", $business, $type, $business_address, $owner, $owner_address, $phone_no, $email);
 
         if ($stmt->execute()) {
             // Insertion successful
@@ -100,8 +99,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .firstname{
-    width: 70vh;
-    margin-right: 20px;
+    width: 66vh;
+    margin-right: 26px;
 }
 
 .firstname p{
@@ -115,7 +114,7 @@ if (isset($_POST['submit-button'])) {
 }
 
 .lastname{
-    width: 70vh;
+    width: 66vh;
     margin-right: 20px;
 }
 
@@ -178,7 +177,7 @@ if (isset($_POST['submit-button'])) {
 
 .email{
     width: 150vh;
-    margin-right: -6px;
+    
 }
 
 .email p{
@@ -267,52 +266,47 @@ if (isset($_POST['submit-button'])) {
                 <div class="back-button">
                     <a href="request_mainpage.php"><p>Back</p></a>
                 </div>
-                <h1>Barangay Certificate Request Form</h1>
+                <h1>Business Permit Request Form</h1>
                 <form method="POST">
                 <div class="container-column">
-                    <div class="firstname">
-                        <p>First Name</p>
-                        <input type="text" id="firstname" required name="first_name">
+                    <div class="address">
+                        <p>Business Name</p>
+                        <input type="text" id="business" required name="business">
                     </div>
-                    <div class="lastname">
-                        <p>Last Name</p>
-                        <input type="text" required name="last_name">
-                    </div>
-                </div>
-                <div class="container-column">
-                    <div class="age">
-                        <p>Age</p>
-                        <input type="text" id="age" required name="age">
-                    </div>
-                    <div class="sex">
-                        <p>Sex</p>
-                        <select id="sex" required name="sex">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                    <div class="purpose">
+                        <p>Business Type</p>
+                        <select id="type" required name="type">
+                            <option value="type1">Business 1</option>
+                            <option value="type2">Business 2</option>
                         </select>
-                    </div>
-                    <div class="phone_no">
-                        <p>Phone Number</p>
-                        <input type="text" id="phone_no" required name="phone_no">
                     </div>
                 </div>
                 <div class="container-column">
                     <div class="email">
-                        <p>Email</p>
-                        <input type="text" id="email" required name="email">
+                        <p>Business Address</p>
+                        <input type="text" id="business_address" required name="business_address">
                     </div>
                 </div>
                 <div class="container-column">
-                    <div class="address">
-                        <p>Address</p>
-                        <input type="text" id="address" required name="address">
+                    <div class="email">
+                        <p>Owner's Name</p>
+                        <input type="text" id="owner" required name="owner">
                     </div>
-                    <div class="purpose">
-                        <p>Purpose</p>
-                        <select id="purpose" required name="purpose">
-                            <option value="option1">Purpose 1</option>
-                            <option value="option2">Purpose 2</option>
-                        </select>
+                </div>
+                <div class="container-column">
+                    <div class="email">
+                        <p>Owner's Address</p>
+                        <input type="text" id="owner_address" required name="owner_address">
+                    </div>
+                </div>
+                <div class="container-column">
+                    <div class="firstname">
+                        <p>Phone Number</p>
+                        <input type="text" id="phone_no" required name="phone_no">
+                    </div>
+                    <div class="lastname">
+                        <p>Email</p>
+                        <input type="email" required name="email">
                     </div>
                 </div>
                 <div class="submit-request">

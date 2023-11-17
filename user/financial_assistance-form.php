@@ -67,7 +67,7 @@ if (isset($_POST['submit-button'])) {
 }
 
 .container-form{
-    min-height: 82vh;
+    min-height: 70vh;
     width: 800px;
     display: flex;
     flex-direction: column;
@@ -100,8 +100,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .firstname{
-    width: 70vh;
-    margin-right: 20px;
+    width: 47.8vh;
+    margin-right: 26px;
 }
 
 .firstname p{
@@ -115,8 +115,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .lastname{
-    width: 70vh;
-    margin-right: 20px;
+    width: 47.8vh;
+    margin-right: 26px;
 }
 
 .lastname p{
@@ -144,6 +144,10 @@ if (isset($_POST['submit-button'])) {
     height: 5vh;
 }
 
+.container-column .sex{
+    margin-left: -20px;
+}
+
 .sex select {
     margin-top: 5px;
     margin-left: 20px;
@@ -161,8 +165,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .phone_no{
-    width: 88vh;
-    margin-right: 10px;
+    width: 39.8vh;
+    margin-right: 28px;
     margin-left: 40px;
 }
 
@@ -177,8 +181,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .email{
-    width: 150vh;
-    margin-right: -6px;
+    width: 49.8vh;
+    margin-right: 20px;
 }
 
 .email p{
@@ -192,7 +196,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .address{
-    width: 94.7vh;
+    width: 150vh;
+    margin-right: -6px;
 }
 
 .address p{
@@ -211,12 +216,6 @@ if (isset($_POST['submit-button'])) {
     font-size: 16px;
 }
 
-.purpose p{
-    text-align: left;
-    color: #9B9988;
-    margin-left: 10px;
-}
-
 .address input{
     height: 5vh;
 }
@@ -225,6 +224,7 @@ if (isset($_POST['submit-button'])) {
     text-align: right;
     margin-top: 30px;
 }
+
 .submit-button {
     font-weight: 600;
     font-size: 14px;
@@ -267,7 +267,7 @@ if (isset($_POST['submit-button'])) {
                 <div class="back-button">
                     <a href="request_mainpage.php"><p>Back</p></a>
                 </div>
-                <h1>Barangay Certificate Request Form</h1>
+                <h1>Financial Assistance Request Form</h1>
                 <form method="POST">
                 <div class="container-column">
                     <div class="firstname">
@@ -278,12 +278,13 @@ if (isset($_POST['submit-button'])) {
                         <p>Last Name</p>
                         <input type="text" required name="last_name">
                     </div>
-                </div>
-                <div class="container-column">
                     <div class="age">
                         <p>Age</p>
                         <input type="text" id="age" required name="age">
                     </div>
+                </div>
+                <div class="container-column">
+                    
                     <div class="sex">
                         <p>Sex</p>
                         <select id="sex" required name="sex">
@@ -295,8 +296,6 @@ if (isset($_POST['submit-button'])) {
                         <p>Phone Number</p>
                         <input type="text" id="phone_no" required name="phone_no">
                     </div>
-                </div>
-                <div class="container-column">
                     <div class="email">
                         <p>Email</p>
                         <input type="text" id="email" required name="email">
@@ -306,13 +305,6 @@ if (isset($_POST['submit-button'])) {
                     <div class="address">
                         <p>Address</p>
                         <input type="text" id="address" required name="address">
-                    </div>
-                    <div class="purpose">
-                        <p>Purpose</p>
-                        <select id="purpose" required name="purpose">
-                            <option value="option1">Purpose 1</option>
-                            <option value="option2">Purpose 2</option>
-                        </select>
                     </div>
                 </div>
                 <div class="submit-request">

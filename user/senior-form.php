@@ -67,7 +67,7 @@ if (isset($_POST['submit-button'])) {
 }
 
 .container-form{
-    min-height: 82vh;
+    height: 88vh;
     width: 800px;
     display: flex;
     flex-direction: column;
@@ -131,7 +131,7 @@ if (isset($_POST['submit-button'])) {
 
 .age{
     width: 10vh;
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .age p{
@@ -154,11 +154,7 @@ if (isset($_POST['submit-button'])) {
     font-size: 16px;
 }
 
-.sex p{
-    text-align: left;
-    color: #9B9988;
-    margin-left: 20px;
-}
+
 
 .phone_no{
     width: 88vh;
@@ -177,8 +173,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .email{
-    width: 150vh;
-    margin-right: -6px;
+    width: 47.8vh;
+    margin-right: 24px;
 }
 
 .email p{
@@ -191,8 +187,24 @@ if (isset($_POST['submit-button'])) {
     height: 5vh;
 }
 
+.name{
+    width: 35vh;
+    margin-right: 32px;
+}
+
+.name p{
+    text-align: left;
+    color: #9B9988;
+    padding-bottom: 5px;
+}
+
+.name input{
+    height: 5vh;
+}
+
 .address{
-    width: 94.7vh;
+    width: 150vh;
+    margin-right: -6px;
 }
 
 .address p{
@@ -209,12 +221,6 @@ if (isset($_POST['submit-button'])) {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-}
-
-.purpose p{
-    text-align: left;
-    color: #9B9988;
-    margin-left: 10px;
 }
 
 .address input{
@@ -267,7 +273,7 @@ if (isset($_POST['submit-button'])) {
                 <div class="back-button">
                     <a href="request_mainpage.php"><p>Back</p></a>
                 </div>
-                <h1>Barangay Certificate Request Form</h1>
+                <h1>Senior Citizen Application Form</h1>
                 <form method="POST">
                 <div class="container-column">
                     <div class="firstname">
@@ -284,35 +290,33 @@ if (isset($_POST['submit-button'])) {
                         <p>Age</p>
                         <input type="text" id="age" required name="age">
                     </div>
-                    <div class="sex">
-                        <p>Sex</p>
-                        <select id="sex" required name="sex">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
+                    <div class="email">
+                        <p>Birthday</p>
+                        <input type="text" id="email" required name="email" placeholder="Date">
                     </div>
-                    <div class="phone_no">
-                        <p>Phone Number</p>
-                        <input type="text" id="phone_no" required name="phone_no">
+                    <div class="email">
+                        <p>Barangay Certificate</p>
+                        <input type="text" id="email" required name="email" placeholder="Upload a file...">
                     </div>
                 </div>
                 <div class="container-column">
-                    <div class="email">
-                        <p>Email</p>
-                        <input type="text" id="email" required name="email">
+                    <div class="name">
+                        <p>Last Name</p>
+                        <input type="text" id="address" required name="address">
+                    </div>
+                    <div class="name">
+                        <p>First Name</p>
+                        <input type="text" id="address" required name="address">
+                    </div>
+                    <div class="name">
+                        <p>Middle Name</p>
+                        <input type="text" id="address" required name="address">
                     </div>
                 </div>
                 <div class="container-column">
                     <div class="address">
                         <p>Address</p>
                         <input type="text" id="address" required name="address">
-                    </div>
-                    <div class="purpose">
-                        <p>Purpose</p>
-                        <select id="purpose" required name="purpose">
-                            <option value="option1">Purpose 1</option>
-                            <option value="option2">Purpose 2</option>
-                        </select>
                     </div>
                 </div>
                 <div class="submit-request">
