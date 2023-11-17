@@ -3,7 +3,7 @@
 ![landingpage]([https://github.com/nyangvaldez13/eBarangay_Portal/assets/122779622/544bfb79-e5a2-4d25-ba73-216dc00a7575](https://github.com/nyangvaldez13/eBarangay_Portal/tree/main/assets/ss))
 
 ### Project Status
-- Current Progress: up to 40% Complete
+- Current Progress: up to 80% Complete
 - Frontend and Backend Development in Progress
 
 ### Getting Started
