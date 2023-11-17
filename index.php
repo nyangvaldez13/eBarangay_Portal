@@ -121,6 +121,75 @@
     cursor: pointer;
 }
 
+/* Gallery */
+.gallery-itemE {
+    width: 310px; 
+    height: 305px;
+    margin-bottom: 43px;
+    padding: 20px;
+    position: relative;
+    background-image: url('../assets/home/events-bg.png');
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    border: 1px solid #9B9988;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.gallery-itemE .backgroundE {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #06030e46;
+    z-index: 1;
+}
+
+.gallery-itemE p {
+    font-size: 16px;
+    color: #9B9988;
+    position: relative;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.gallery-itemE .captionE {
+    font-size: 23px;
+    color: #262626;
+    font-weight: 550;
+    margin-bottom: 30px;
+}
+
+.gallery-itemE .dateE {
+    font-size: 17px;
+    color: #262626;
+}
+
+.item-detailsE {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.item-detailsE .captionE {
+    flex: 1; 
+}
+
+.dividerE {
+    height: 1.4px;
+    background-color: #9B9988;
+    margin-bottom: 30px;
+    width: 26%;
+}
+
+.dateE {
+    color: #888;
+    font-size: 14px;
+}
+
 </style>
 <head>
     <meta charset="UTF-8">
@@ -154,7 +223,7 @@
                 <h2>Connect Communities, One Click at a Time</h2>
                 <p>Welcome to the eBarangay Portal, your vibrant digital hub where community meets technology. Get ready to unlock the 
                     full potential of your barangay with seamless access to essential services and a vibrant online community.</p>
-                <a href="#get-started" class="btn">GET STARTED</a>
+                <a href="../eBarangay-Portal/login" class="btn">GET STARTED</a>
             </div>
         </div>
     </section>
@@ -186,7 +255,7 @@
         <div class="gallery">
             <div class="gallery-item">
                 <p>
-                    <span class="title">Event</span>
+                    <span class="title">Announcement</span>
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
                     8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
                 </p>
@@ -198,7 +267,7 @@
             </div>
 
             <div class="gallery-item">
-                <p>Title 2</p>
+                <p>Event</p>
                 <div class="item-details">
                     <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                 </div>
@@ -208,7 +277,39 @@
 
             <div class="gallery-item">
                 <p>
-                    <span class="title">Event</span>
+                    <span class="title">Announcement</span>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
+                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
+                </p>
+                <div class="item-details">
+                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </div>
+                <div class="divider"></div>
+                <p class="date">MM-DD-YYYY</p>
+            </div>
+
+            <!-- <div class="gallery-itemE">
+            <div class="backgroundE"></div>
+                <p>Event</p>
+                <div class="item-detailsE">
+                    <p class="captionE">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </div>
+                <div class="dividerE"></div>
+                <p class="dateE">MM-DD-YYYY</p>
+            </div> -->
+
+            <div class="gallery-item">
+                <p>Event</p>
+                <div class="item-details">
+                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </div>
+                <div class="divider"></div>
+                <p class="date">MM-DD-YYYY</p>
+            </div>
+
+            <div class="gallery-item">
+                <p>
+                    <span class="title">Announcement</span>
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
                     8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
                 </p>
@@ -220,30 +321,8 @@
             </div>
 
             <div class="gallery-item">
-                <p>Title 4</p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
-
-            <div class="gallery-item">
                 <p>
-                    <span class="title">Event</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
-                </p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
-
-            <div class="gallery-item">
-                <p>
-                    <span class="title">Event</span>
+                    <span class="title">Announcement</span>
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
                     8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
                 </p>
@@ -432,7 +511,7 @@
         setTimeout(function() {
    
             notifier.style.top = "-50px";
-        }, 3000); 
+        }, 1000); 
     });
 });
 
