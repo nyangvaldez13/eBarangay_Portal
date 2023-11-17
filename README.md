@@ -1,6 +1,6 @@
 # eBarangay_Portal
 
-![landingpage][([https://github.com/nyangvaldez13/eBarangay_Portal/assets/122779622/544bfb79-e5a2-4d25-ba73-216dc00a7575](https://github.com/nyangvaldez13/eBarangay_Portal/tree/main/assets/ss))](https://github.com/nyangvaldez13/eBarangay_Portal/blob/main/assets/ss/landingpage.JPG)
+![landingpage](https://github.com/nyangvaldez13/eBarangay_Portal/blob/main/assets/ss/landingpage.JPG)
 
 ### Project Status
 - Current Progress: up to 80% Complete
