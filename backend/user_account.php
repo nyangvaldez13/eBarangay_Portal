@@ -1,6 +1,6 @@
 <?php
 
-$db = mysqli_connect("localhost", "root", "", "ebarangay_portal");
+include 'db.php';
 
 session_start();
 
@@ -13,13 +13,13 @@ if(isset($_POST['login'])){
     $email = stripcslashes($email);
     $pass = stripcslashes($pass);
     
-    $email = mysqli_real_escape_string ($db, $email); 
-    $pass = mysqli_real_escape_string ($db, $pass);
+    //$email = mysqli_real_escape_string ($db, $email); 
+    //$pass = mysqli_real_escape_string ($db, $pass);
   
     $query  = " SELECT *
                 FROM users 
                 WHERE email = '$email' and user_password = '$pass'";
-    $result = mysqli_query($db, $query);  
+    $result = mysqli_query($conn, $query);  
 
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
     $count = mysqli_num_rows($result);
@@ -99,5 +99,6 @@ if (isset($_POST['signup'])) {
     }}
 
     //mysqli_close($conn);
+    $conn->close();
 }
 ?>
