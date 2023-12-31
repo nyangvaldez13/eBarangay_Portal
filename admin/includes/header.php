@@ -275,43 +275,43 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="dashboard_admin.php">
         <i class="bi bi-house-door-fill"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="residents.php">
         <i class="bi bi-people-fill"></i>
           <span>Resident</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="admin.php">
         <i class="bi bi-person-fill"></i>
           <span>Admin</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="requests.php">
         <i class="bi bi-file-earmark-fill"></i>
           <span>Request</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="news.php">
         <i class="bi bi-megaphone-fill"></i>
           <span>News</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="projects.php">
         <i class="bi bi-flag-fill"></i>
           <span>Projects</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="settings.php">
         <i class="bi bi-gear-fill"></i>
           <span>Settings</span>
         </a>

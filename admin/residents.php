@@ -41,7 +41,7 @@
                     <td>Curicó</td>
                     <td>
                         <button type="button" class="btn"><i class="bi bi-eye"></i></button>
-                        <button type="button" class="btn"><i class="bi bi-trash3"></i></button>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
                  
@@ -56,7 +56,28 @@
       </div>
     </section>
 
+<div class="modal fade" id="deleteModal" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                     
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <span class="card-title fs-6"> Are you sure you want to delete?</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
+                      <button type="button" class="btn btn-primary">Yes</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Small Modal-->
 
+    <script>
+
+        
+    </script>
 
 
 <?php require('./includes/footer.php') ?>
