@@ -7,7 +7,7 @@
     </div>
     <div class="col-auto">
         <div class="">
-        <button type="button" class="btn btn-outline-primary"><i class="bi bi-upload"></i> Export</button>
+        <button type="button" class="btn btn-primary" id = "addBtn"><i class="bi bi-plus"></i> Add Projects</button>
         </div>
     </div>
     </div>
@@ -34,8 +34,8 @@
                   <tr>
                     <td>Lorem ipsum</td>
                     <td>
-                        <button type="button" class="btn"><i class="bi bi-eye"></i></button>
-                        <button type="button" class="btn"><i class="bi bi-pencil"></i></button>
+                        <button type="button" class="btn" id = "viewBtn"><i class="bi bi-eye"></i></button>
+                        <button type="button" class="btn" id = "editBtn"><i class="bi bi-pencil"></i></button>
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
@@ -70,7 +70,17 @@
               </div><!-- End Small Modal-->
 
     <script>
+    document.getElementById('addBtn').addEventListener('click', function(){
+          window.location.href = "add-projects.php";
+        });
 
+        document.getElementById('viewBtn').addEventListener('click', function(){
+          window.location.href = "view-projects.php";
+        });
+
+        document.getElementById('editBtn').addEventListener('click', function(){
+          window.location.href = "edit-projects.php";
+        });
         
     </script>
 
