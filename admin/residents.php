@@ -7,7 +7,6 @@
     </div>
     <div class="col-auto">
         <div class="">
-        <button type="button" class="btn btn-outline-primary"><i class="bi bi-upload"></i> Export</button>
         </div>
     </div>
     </div>
@@ -40,7 +39,7 @@
                     <td>Curicó</td>
                     <td>Curicó</td>
                     <td>
-                        <button type="button" class="btn"><i class="bi bi-eye"></i></button>
+                        <button type="button" class="btn" id="viewBtn"><i class="bi bi-eye"></i></button>
                       <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
@@ -75,7 +74,9 @@
               </div><!-- End Small Modal-->
 
     <script>
-
+      document.getElementById('viewBtn').addEventListener('click', function(){
+          window.location.href = "view-resident.php";
+        });
         
     </script>
 

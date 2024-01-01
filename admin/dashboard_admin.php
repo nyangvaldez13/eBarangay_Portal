@@ -57,7 +57,7 @@
     </div>
     <div class="col-auto">
         <div class="">
-        <button type="button" class="btn btn-primary"><i class="bi bi-plus"></i> Add Barangay Official</button>
+        <button type="button" class="btn btn-primary" id = "addBtn"><i class="bi bi-plus"></i> Add Barangay Official</button>
         </div>
     </div>
     </div>
@@ -80,8 +80,8 @@
                     <td>9958</td>
                     <td>Curicó</td>
                     <td>
-                        <button type="button" class="btn"><i class="bi bi-eye"></i></button>
-                        <button type="button" class="btn"><i class="bi bi-pencil"></i></button>
+                        <button type="button" class="btn" id = "viewBtn"><i class="bi bi-eye"></i></button>
+                        <button type="button" class="btn" id = "editBtn"><i class="bi bi-pencil"></i></button>
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
@@ -119,6 +119,17 @@
 
     <script>
 
+        document.getElementById('addBtn').addEventListener('click', function(){
+          window.location.href = "add-barangay-official.php";
+        });
+
+        document.getElementById('viewBtn').addEventListener('click', function(){
+          window.location.href = "view-barangay-official.php";
+        });
+
+        document.getElementById('editBtn').addEventListener('click', function(){
+          window.location.href = "edit-barangay-official.php";
+        });
         
     </script>
 
