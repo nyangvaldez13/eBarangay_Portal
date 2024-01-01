@@ -3,12 +3,17 @@
 <section class="section pt-5">
     <div class="row align-items-center">
     <div class="col-xl">
-        <div class="fs-2 fw-bold">Request List</div>
+        <div class="fs-2 fw-bold card-title">Requests List</div>
     </div>
     <div class="col-auto">
         <div class="">
         <button type="button" class="btn btn-outline-primary"><i class="bi bi-upload"></i> Export</button>
         </div>
+        <div class="col-auto">
+        <div class="">
+        <button type="button" class="btn btn-primary" id = "addBtn"><i class="bi bi-plus"></i> Add Admin</button>
+        </div>
+    </div>
     </div>
     </div>
 

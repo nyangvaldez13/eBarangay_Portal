@@ -5,10 +5,12 @@
     <div class="col-xl">
         <div class="fs-2 fw-bold">News List</div>
     </div>
+  
     <div class="col-auto">
         <div class="">
-        <button type="button" class="btn btn-outline-primary"><i class="bi bi-upload"></i> Export</button>
+        <button type="button" class="btn btn-primary" id = "addBtn"><i class="bi bi-plus"></i> Add News</button>
         </div>
+    </div>
     </div>
     </div>
 
