@@ -3,11 +3,11 @@
 <section class="section pt-2">
     <div class="row align-items-center">
     <div class="col-xl">
-       <div class="card-title fs-3">Add News</div>
+       <div class="card-title fs-3">View News</div>
               <nav>
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="news.php"> News List</a></li>
-                  <li class="breadcrumb-item active">Add News </li>
+                  <li class="breadcrumb-item active">View News </li>
                 </ol>
               </nav>
     </div>

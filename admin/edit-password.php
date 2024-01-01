@@ -15,42 +15,22 @@
              </nav>
             </div>
             <div class="col-8 d-flex justify-content-center align-items-center flex-column mt-2">
-                 <div class="file-upload-container justify-content-center align-items-center mb-2">
-                <input type="file" id="file-upload" class="file-upload-input">
-                    <label for="file-upload" class="file-upload-label">
-                <span class="upload-icon">
-                    <i class="bi bi-image"></i>
-                </span>
-                <span class="upload-text">
-                        Click to upload
-                </span>
-            </div>
-            
-             <form class="row g-3 mt-2 ms-4">
+             <form class="row g-3 mt-1 ms-4">
                 <div class=" col-12 row">
-                    <div class="col-6">
-                        <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="inputName1">
-                    </div>
-                    <div class="col-6">
-                        <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="inputName2">
-                    </div>
 
                 <div class="col-12">
-                        <label for="inputName5" class="form-label mt-2">Address</label>
-                        <input type="text" class= "form-control" id="inputName2">
+                        <label for="inputName5" class="form-label mt-2">Current Password</label>
+                        <input type="password" class= "form-control" id="inputName2">
+                </div>
+                 <div class="col-12">
+                        <label for="inputName5" class="form-label mt-2"> New Password</label>
+                        <input type="password" class= "form-control" id="inputName2">
+                </div>
+                 <div class="col-12">
+                        <label for="inputName5" class="form-label mt-2">Confirm New Password</label>
+                        <input type="password" class= "form-control" id="inputName2">
                 </div>
 
-
-                <div class="col-6">
-                    <label for="inputName5" class="form-label mt-2">Email</label>
-                     <input type="text" class="form-control" id="inputName3">
-                    </div>
-                <div class="col-6">
-                    <label for="inputName5" class="form-label mt-2">Contact Number</label>
-                     <input type="text" class="form-control" id="inputName4">
-                    </div>
                 </div>
                  <div class="text-center mt-5">
                   <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-outline-primary btn-lg">Cancel</button>

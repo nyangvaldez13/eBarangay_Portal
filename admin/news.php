@@ -58,7 +58,8 @@
                     </td>
                     <td>28 Sept 2023</td>
                     <td>
-                        <button type="button" class="btn"><i class="bi bi-eye"></i></button>
+                        <button type="button" class="btn" id = "viewBtn"><i class="bi bi-eye"></i></button>
+                        <button type="button" class="btn" id = "editBtn"><i class="bi bi-pencil"></i></button>
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
@@ -93,7 +94,17 @@
               </div><!-- End Small Modal-->
 
     <script>
+      document.getElementById('addBtn').addEventListener('click', function(){
+          window.location.href = "add-news.php";
+        });
 
+        document.getElementById('viewBtn').addEventListener('click', function(){
+          window.location.href = "view-news.php";
+        });
+
+        document.getElementById('editBtn').addEventListener('click', function(){
+          window.location.href = "edit-news.php";
+        });
         
     </script>
 
