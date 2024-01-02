@@ -24,15 +24,19 @@
 
             <h5 class="card-title mt-3">Admin Details</h5>
 
-           <form class="row g-3 mt-2">
+           <form class="row g-3 mt-2 " name="add-admin" method="POST" action="../backend/add-admin.php">
                 <div class=" col-9 row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="inputName1">
+                        <input type="text" name="firstname" class="form-control" id="inputName1">
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="inputName2">
+                        <input type="text" name="lastname" class="form-control" id="inputName2">
+                    </div>
+                    <div class="col-4">
+                        <label for="inputName5" class="form-label">Password</label>
+                        <input type="password" name="user_password" class="form-control" id="inputName2">
                     </div>
 
                 <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -40,19 +44,18 @@
 
                 <div class="col-12">
                         <label for="inputName5" class="form-label">Address</label>
-                        <input type="text" class= "form-control" id="inputName2">
+                        <input type="text" name="address" class= "form-control" id="inputName2">
                 </div>
 
 
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Email</label>
-                     <input type="text" class="form-control" id="inputName3">
+                     <input type="email" name="email" class="form-control" id="inputName3">
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Contact Number</label>
-                     <input type="text" class="form-control" id="inputName4">
+                     <input type="number" name="phone" class="form-control" id="inputName4">
                     </div>
-               
                 </div>
             <div class="col-2">
                 <span class="card-title ms-4">Photo</span>

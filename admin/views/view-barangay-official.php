@@ -1,5 +1,5 @@
 <?php require('../includes/header.php') ?>
-
+<?php require '../backend/view-barangay-official.php'; ?>
 <section class="section pt-2">
     <div class="row align-items-center">
     <div class="col-xl">
