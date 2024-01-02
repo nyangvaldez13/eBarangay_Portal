@@ -9,13 +9,13 @@ require_once('backend/auth.php')
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
 
   <title>Admin Portal</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+  <link rel="icon" type="image/png" href="assets/img/logoE.png">
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -248,7 +248,7 @@ require_once('backend/auth.php')
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="backend/logout.php">
         <i class="bi bi-box-arrow-in-right"></i>
           <span>Log out</span>
         </a>

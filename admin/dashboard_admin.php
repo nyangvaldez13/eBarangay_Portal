@@ -35,7 +35,7 @@
     <div class="col-lg-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title"><i class="bi bi-file-earmark text-info"></i> Files</h5>
+          <h5 class="card-title"><i class="bi bi-file-earmark text-info"></i> Pending Request</h5>
           <p>127</p>
         </div>
       </div>
