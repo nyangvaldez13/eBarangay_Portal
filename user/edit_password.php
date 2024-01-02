@@ -1,6 +1,89 @@
 <!DOCTYPE html>
 <html lang="en"></html>
 
+<?php 
+
+$hostname = 'localhost';
+$username = 'ebar_admin'; 
+$password = 'Ae2-8N39CvbJ2ngn';    
+$database = 'ebar_ebardb'; 
+
+$db = new mysqli($hostname, $username, $password, $database);
+
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+}
+
+session_start();
+
+//Update Password process
+if (isset($_POST['updatepass-button'])) {
+    $current_pass = $_POST['current_pass'];
+    $new_pass = $_POST['new_pass'];
+    $confirm_pass = $_POST['confirm_pass'];
+    
+    $user_id = $_SESSION['id'];
+
+    // Check if new password meets complexity requirements
+    if (
+        strlen($new_pass) < 8 ||                // Minimum length of 8 characters
+        !preg_match('/\d/', $new_pass) ||       // Contains at least one digit
+        !preg_match('/[A-Z]/', $new_pass)       // Contains at least one uppercase letter
+    ) {
+        echo "<script>alert('Password complexity requirements not met.');</script>";
+        echo "<script>location.href='../user/edit_password.php';</script>";
+        exit();
+    }
+
+    // Check if new password and confirm password match
+    if ($new_pass != $confirm_pass) {
+        echo "<script>alert('New password and confirm password do not match.');</script>";
+        echo "<script>location.href='../user/edit_password.php';</script>";
+        exit();
+    }
+
+    // Retrieve stored password from the database
+$check_pass_query = "SELECT user_password FROM users WHERE id = $user_id";
+$result = mysqli_query($db, $check_pass_query);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    //$storedPassword = $row['user_password'];
+    $count = mysqli_num_rows($result);
+
+   
+
+    // Verify the current password
+    //if (!password_verify($current_pass, $storedPassword)) 
+    if($count != 1 && $row['user_password'] != $current_pass)
+    {
+        echo "<script>alert('Current password is incorrect.');</script>";
+        echo "<script>location.href='../user/edit_password.php';</script>";
+        exit();
+    }
+} else {
+    echo "Error: " . mysqli_error($db);
+    exit();
+}
+    
+    // Hash the new password
+$hashed_new_pass = $new_pass;  // Remove password_hash function
+
+// Update the password in the database
+$update_pass_query = "UPDATE users SET user_password = '$hashed_new_pass' WHERE id = $user_id";
+
+if (mysqli_query($db, $update_pass_query)) {
+    echo "<script>alert('Password updated successfully.');</script>";
+    echo "<script>location.href='../user/edit_password.php';</script>";
+    exit();
+} else {
+    echo "Error updating password: " . mysqli_error($db);
+    exit();
+}
+
+}
+?>
+
 <style>
 
 /* user-topnav */
@@ -263,30 +346,32 @@
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABP0lEQVR4nO1UMU7DQBA8CTroyO49AGjsXSsSNFTwgZSpoEM0FEhmNzV8AAoIL0j4BBEd+UuQ+ANobCxZIJCFTYHISqu1z9bM3szehbCM/xHKuQrZvZLNukgBFudagCd0ui7kz0r20hWBFli+AHYQ9j1lf82iDYTPomyMdtsqkkUbABPYIY12gBfU4pnssi1BWsP8kgDb057tFNt8j2EYriTkfey0DtjvjbaRjQlgkLI9KdkVahZNsmhrQv6obDdK/iDsRwAT9jslmyCFbdyIAFOQkm9W3Sn5VNlP0mjHWNsPF6sgLr/ZpOoc/2GtEUFC+db3BD7/MUEpkc+F/Br1s0Q2Ez4/LCWyMYDL2ffbxiYDECajfjQ5i8atTO50TKV20NBZ5wctwbyTL37jqsgqeWFil5edkk+B2VaJZfyReAN2PyewosRPuQAAAABJRU5ErkJggg==">
                 <h4 class="h4-pass">Password</h4></div>
         </div>
+        <form method="POST" action="">
         <div class="edit-profile">
             <div class="container-column">
                 <div class="info">
                     <p>Current Password</p>
-                    <input type="text" id="firstname" required name="first_name">
+                    <input type="password" id="firstname" required name="current_pass">
                 </div>
             </div>
             <div class="container-column">
                 <div class="info">
                     <p>New Password</p>
-                    <input type="text" id="firstname" required name="first_name">
+                    <input type="password" id="firstname" required name="new_pass">
                 </div>
             </div>
             <div class="container-column">
                 <div class="info">
                     <p>Confirm Password</p>
-                    <input type="text" id="firstname" required name="first_name">
+                    <input type="password" id="firstname" required name="confirm_pass">
                 </div>
             </div>
             <div class="submit-request">
-                <button class="cancel-button" type="submit-button" name="submit-button">CANCEL</button>
-                <button class="submit-button" type="submit-button" name="submit-button">SAVE</button>
+                <button class="cancel-button" type="submit-button" name="cancel-button" onclick="location.href='_index.php'">CANCEL</button>
+                <button class="submit-button" type="submit-button" name="updatepass-button">SAVE</button>
             </div>
-        </div>
+        </div
+        </form>
     </section>
 
     <!-- Footer -->
