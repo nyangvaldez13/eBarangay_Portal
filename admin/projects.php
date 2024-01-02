@@ -3,7 +3,7 @@
 <section class="section pt-5">
     <div class="row align-items-center">
     <div class="col-xl">
-        <div class="fs-2 fw-bold">Projects List</div>
+        <div class="fs-2 fw-bold card-title">Projects List</div>
     </div>
     <div class="col-auto">
         <div class="">

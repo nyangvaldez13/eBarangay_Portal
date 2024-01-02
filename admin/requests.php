@@ -5,16 +5,6 @@
     <div class="col-xl">
         <div class="fs-2 fw-bold card-title">Requests List</div>
     </div>
-    <div class="col-auto">
-        <div class="">
-        <button type="button" class="btn btn-outline-primary"><i class="bi bi-upload"></i> Export</button>
-        </div>
-        <div class="col-auto">
-        <div class="">
-        <button type="button" class="btn btn-primary" id = "addBtn"><i class="bi bi-plus"></i> Add Admin</button>
-        </div>
-    </div>
-    </div>
     </div>
 
 </section>
@@ -61,7 +51,9 @@
                        ?>
                        <div class="<?= $toDisplayClass; ?>"><?= $toDisplay?></div>
                     <td>
-                        <button type="button" class="btn"><i class="bi bi-eye"></i></button>
+                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="bi bi-eye"></i>
+                        </button>
+                       
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
@@ -117,6 +109,74 @@
                   </div>
                 </div>
               </div><!-- End Small Modal-->
+
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
+                Large Modal
+              </button>
+
+              <div class="modal fade" id="largeModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="card-title"> Barangay Certificate Request Form</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="grid d-flex">
+
+                        <form class = "row g-3">
+            <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">First Name</label>
+                        <input type="text" class= "form-control" id="inputName2">
+                </div>
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">Last Name</label>
+                        <input type="text" class= "form-control" id="inputName2">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Age</label>
+                        <input type="text" class= "form-control" id="inputName2">
+                </div>
+                <div class="col-3">
+                       <label for="inputName5" class="form-label mt-2">Sex</label>
+                      <select id="inputState" placeholder = "Select a type" class="form-select">
+                         <option selected="">Select a type</option>
+                         <option>...</option>
+                      </select>
+                    </div>
+                <div class="col-7">
+                        <label for="inputName5" class="form-label mt-2">Phone Number</label>
+                        <input type="number" min = "0" class= "form-control" id="inputName2">
+                </div>
+                <div class="col-12">
+                        <label for="inputName5" class="form-label mt-2">Email</label>
+                        <input type="text" class= "form-control" id="inputName2">
+                </div>
+                <div class="col-8">
+                        <label for="inputName5" class="form-label mt-2">Address</label>
+                        <input type="text" class= "form-control" id="inputName2">
+                </div>
+                <div class="col-4">
+                       <label for="inputName5" class="form-label mt-2">Purpose</label>
+                      <select id="inputState" placeholder = "Select a type" class="form-select">
+                         <option selected="">Select a type</option>
+                         <option>...</option>
+                      </select>
+                    </div>
+
+
+
+            </form>
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+                      <button type="button" class="btn btn-primary">Approve</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Large Modal-->
 
     <script>
 
