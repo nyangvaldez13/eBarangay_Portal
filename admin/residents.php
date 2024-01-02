@@ -51,7 +51,9 @@
                     <td><?=  $formatted_date; ?></td>
                     
                     <td>
-                        <button type="button" class="btn" id="viewBtn"><i class="bi bi-eye"></i></button>
+                        <!-- <button type="button" class="btn" id="viewBtn"><i class="bi bi-eye"></i></button> -->
+
+                      <a href="view-resident.php?residentId=<?= $resident['ID']; ?>" class="btn"><i class="bi bi-eye"></i></a>
                       <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
