@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <html lang="en"></html>
 
+<?php
+$hostname = 'localhost';
+$username = 'ebar_admin'; 
+$password = 'Ae2-8N39CvbJ2ngn';    
+$database = 'ebar_ebardb'; 
+
+$db = new mysqli($hostname, $username, $password, $database);
+
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+}
+
+session_start();
+
+if (isset($_SESSION['id'])) {
+    $user_id = $_SESSION['id'];
+    $query = "SELECT * FROM users WHERE id = $user_id";
+    $result = mysqli_query($db, $query);
+
+    if ($result) {
+        $user_data = mysqli_fetch_assoc($result);
+        
+        $full_name = $user_data['name'];
+        $names = explode(' ', $full_name);
+        $first_name = isset($names[0]) ? $names[0] : '';
+        $last_name = isset($names[1]) ? $names[1] : '';
+    } else {
+        echo "Error: " . mysqli_error($db);
+    }
+}
+?>
+
 <style>
 
 /* user-topnav */
@@ -254,6 +286,7 @@
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA7klEQVR4nO2VQQrCMBBFs/IUehGpZ3MhOL8HEDIT8ADdq3dx3XoNJaVpY7tKSqpiPmTRfMi8DH8apbKysr5BVbVfiabSMB6G8Uy5RFNjGLA1ewC7kbrwBIRBPUBH9WTGNnW3mVG4TvgdaKmGb7qnhBjXU1MAz/xrgMqbjnF6Y70gAMOAMC4iWNtlNF1demO9IADR1NgD3P75dNi49MZ6swEMo57jhQEwyLbPHtDegnETTcc5XngIGdQFqbaHvAUtwgsCSKVfAKBlf8UyPEZFysJtLSl3HUA/FapN7dLPsTcVapTa1MUnU5GVlaU+qReJx9VXHvtV6wAAAABJRU5ErkJggg==">
                 <a href="edit_password.php"><h4>Password</h4></a></div>
         </div>
+        <form method="POST" action="../backend/user_account.php">
         <div class="edit-profile">
             <div class="profile-pic">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB9klEQVR4nO2aWU/DMAyAPRjjljjEYNDldEgJYiDGzUP//79CFkOqpl1t13Yt/iQ/TZv8LXHipAVgGIZhGIZhmGrw3h9rrW+ttfebHJQj5VpIVkp5Za39MsZ8NyEoV8o5lywi7lprP+uWyCH9SblnFtZaX9adfIHoZxb23l+nf0QIoQGgA5tHh3JL50q5FxaO4/gcNhTKjYWrGuHxeLxD20OuhaNhI9yZriVjjAOAbWijsFJKzloxqSGAFgpvL2pQoijahzYJDwaDg0X7ohDiFEqER9hzDZezSksp1VQtt3eVnt6HQwg9qAjutDz30svhw0NczWkJES8m1zZjpdSjMUYkSdJtYw1vOefu5rSnr6PR6LA1wkmSdI0xD4u6NUT8kFKeNF44hNBzzj2tel8VRdFZrcIhhJ61FrXWb9R0WGuf6Zi4rO4IKeUe1WqW+6pJY9OvRdj/3lm/zUnuhQ4V836fPqPazCKbDufcTaXCcRyfL7vGpbqbNQVDCEdKqfe8silpU4nwcDi8zjIFhRCDv+/SwkN/RFHZVLgyhTtUr3kSo7qe7LFlPMl4WbswIl4gYigh2bXHuoQ/6hapVNg0KFh4FXiETcuntP5vj0uxwQ/Ec9+nyQa+8kAzE4rgvT+m9q3ul1aWBeVY+KUWhmEYhmEYhoGV+QEyObi3O0jDCwAAAABJRU5ErkJggg==">
@@ -264,36 +297,37 @@
             <div class="container-column">
                 <div class="name">
                     <p>First Name</p>
-                    <input type="text" id="firstname" required name="first_name">
+                    <input type="text" name="edit_fname" value="<?php echo $first_name; ?>">
                 </div>
                 <div class="name">
                     <p>Last Name</p>
-                    <input type="text" required name="last_name">
+                    <input type="text" name="edit_lname" value="<?php echo $last_name; ?>">
                 </div>
             </div>
             <div class="container-column">
                 <div class="info">
                     <p>Address</p>
-                    <input type="text" id="firstname" required name="first_name">
+                    <input type="text" name="edit_address" value="<?php echo isset($user_data['address']) ? $user_data['address'] : ''; ?>">
                 </div>
             </div>
             <div class="container-column">
                 <div class="info">
                     <p>Email Address</p>
-                    <input type="text" id="firstname" required name="first_name">
+                    <input type="text" id="firstname" name="edit_email" value="<?php echo isset($user_data['email']) ? $user_data['email'] : ''; ?>">
                 </div>
             </div>
             <div class="container-column">
                 <div class="info">
                     <p>Contact Number</p>
-                    <input type="text" id="firstname" required name="first_name">
+                    <input type="text" id="firstname" name="edit_phone" value="<?php echo isset($user_data['phone']) ? $user_data['phone'] : ''; ?>">
                 </div>
             </div>
             <div class="submit-request">
-                <button class="cancel-button" type="submit-button" name="submit-button">CANCEL</button>
+                <button class="cancel-button" type="cancel-button" name="cancel-button" >CANCEL</button>
                 <button class="submit-button" type="submit-button" name="submit-button">SAVE</button>
             </div>
         </div>
+        </form>
     </section>
 
     <!-- Footer -->
