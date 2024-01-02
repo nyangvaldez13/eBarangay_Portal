@@ -71,11 +71,7 @@
             </div>
             </div>
               <?php endforeach; ?>
-              <a href="admin.php" id="btn" class="btn btn-primary col-2 ms-3">Back</a>
-              <button class="btn btn-primary visually-hidden" id="loadingBtn" type="button" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Loading...
-              </button>
+              <a href="admin.php" id="btn"  onclick="handleClick()" class="btn btn-primary col-2 ms-3">Back</a>
             <style>
                 .file-upload-container {
                 position: relative;
@@ -151,6 +147,7 @@
       </div>
     </section>
 
+    
 
 
 

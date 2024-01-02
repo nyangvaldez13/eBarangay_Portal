@@ -8,7 +8,7 @@ if ($dbConnect){
 
 if(isset($_GET['residentId'])){
     $residentId = $_GET['residentId'];
-    $sql = "SELECT FROM users WHERE id = $residentId";
+    $sql = "SELECT * FROM users WHERE id = $residentId";
     $result = $conn->query($sql);
     
     if($result->num_rows > 0){

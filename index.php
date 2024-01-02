@@ -1,3 +1,6 @@
+<?php 
+include 'backend/auth.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 

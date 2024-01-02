@@ -136,9 +136,9 @@
                 font-size: 15px;
                 color: grey;
                 margin-top: 2px; /* Adjust as needed */
-}
+} 
             </style>
-
+            <a href="residents.php" style="width: 120px;" class="btn btn-outline-secondary ms-3">Back</a>
             </div>
           </div>
 

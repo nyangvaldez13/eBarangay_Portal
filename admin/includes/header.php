@@ -158,14 +158,14 @@ require_once('../backend/auth.php')
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle mb-2">
-              <h6><?= $firstname, $lastname; ?></h6>
+              <h6><?= $firstname ?> <?= $lastname; ?></h6>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="settings.php">
                 <i class="bi bi-person"></i>
                 <span>Edit Profile</span>
               </a>

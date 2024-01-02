@@ -24,6 +24,15 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">Admin Details</h5>
+            <div id="toast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Updating Information.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+
           
            <form class="row g-3 mt-2" name="update-admin" action="../backend/edit-admin.php" method="POST" enctype="multipart/form-data">
            <?php 
@@ -155,8 +164,7 @@
                 margin-top: 2px; /* Adjust as needed */
 }
             </style>
-
-
+                
                 <div class="text-left">
                   <a href="admin.php" style="width: 120px;" class="btn btn-outline-secondary">Cancel</a>
                   <button style = "width: 120px;" id="btn" type="submit" name="update-admin" class="btn btn-primary">Save</button>               
@@ -164,7 +172,7 @@
               </form>
 
 
-
+   
 
 
             </div>
@@ -173,6 +181,17 @@
         </div>
       </div>
     </section>
+
+    <script>
+            document.getElementById('btn').addEventListener('click', function() {
+              var toast = new bootstrap.Toast(document.getElementById('toast'), { autohide: false });
+              toast.show();
+              
+              setTimeout(function(){
+                toast.hide();
+              }, 2000); // Hide the toast after 2 seconds
+            });
+          </script>
 
 
 <?php require('../includes/footer.php') ?>

@@ -1,3 +1,7 @@
+<?php 
+include 'backend/auth.php'
+?>
+
 <!DOCTYPE html>
 <style>
 .Signup{
@@ -133,6 +137,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
+
         <!-- Top Navbar -->
         <nav class="top-navbar">
             <div class="row">

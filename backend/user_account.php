@@ -20,14 +20,17 @@ if (isset($_POST['login'])) {
         $_SESSION['access_level'] = $row['access_level'];
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
+        $_SESSION['id'] = $row['id'];
 
         // Redirect based on access level = admin
         if ($row['access_level'] == 1) {
+            session_start();
             header("Location: ../admin/index.php");
             
-            exit();
+            exit;
          // Redirect based on access level = user
         } else if ($row['access_level'] == 2) {
+            session_start();
             header("Location: ../user/_index.php");
             exit();
         }

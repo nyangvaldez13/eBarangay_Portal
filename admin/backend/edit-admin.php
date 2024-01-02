@@ -1,6 +1,6 @@
 <?php 
 include('db.php');
-
+sleep(2);
 if($_SERVER["REQUEST_METHOD"] === "POST"){
   
     if(isset($_POST['id'])){
