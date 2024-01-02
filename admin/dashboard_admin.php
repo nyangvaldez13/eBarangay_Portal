@@ -1,7 +1,7 @@
 <?php require('./includes/header.php') ?>
 
 <div class="grid gap-0">
-    <div class="fs-1">Welcome, <span class="text-warning">Admin!</span></div>
+    <div class="fs-1 fw-bold">Welcome, <span class="text-warning"><?= $user; ?></span></div>
     <div class="fs-4 text-success">Manage with confidence and ease.</div>
 </div>
 

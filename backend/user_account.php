@@ -2,59 +2,40 @@
 
 include 'db.php';
 
-session_start();
 
-//Login process
-if(isset($_POST['login'])){
-        
-    $email  = $_POST['email'];  
-    $pass   = $_POST['password'];  
-  
-    $email = stripcslashes($email);
-    $pass = stripcslashes($pass);
-    
-    //$email = mysqli_real_escape_string ($db, $email); 
-    //$pass = mysqli_real_escape_string ($db, $pass);
-  
-    $query  = " SELECT *
-                FROM users 
-                WHERE email = '$email' and user_password = '$pass'";
-    $result = mysqli_query($conn, $query);  
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
 
-    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
-    $count = mysqli_num_rows($result);
-    
-    if($count == 1){  
+   
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND user_password = ?");
+    $stmt->bind_param("ss", $email, $pass);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
         session_start();
-        $_SESSION ['email']     = $email;
-        $_SESSION ['id']   = $id;
-        
-        header("Location: ../user/_index.php");         
-    }  else{  
-        echo '<script>alert("Login failed.")</script>';  
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['access_level'] = $row['access_level'];
+        $_SESSION['user'] = $row['name'];
+
+        // Redirect based on access level = admin
+        if ($row['access_level'] == 1) {
+            header("Location: ../admin/dashboard_admin.php");
+            exit();
+         // Redirect based on access level = user
+        } else if ($row['access_level'] == 2) {
+            header("Location: ../index.php");
+            exit();
+        }
+    } else {
+        echo '<script>alert("Login failed.")</script>';
         echo "<script>location.href='../login.php';</script>";
         exit();
     }
-    /*if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        $storedPassword = $row['password'];
-
-        // Check if the entered password matches the stored hash
-        if (password_verify($pass, $storedPassword)) {
-            // Password is correct, set session and redirect
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['email'] = $email;
-            header("Location: index.php"); // Redirect to the dashboard or another page
-            exit();
-        } else {
-            echo '<script>alert("Incorrect password.")</script>';  
-        echo "<script>location.href='../login.php';</script>";
-        }
-    } else {
-        echo '<script>alert("Email not found.")</script>';  
-        echo "<script>location.href='../login.php';</script>";
-    }    */
 }
+
 
 //Signup process
 if (isset($_POST['signup'])) {
@@ -63,6 +44,7 @@ if (isset($_POST['signup'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
+    $access_level = 2;
 
     if (
         strlen($password) < 8 ||                // Minimum length of 8 characters
@@ -87,7 +69,7 @@ if (isset($_POST['signup'])) {
             echo "<script>location.href='../sign-up.php';</script>";
         } else {
 
-            $insertQuery = "INSERT INTO users (name, phone, email, user_password) VALUES ('$name', '$phone', '$email', '$password')";
+            $insertQuery = "INSERT INTO users (name, phone, email, user_password, access_level) VALUES ('$name', '$phone', '$email', '$password', '$access_level')";
 
             if (mysqli_query($db, $insertQuery)) {
                  echo "<script>alert('Registration successful.');</script>";
