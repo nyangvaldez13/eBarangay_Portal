@@ -1,4 +1,32 @@
-<?php require('../includes/header.php') ?>
+<?php require('./includes/header.php') ?>
+
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ebp";
+
+$db = new mysqli($servername, $username, $password, $dbname);
+
+if (isset($_SESSION['access_level'])) {
+  $access_level = $_SESSION['access_level'];
+  $query = "SELECT * FROM users WHERE access_level = 2";
+  $result = mysqli_query($db, $query);
+
+  if ($result) {
+      $user_data = mysqli_fetch_assoc($result);
+      
+      $admin_name = $user_data['name'];
+      $email = $user_data['email'];
+      $phone = $user_data['phone'];
+      
+  } else {
+      echo "Error: " . mysqli_error($db);
+  }
+}
+
+ ?>
 
 <section class="section pt-5">
     <div class="row align-items-center">
@@ -28,17 +56,19 @@
                   <tr>
                     <th>Admin Name</th>
                     <th>Email</th>
+                    <th>Phone</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Curicó</td>
-                    <td>Curicó</td>
+                    <td><?php echo $admin_name; ?></td>
+                    <td><?php echo $email; ?></td>
+                    <td><?php echo $phone; ?></td>
                     <td>
                         <button type="button" class="btn" id = "viewBtn"><i class="bi bi-eye"></i></button>
                         <button type="button" class="btn" id = "editBtn"><i class="bi bi-pencil"></i></button>
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal" email="<?php echo $row['email']; ?>"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
                  
@@ -64,8 +94,8 @@
                         <span class="card-title fs-6"> Are you sure you want to delete?</span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
-                      <button type="button" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" id="cancelDeleteBtn">No</button>
+                    <button type="button" class="btn btn-primary" id="confirmDeleteBtn">Yes</button>
                     </div>
                   </div>
                 </div>
@@ -85,9 +115,46 @@
           window.location.href = "edit-admin.php";
         });
         
-        
     </script>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".deleteBtn").click(function () {
+            var email = $(this).data("email");
+
+            $("#confirmDeleteBtn").data("email", email);
+        });
+
+        $("#confirmDeleteBtn").click(function () {
+            var email = $(this).data("email");
+
+            $.ajax({
+                type: "POST",
+                url: "../backend/delete_acc.php",
+                data: { email: email },
+                success: function (response) {
+                    console.log(response);
+
+                  if (response === "success") {
+
+                    alert("Admin deleted successfully!");
+
+                  } else {
+                          console.error("Unexpected response from server:", response);
+
+                    alert("An unexpected error occurred. Please try again.");
+                  }
+                },
+                error: function (error) {
+                    console.error(error);
+                    alert("Error: Unable to communicate with the server. Please try again later.");
+                },
+            });
+        });
+    });
+</script>
 
 
-<?php require('../includes/footer.php') ?>
+<?php require('./includes/footer.php') ?>
