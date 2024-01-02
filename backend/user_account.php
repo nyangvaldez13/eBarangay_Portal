@@ -18,11 +18,13 @@ if (isset($_POST['login'])) {
         session_start();
         $_SESSION['email'] = $row['email'];
         $_SESSION['access_level'] = $row['access_level'];
-        $_SESSION['user'] = $row['name'];
+        $_SESSION['firstname'] = $row['firstname'];
+        $_SESSION['lastname'] = $row['lastname'];
 
         // Redirect based on access level = admin
         if ($row['access_level'] == 1) {
-            header("Location: ../admin/dashboard_admin.php");
+            header("Location: ../admin/index.php");
+            
             exit();
          // Redirect based on access level = user
         } else if ($row['access_level'] == 2) {

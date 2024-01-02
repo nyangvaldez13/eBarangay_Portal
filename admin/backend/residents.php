@@ -8,7 +8,7 @@ if ($dbConnect){
 
 
 
-$sql = "SELECT * FROM brgy_residents";
+$sql = "SELECT * FROM users WHERE access_level = 2";
 $result = $conn->query($sql);
 
 
