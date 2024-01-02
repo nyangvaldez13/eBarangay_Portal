@@ -33,17 +33,32 @@
                   </tr>
                 </thead>
                 <tbody>
+
+                <?php include('backend/residents.php')?>
+
                   <tr>
-                    <td>Unity Pugh</td>
-                    <td>9958</td>
-                    <td>Curicó</td>
-                    <td>Curicó</td>
+                  <?php 
+                  if($result->num_rows > 0){
+                    $residents = $result->fetch_all(MYSQLI_ASSOC);
+                    foreach($residents as $resident){
+                      $timestamp = strtotime($resident['created_at']);
+                      $formatted_date = date('j M Y', $timestamp);
+                   
+                  ?>
+                    <td><?= $resident['resident_name']; ?></td>
+                    <td><?= $resident['phone']; ?></td>
+                    <td><?= $resident['email']; ?></td>
+                    <td><?=  $formatted_date; ?></td>
+                    
                     <td>
                         <button type="button" class="btn" id="viewBtn"><i class="bi bi-eye"></i></button>
                       <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
-                 
+                  <?php 
+                   }
+                  }
+                  ?>
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -78,6 +93,8 @@
           window.location.href = "view-resident.php";
         });
         
+
+        console.log("<?=$console_message;?>")
     </script>
 
 
