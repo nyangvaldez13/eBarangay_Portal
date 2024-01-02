@@ -25,16 +25,16 @@
 
             <h5 class="card-title mt-3">Resident Details</h5>
             <?php include_once('../backend/view-resident.php'); ?>
-            <?= $resident['name']; ?>
+            
            <form class="row g-3 mt-2">
                 <div class=" col-9 row">
                     <div class="col-6">
                         <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" value="<?= $resident['name']; ?>" class="form-control" id="inputName1">
+                        <input type="text" value="<?= $resident['firstname']; ?>" class="form-control" id="inputName1" disabled>
                     </div>
                     <div class="col-6">
                         <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" placeholder = "Blair" class="form-control" id="inputName2">
+                        <input type="text"  value="<?= $resident['lastname']; ?>" disabled placeholder = "Blair" class="form-control" id="inputName2">
                     </div>
 
                 <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -42,17 +42,17 @@
 
                  <div class="col-12">
                         <label for="inputName5" class="form-label">Address</label>
-                        <input type="text" placeholder = "1833 Bel Meadow Drive, Fontana, California 92335, USA" class="form-control" id="inputName2">
+                        <input type="text" value="<?= $resident['address']; ?>" disabled  placeholder = "1833 Bel Meadow Drive, Fontana, California 92335, USA" class="form-control" id="inputName2">
                 </div>
 
 
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Email</label>
-                     <input type="text" placeholder = "lindablair@mail.com" class="form-control" id="inputName3">
+                     <input type="text" value="<?= $resident['email']; ?>" disabled  placeholder = "lindablair@mail.com" class="form-control" id="inputName3">
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Contact Number</label>
-                     <input type="text" placeholder = "050 414 8778" class="form-control" id="inputName4">
+                     <input type="text" value="<?= $resident['phone']; ?>" disabled  placeholder = "050 414 8778" class="form-control" id="inputName4">
                     </div>
                
                 </div>

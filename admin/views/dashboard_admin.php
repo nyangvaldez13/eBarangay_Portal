@@ -18,7 +18,8 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><i class="bi bi-people-fill text-warning"></i> Total Residents</h5>
-          <p>129</p>
+          <?php require('../backend/dashboard.php') ?>
+          <p><?= $residentCount; ?></p>
         </div>
       </div>
     </div>
@@ -27,7 +28,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><i class="bi bi-person-fill text-success"></i> Total Admins</h5>
-          <p>14</p>
+          <p><?= $adminCount; ?></p>
         </div>
       </div>
     </div>
@@ -36,7 +37,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"><i class="bi bi-file-earmark text-info"></i> Pending Request</h5>
-          <p>127</p>
+          <p><?= $totalCount; ?></p>
         </div>
       </div>
     </div>
@@ -75,17 +76,18 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php foreach($brgyPerson as $person): ?>
                   <tr>
-                    <td>Unity Pugh</td>
-                    <td>9958</td>
-                    <td>Curicó</td>
+                   <td><?= $person['firstname'] ?> <?= $person['committee'] ?></td>
+                   <td><?= $person['committee'] ?></td>
+                   <td><?= $person['position'] ?></td>
                     <td>
-                        <button type="button" class="btn" id = "viewBtn"><i class="bi bi-eye"></i></button>
+                        <a href="view-barangay-official.php?id=<?= $person['id'] ?>" class="btn"><i class="bi bi-eye"></i></a>
                         <button type="button" class="btn" id = "editBtn"><i class="bi bi-pencil"></i></button>
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
-                 
+                  <?php endforeach; ?>
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->

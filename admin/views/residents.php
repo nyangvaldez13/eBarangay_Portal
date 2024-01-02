@@ -54,9 +54,28 @@
                         <!-- <button type="button" class="btn" id="viewBtn"><i class="bi bi-eye"></i></button> -->
 
                       <a href="view-resident.php?residentId=<?= $resident['id']; ?>" class="btn"><i class="bi bi-eye"></i></a>
-                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $resident['id']; ?>">
+                          <i class="bi bi-trash3"></i>
+                      </button>  
                     </td>
                   </tr>
+                   <!-- Modal for each resident -->
+                    <div class="modal fade" id="deleteModal<?= $resident['id']; ?>" tabindex="-1">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <span class="card-title fs-6"> Are you sure you want to delete this resident?</span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-primary" onclick="deleteResident(<?= $resident['id']; ?>)">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                   <?php 
                    }
                   }
@@ -71,31 +90,27 @@
         </div>
       </div>
     </section>
-
-<div class="modal fade" id="deleteModal" tabindex="-1">
-                <div class="modal-dialog modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                     
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <span class="card-title fs-6"> Are you sure you want to delete?</span>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
-                      <button type="button" class="btn btn-primary">Yes</button>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End Small Modal-->
+    
 
     <script>
-      document.getElementById('viewBtn').addEventListener('click', function(){
-          window.location.href = "view-resident.php";
+       function deleteResident(residentId) {
+        fetch(`../backend/delete-resident.php?residentId=${residentId}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Resident deleted successfully');
+              
+                location.reload();
+            } else {
+                alert('Failed to delete resident');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to delete resident');
         });
-        
-
+    }
       
     </script>
 

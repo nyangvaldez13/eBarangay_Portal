@@ -23,16 +23,19 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">Barangay Official Details</h5>
-
+            
+            <?php 
+            require '../backend/view-barangay-official.php';
+            foreach($personInfo as $info): ?>
            <form class="row g-3 mt-2">
                 <div class=" col-9 row">
                     <div class="col-6">
                         <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" placeholder = "Linda" class="form-control" id="inputName1">
+                        <input type="text" value="<?= $info['firstname'] ?>" disabled placeholder = "Linda" class="form-control" id="inputName1">
                     </div>
                     <div class="col-6">
                         <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" placeholder = "Blair" class="form-control" id="inputName2">
+                        <input type="text" value="<?= $info['lastname'] ?>" disabled placeholder = "Blair" class="form-control" id="inputName2">
                     </div>
 
                 <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -40,11 +43,11 @@
 
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Committee</label>
-                     <input type="text" placeholder = "Finance" class="form-control" id="inputName3">
+                     <input type="text" value="<?= $info['committee'] ?>" disabled placeholder = "Finance" class="form-control" id="inputName3">
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Position</label>
-                     <input type="text" placeholder = "Barangay Treasurer" class="form-control" id="inputName4">
+                     <input type="text" value="<?= $info['position'] ?>" disabled placeholder = "Barangay Treasurer" class="form-control" id="inputName4">
                     </div>
                
                 </div>
@@ -62,7 +65,7 @@
                 </span>
             </div>
             </div>
-
+            <?php endforeach; ?>
             <style>
                 .file-upload-container {
                 position: relative;
