@@ -1,3 +1,8 @@
+
+<?php 
+require_once('backend/auth.php')
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,13 +152,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?= $user; ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle mb-2">
-              <h6>Jane Doe</h6>
+              <h6><?= $user; ?></h6>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -180,11 +185,12 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+  <a class="dropdown-item d-flex align-items-center" href="backend/logout.php">
+    <i class="bi bi-box-arrow-right"></i>
+    <span>Logout</span>
+  </a>
+</li>
+
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
