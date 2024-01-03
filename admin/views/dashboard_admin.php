@@ -83,7 +83,7 @@
                    <td><?= $person['position'] ?></td>
                     <td>
                         <a href="view-barangay-official.php?id=<?= $person['id'] ?>" class="btn"><i class="bi bi-eye"></i></a>
-                        <button type="button" class="btn" id = "editBtn"><i class="bi bi-pencil"></i></button>
+                        <a href="edit-barangay-official.php?id=<?= $person['id'] ?>" class="btn"><i class="bi bi-pencil"></i></a>
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>

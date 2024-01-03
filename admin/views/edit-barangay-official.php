@@ -23,16 +23,29 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">Barangay Official Details</h5>
+            <?php include '../backend/db.php';
+            if(isset($_GET['id'])){
+              $id = $_GET['id'];
+              $sql = "SELECT * FROM brgy_officials WHERE id = $id";
+             
+              $result = $conn->query($sql);
+              
+              if ($result->num_rows > 0) {
 
+                $info = $result->fetch_assoc();
+            }
+            
+               
+             ?> 
            <form class="row g-3 mt-2">
                 <div class=" col-9 row">
                     <div class="col-6">
                         <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="inputName1">
+                        <input type="text" class="form-control" name="firstname" value="<?= $info['firstname']?>" id="inputName1">
                     </div>
                     <div class="col-6">
                         <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="inputName2">
+                        <input type="text" class="form-control" name="lastname" value="<?= $info['lastname']?>" id="inputName2">
                     </div>
 
                 <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -40,15 +53,15 @@
 
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Committee</label>
-                      <select id="inputState" class="form-select">
-                         <option selected="">         </option>
+                      <select id="inputState" class="form-select" name="committee">
+                         <option value="<?= $info['committee']?>"><?= $info['committee']?> </option>
                          <option>...</option>
                       </select>
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Position</label>
-                      <select id="inputState" class="form-select">
-                         <option selected="">         </option>
+                      <select id="inputState" class="form-select" name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> ">
+                         <option value="<?= $info['position']?>"><?= $info['committee']?></option>
                          <option>...</option>
                       </select>
                     </div>
@@ -68,7 +81,7 @@
                 </span>
             </div>
             </div>
-
+            <?php } ?>
             <style>
                 .file-upload-container {
                 position: relative;
@@ -139,7 +152,7 @@
 
 
                 <div class="text-left">
-                  <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-secondary">Cancel</button>
+                  <a href="dashboard_admin.php" style = "width: 120px;" class="btn btn-outline-secondary">Cancel</a>
                   <button style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
                 </div>
               </form>

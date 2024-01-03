@@ -34,6 +34,13 @@ require_once('../backend/auth.php')
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
 
+  <style>
+        .notifications-wrapper {
+            max-height: 300px; /* Set the maximum height to allow scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            }
+        </style>
+
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Nov 17 2023 with Bootstrap v5.3.2
@@ -56,12 +63,7 @@ require_once('../backend/auth.php')
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+    <!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -72,77 +74,58 @@ require_once('../backend/auth.php')
           </a>
         </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
+   
 
+        <li class="nav-item dropdown">
+          <?php 
+          include '../backend/db.php';
+          include '../backend/helpers.php';
+          // count pending requests
+          $tables = array("brgy_cert_submission", "burial_assistance_submission", "business_permit_submission", "financial_assistance_submission", "medical_assistance_submission", "senior_citizen_application");
+          $totalCount = 0;
+
+          foreach($tables as $table){
+              $sql = "SELECT COUNT(*) AS count FROM $table WHERE status = 2";
+              $result = $conn->query($sql);
+
+              if($result->num_rows > 0){
+                  $row = $result->fetch_assoc();
+                  $count = $row['count'];
+                  $totalCount += $count;
+              } else {
+                  echo "No record to be count.";
+              }
+          }
+
+
+          ?>
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
+            <span class="badge bg-primary badge-number"><?= $totalCount ?></span>
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+    <div class="notifications-wrapper">
             <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              You have <?= $totalCount ?> pending request
+              <a href="requests.php"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
+           <?php include '../backend/notification.php'; ?>
 
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
+                       
+<!-- Output the generated notifications HTML -->
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+    <?php echo $notificationsHTML; ?>
 
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            
             <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
+              <a href="requests.php">Show all notifications</a>
             </li>
-
+    </div>
           </ul><!-- End Notification Dropdown Items -->
 
         </li><!-- End Notification Nav -->
@@ -158,14 +141,14 @@ require_once('../backend/auth.php')
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle mb-2">
-              <h6><?= $firstname, $lastname; ?></h6>
+              <h6><?= $firstname ?> <?= $lastname; ?></h6>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="settings.php">
                 <i class="bi bi-person"></i>
                 <span>Edit Profile</span>
               </a>
@@ -175,7 +158,7 @@ require_once('../backend/auth.php')
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="edit-password.php">
                 <i class="bi bi-gear"></i>
                 <span>Change Password</span>
               </a>

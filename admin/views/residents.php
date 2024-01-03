@@ -38,6 +38,7 @@
 
                   <tr>
                   <?php 
+                  
                   if($result->num_rows > 0){
                     $residents = $result->fetch_all(MYSQLI_ASSOC);
                     foreach($residents as $resident){

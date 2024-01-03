@@ -12,6 +12,7 @@ if (!isset($_SESSION['access_level'])) {
 } else {
     $firstname = $_SESSION['firstname'];
     $lastname = $_SESSION['lastname'];
+ 
     
 }
 

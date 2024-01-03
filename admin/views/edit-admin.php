@@ -1,4 +1,5 @@
 <?php require('../includes/header.php') ?>
+<?php require '../backend/db.php';?>
 
 <section class="section pt-2">
     <div class="row align-items-center">
@@ -23,16 +24,40 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">Admin Details</h5>
+            <div id="toast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Updating Information.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
 
-           <form class="row g-3 mt-2">
+          
+           <form class="row g-3 mt-2" name="update-admin" action="../backend/edit-admin.php" method="POST" enctype="multipart/form-data">
+           <?php 
+            if(isset($_GET['id'])){
+              $adminId = $_GET['id'];
+              $sql = "SELECT * FROM users WHERE id = $adminId";
+             
+              $result = $conn->query($sql);
+              
+              if ($result->num_rows > 0) {
+
+                $info = $result->fetch_assoc();
+            }
+            
+               
+             ?> 
+           <input type="hidden" name="id" value="<?= $info['id'] ?>">
                 <div class=" col-9 row">
                     <div class="col-6">
                         <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="inputName1">
+                        <input type="text" name="firstname" value="<?= $info['firstname'] ?>" class="form-control" id="inputName1">
                     </div>
                     <div class="col-6">
                         <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="inputName2">
+                        <input type="text" name="lastname" value="<?= $info['lastname'] ?>" class="form-control" id="inputName2">
                     </div>
 
                 <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -40,17 +65,17 @@
 
                 <div class="col-12">
                         <label for="inputName5" class="form-label">Address</label>
-                        <input type="text" class= "form-control" id="inputName2">
+                        <input type="text" name="address" value="<?= $info['address'] ?>" class="form-control" id="inputName2">
                 </div>
 
 
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Email</label>
-                     <input type="text" class="form-control" id="inputName3">
+                     <input type="text" name="email" value="<?= $info['email'] ?>" class="form-control" id="inputName3">
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Contact Number</label>
-                     <input type="text" class="form-control" id="inputName4">
+                     <input type="text" name="phone" value="<?= $info['phone'] ?>" class="form-control" id="inputName4">
                     </div>
                
                 </div>
@@ -68,7 +93,10 @@
                 </span>
             </div>
             </div>
-
+            <?php 
+             }
+            
+             ?>
             <style>
                 .file-upload-container {
                 position: relative;
@@ -136,16 +164,15 @@
                 margin-top: 2px; /* Adjust as needed */
 }
             </style>
-
-
+                
                 <div class="text-left">
-                  <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-secondary">Cancel</button>
-                  <button style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
+                  <a href="admin.php" style="width: 120px;" class="btn btn-outline-secondary">Cancel</a>
+                  <button style = "width: 120px;" id="btn" type="submit" name="update-admin" class="btn btn-primary">Save</button>               
                 </div>
               </form>
 
 
-
+   
 
 
             </div>
@@ -154,6 +181,17 @@
         </div>
       </div>
     </section>
+
+    <script>
+            document.getElementById('btn').addEventListener('click', function() {
+              var toast = new bootstrap.Toast(document.getElementById('toast'), { autohide: false });
+              toast.show();
+              
+              setTimeout(function(){
+                toast.hide();
+              }, 2000); // Hide the toast after 2 seconds
+            });
+          </script>
 
 
 <?php require('../includes/footer.php') ?>

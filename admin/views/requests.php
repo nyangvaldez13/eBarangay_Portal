@@ -19,70 +19,61 @@
 
               <!-- Table with stripped rows -->
               <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Request</th>
-                    <th>Status</th>
-                    <th>Request Date</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Unity Pugh</td>
-                    <td>9958</td>
-                    <td>Curicó</td>
-                    <td>
-                       <?php 
-                       
-                       $status = "Processing";
+              <thead>
+    <tr>
+      <th>Name</th>
+      <th>Request</th>
+      <th>Status</th>
+      <th>Request Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php 
+    foreach ($tables as $table => $tableLabel) {
+        $sql = "SELECT *, users.* 
+                FROM $table 
+                LEFT JOIN users ON $table.request_id = users.id 
+                ";
+        $result = $conn->query($sql);
 
-                        if ($status === "Approved"){
-                            $isProcess = true;
-                        } else {
-                            $isProcess = false;
-                        }
-                        
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $name = $row['firstname'] . ' ' . $row['lastname'];
+                $status = $row['status'];
+                if($status == 2 ){
+                  $isProcess = false;
+                } else {
+                  $isProcess = true;
+                }
+               
+                $date = date('d M Y', strtotime($row['request_date']));
+                $toDisplay = $isProcess ? 'Approved' : 'Processing';
+                $toDisplayClass = $isProcess ? 'text-success border border-success rounded bg-light text-center ' : 'text-warning border border-warning rounded bg-light col-4 text-center';
 
-                        $toDisplay = $isProcess ? 'Processing' : 'Approved';
-                        $toDisplayClass =  $isProcess ? 'text-warning border border-warning rounded bg-light col-4 text-center' : 'text-success border border-success rounded bg-light col-4 text-center';
-                       
-                       ?>
-                       <div class="<?= $toDisplayClass; ?>"><?= $toDisplay?></div>
-                    <td>
-                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="bi bi-eye"></i>
-                        </button>
-                       
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
-                    </td>
-                  </tr>
+   
+            ?>
+              <tr>
+                <td><?= $name ?></td>
+                <td><?= $tableLabel ?></td>
+                
+                <td style="width: 200px;">
+                    <div class="<?= $toDisplayClass; ?>" style="width:150px;"><?= $toDisplay?></div>
+                </td>
 
-                  <tr>
-                    <td>Unity Pugh</td>
-                    <td>9958</td>
-                    <td>Curicó</td>
-                    <td>
-                       <?php 
-                        $status = "Processing";
-                        $isProcess = false;
-                        if ($status === "Approved"){
-                            $isProcess = true;
-                        } 
-                        
-                        $toDisplay = $isProcess ? 'Processing' : 'Approved';
-                        $toDisplayClass =  $isProcess ? 'text-warning border border-warning rounded bg-light col-4 text-center' : 'text-success border border-success rounded bg-light col-4 text-center';
-                       
-                       ?>
-                       <div class="<?= $toDisplayClass; ?>"><?= $toDisplay?></div>
-                    <td>
-                        <button type="button" class="btn"><i class="bi bi-eye"></i></button>
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
-                    </td>
-                  </tr>
-                 
-                </tbody>
-              </table>
+                <td><?= $date ?></td>
+                <td>
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
+                </td>
+              </tr>
+    <?php
+            }
+        }
+    }
+    ?>
+  </tbody>
+</table>
               <!-- End Table with stripped rows -->
 
             </div>

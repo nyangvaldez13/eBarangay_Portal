@@ -1,4 +1,5 @@
 <?php require('../includes/header.php') ?>
+<?php require '../backend/view-admin.php';?>
 
 <section class="section pt-2">
     <div class="row align-items-center">
@@ -23,16 +24,17 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">Admin Details</h5>
-
+            
            <form class="row g-3 mt-2">
+           <?php foreach($personInfo as $info): ?>
                 <div class=" col-9 row">
                     <div class="col-6">
                         <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" placeholder = "Linda" class="form-control" id="inputName1">
+                        <input type="text" value="<?= $info['firstname'] ?>" disabled placeholder = "Linda" class="form-control" id="inputName1">
                     </div>
                     <div class="col-6">
                         <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" placeholder = "Blair" class="form-control" id="inputName2">
+                        <input type="text" value="<?= $info['lastname'] ?>" disabled placeholder = "Blair" class="form-control" id="inputName2">
                     </div>
 
                 <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -40,17 +42,17 @@
 
                  <div class="col-12">
                         <label for="inputName5" class="form-label">Address</label>
-                        <input type="text" placeholder = "1833 Bel Meadow Drive, Fontana, California 92335, USA" class="form-control" id="inputName2">
+                        <input type="text" value="<?= $info['address'] ?>" disabled placeholder = "1833 Bel Meadow Drive, Fontana, California 92335, USA" class="form-control" id="inputName2">
                 </div>
 
 
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Email</label>
-                     <input type="text" placeholder = "lindablair@mail.com" class="form-control" id="inputName3">
+                     <input type="text" value="<?= $info['email'] ?>" disabled placeholder = "lindablair@mail.com" class="form-control" id="inputName3">
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Contact Number</label>
-                     <input type="text" placeholder = "050 414 8778" class="form-control" id="inputName4">
+                     <input type="text" value="<?= $info['phone'] ?>" disabled placeholder = "050 414 8778" class="form-control" id="inputName4">
                     </div>
                
                 </div>
@@ -68,7 +70,8 @@
                 </span>
             </div>
             </div>
-
+              <?php endforeach; ?>
+              <a href="admin.php" id="btn"  onclick="handleClick()" class="btn btn-primary col-2 ms-3">Back</a>
             <style>
                 .file-upload-container {
                 position: relative;
@@ -143,6 +146,9 @@
         </div>
       </div>
     </section>
+
+    
+
 
 
 <?php require('../includes/footer.php') ?>

@@ -1,5 +1,5 @@
 <?php require('../includes/header.php') ?>
-
+<?php require '../backend/view-barangay-official.php'; ?>
 <section class="section pt-2">
     <div class="row align-items-center">
     <div class="col-xl">
@@ -26,7 +26,7 @@
             
             <?php 
             require '../backend/view-barangay-official.php';
-            foreach($personInfo as $info): ?>
+            foreach($result as $info): ?>
            <form class="row g-3 mt-2">
                 <div class=" col-9 row">
                     <div class="col-6">
@@ -66,6 +66,7 @@
             </div>
             </div>
             <?php endforeach; ?>
+            <a href="dashboard_admin.php" style="width: 180px;" class="btn btn-outline-secondary ms-3">Back</a>
             <style>
                 .file-upload-container {
                 position: relative;

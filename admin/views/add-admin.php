@@ -23,16 +23,28 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">Admin Details</h5>
-
-           <form class="row g-3 mt-2">
-                <div class=" col-9 row">
-                    <div class="col-6">
-                        <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="inputName1">
+            <div id="toast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Creating Information.
                     </div>
-                    <div class="col-6">
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+
+           <form class="row g-3 mt-2 " name="add-admin" method="POST" action="../backend/add-admin.php">
+                <div class=" col-9 row">
+                    <div class="col-4">
+                        <label for="inputName5" class="form-label">First Name</label>
+                        <input type="text" name="firstname" class="form-control" required id="inputName1">
+                    </div>
+                    <div class="col-4">
                         <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="inputName2">
+                        <input type="text" name="lastname" class="form-control" required id="inputName2">
+                    </div>
+                    <div class="col-4">
+                        <label for="inputName5" class="form-label">Password</label>
+                        <input type="password" name="user_password" class="form-control" required id="inputName2">
                     </div>
 
                 <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -40,19 +52,18 @@
 
                 <div class="col-12">
                         <label for="inputName5" class="form-label">Address</label>
-                        <input type="text" class= "form-control" id="inputName2">
+                        <input type="text" name="address" class= "form-control" required id="inputName2">
                 </div>
 
 
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Email</label>
-                     <input type="text" class="form-control" id="inputName3">
+                     <input type="email" name="email" class="form-control" required id="inputName3">
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Contact Number</label>
-                     <input type="text" class="form-control" id="inputName4">
+                     <input type="number" name="phone" class="form-control" required id="inputName4">
                     </div>
-               
                 </div>
             <div class="col-2">
                 <span class="card-title ms-4">Photo</span>
@@ -140,7 +151,7 @@
 
                 <div class="text-left">
                   <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-secondary">Cancel</button>
-                  <button style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
+                  <button id="btn" style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
                 </div>
               </form>
 
@@ -155,5 +166,14 @@
       </div>
     </section>
 
-
+    <script>
+            document.getElementById('btn').addEventListener('click', function() {
+              var toast = new bootstrap.Toast(document.getElementById('toast'), { autohide: false });
+              toast.show();
+              
+              setTimeout(function(){
+                toast.hide();
+              }, 2000); // Hide the toast after 2 seconds
+            });
+          </script>
 <?php require('../includes/footer.php') ?>
