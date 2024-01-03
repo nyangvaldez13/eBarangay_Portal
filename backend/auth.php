@@ -9,7 +9,7 @@ if(isset($_SESSION['email']) && $_SESSION['access_level'] === 1) {
     header("Location: admin/views/dashboard_admin.php");
     exit;
 } else if(isset($_SESSION['email']) && $_SESSION['access_level'] === 2){
-    header("Location: dashboard_admin.php");
+    header("Location: user/_index.php");
     exit();
 }
 

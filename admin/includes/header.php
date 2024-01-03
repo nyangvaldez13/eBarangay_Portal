@@ -63,12 +63,7 @@ require_once('../backend/auth.php')
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+    <!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -84,6 +79,7 @@ require_once('../backend/auth.php')
         <li class="nav-item dropdown">
           <?php 
           include '../backend/db.php';
+          include '../backend/helpers.php';
           // count pending requests
           $tables = array("brgy_cert_submission", "burial_assistance_submission", "business_permit_submission", "financial_assistance_submission", "medical_assistance_submission", "senior_citizen_application");
           $totalCount = 0;
@@ -117,85 +113,9 @@ require_once('../backend/auth.php')
             <li>
               <hr class="dropdown-divider">
             </li>
-            <?php 
-include '../backend/db.php';
+           <?php include '../backend/notification.php'; ?>
 
-// Initialize an empty string to store notifications HTML
-$notificationsHTML = '';
-
-function timeAgo($timestamp) {
-  $currentTime = time();
-  $createdAt = strtotime($timestamp);
-  $timeDiff = $currentTime - $createdAt;
-
-  if ($timeDiff < 60) {
-      return 'just now';
-  } elseif ($timeDiff < 3600) {
-      $minutes = floor($timeDiff / 60);
-      return $minutes . ' mins ago';
-  } elseif ($timeDiff < 86400) {
-      $hours = floor($timeDiff / 3600);
-      return $hours == 1 ? '1 hour ago' : $hours . ' hours ago';
-  } else {
-      $days = floor($timeDiff / 86400);
-      return $days == 1 ? '1 day ago' : $days . ' days ago';
-  }
-}
-
-// Count pending requests in tables with a limit of 4 notifications per table
-$tables = array(
-    "brgy_cert_submission" => "Barangay Submission",
-    "burial_assistance_submission" => "Burial Assistance",
-    "business_permit_submission" => "Business Permit",
-    "financial_assistance_submission" => "Financial Assistance",
-    "medical_assistance_submission" => "Medical Assistance",
-    "senior_citizen_application" => "Senior Citizen Application"
-);
-
-foreach ($tables as $table => $tableLabel) {
-    $sql = "SELECT *, users.* 
-            FROM $table 
-            LEFT JOIN users ON $table.request_id = users.id 
-            WHERE $table.status = 2 
-            LIMIT 4";
-    $result = $conn->query($sql);
-
-    $notificationCounter = 0; // Counter to limit notifications to 4 per table
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            if ($notificationCounter < 4) {
-                // Get timestamp and calculate time difference
-                $time = timeAgo($row['created_at']);
-                $name = $row['firstname'] . ' ' . $row['lastname'];
-
-                // Generate HTML for each notification
-                $notificationsHTML .= '
-                    <li class="notification-item">
-                        <i class="bi bi-exclamation-circle text-warning"></i>
-                        <div>
-                            <h4>' . $tableLabel . '</h4>
-                            <p>' . $time . '</p>
-                            <!-- Access user-related data -->
-                            <p>Requested by: ' . $name . '</p>
-                        </div>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                ';
-                $notificationCounter++;
-            }
-        }
-    } else {
-        // No records found for this table
-        // echo "No record found.";  // Commented to avoid displaying this multiple times
-    }
-}
-?>
-
-                            <!-- <p>' . $row['description_field'] . '</p>
-                            // <p>' . $row['timestamp_field'] . '</p> --> 
+                       
 <!-- Output the generated notifications HTML -->
 
     <?php echo $notificationsHTML; ?>

@@ -195,7 +195,7 @@
                         <a href="edit_password.php"><span>Settings</span></a>
                     </div>
                     <div class="user-dropdown-option" data-filter="announcements">
-                        <a href="../index.php"><span>Sign out</span></a>
+                        <a href="../backend/logout.php"><span>Sign out</span></a>
                     </div>
                 </div>
            
