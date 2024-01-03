@@ -34,6 +34,13 @@ require_once('../backend/auth.php')
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
 
+  <style>
+        .notifications-wrapper {
+            max-height: 300px; /* Set the maximum height to allow scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            }
+        </style>
+
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Nov 17 2023 with Bootstrap v5.3.2
@@ -72,77 +79,133 @@ require_once('../backend/auth.php')
           </a>
         </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
+   
 
+        <li class="nav-item dropdown">
+          <?php 
+          include '../backend/db.php';
+          // count pending requests
+          $tables = array("brgy_cert_submission", "burial_assistance_submission", "business_permit_submission", "financial_assistance_submission", "medical_assistance_submission", "senior_citizen_application");
+          $totalCount = 0;
+
+          foreach($tables as $table){
+              $sql = "SELECT COUNT(*) AS count FROM $table WHERE status = 2";
+              $result = $conn->query($sql);
+
+              if($result->num_rows > 0){
+                  $row = $result->fetch_assoc();
+                  $count = $row['count'];
+                  $totalCount += $count;
+              } else {
+                  echo "No record to be count.";
+              }
+          }
+
+
+          ?>
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
+            <span class="badge bg-primary badge-number"><?= $totalCount ?></span>
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+    <div class="notifications-wrapper">
             <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              You have <?= $totalCount ?> pending request
+              <a href="requests.php"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
+            <?php 
+include '../backend/db.php';
 
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
+// Initialize an empty string to store notifications HTML
+$notificationsHTML = '';
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+function timeAgo($timestamp) {
+  $currentTime = time();
+  $createdAt = strtotime($timestamp);
+  $timeDiff = $currentTime - $createdAt;
 
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
+  if ($timeDiff < 60) {
+      return 'just now';
+  } elseif ($timeDiff < 3600) {
+      $minutes = floor($timeDiff / 60);
+      return $minutes . ' mins ago';
+  } elseif ($timeDiff < 86400) {
+      $hours = floor($timeDiff / 3600);
+      return $hours == 1 ? '1 hour ago' : $hours . ' hours ago';
+  } else {
+      $days = floor($timeDiff / 86400);
+      return $days == 1 ? '1 day ago' : $days . ' days ago';
+  }
+}
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+// Count pending requests in tables with a limit of 4 notifications per table
+$tables = array(
+    "brgy_cert_submission" => "Barangay Submission",
+    "burial_assistance_submission" => "Burial Assistance",
+    "business_permit_submission" => "Business Permit",
+    "financial_assistance_submission" => "Financial Assistance",
+    "medical_assistance_submission" => "Medical Assistance",
+    "senior_citizen_application" => "Senior Citizen Application"
+);
 
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
+foreach ($tables as $table => $tableLabel) {
+    $sql = "SELECT *, users.* 
+            FROM $table 
+            LEFT JOIN users ON $table.request_id = users.id 
+            WHERE $table.status = 2 
+            LIMIT 4";
+    $result = $conn->query($sql);
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+    $notificationCounter = 0; // Counter to limit notifications to 4 per table
 
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            if ($notificationCounter < 4) {
+                // Get timestamp and calculate time difference
+                $time = timeAgo($row['created_at']);
+                $name = $row['firstname'] . ' ' . $row['lastname'];
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                // Generate HTML for each notification
+                $notificationsHTML .= '
+                    <li class="notification-item">
+                        <i class="bi bi-exclamation-circle text-warning"></i>
+                        <div>
+                            <h4>' . $tableLabel . '</h4>
+                            <p>' . $time . '</p>
+                            <!-- Access user-related data -->
+                            <p>Requested by: ' . $name . '</p>
+                        </div>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                ';
+                $notificationCounter++;
+            }
+        }
+    } else {
+        // No records found for this table
+        // echo "No record found.";  // Commented to avoid displaying this multiple times
+    }
+}
+?>
+
+                            <!-- <p>' . $row['description_field'] . '</p>
+                            // <p>' . $row['timestamp_field'] . '</p> --> 
+<!-- Output the generated notifications HTML -->
+
+    <?php echo $notificationsHTML; ?>
+
+
+            
             <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
+              <a href="requests.php">Show all notifications</a>
             </li>
-
+    </div>
           </ul><!-- End Notification Dropdown Items -->
 
         </li><!-- End Notification Nav -->
@@ -175,7 +238,7 @@ require_once('../backend/auth.php')
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="edit-password.php">
                 <i class="bi bi-gear"></i>
                 <span>Change Password</span>
               </a>
