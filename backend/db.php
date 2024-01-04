@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "ebp";
+$dbname = "ebarangay_portal";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
