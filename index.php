@@ -486,7 +486,7 @@ include 'backend/auth.php'
                     <p>We are dedicated to ushering in a new era of connectivity and empowerment, reimagining the way you engage with your barangay. 
                         Our mission is simple but profound: to make your barangay experience more convenient, engaging, and accessible than ever before.</p>
                     <div class="desc-button">
-                        <button class="about-more-button">Read More</button>
+                        <a href="_about.php"><button class="about-more-button">Read More</button></a> 
                     </div>
                 </div>
                 
