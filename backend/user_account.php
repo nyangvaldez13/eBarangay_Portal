@@ -32,7 +32,7 @@ if (isset($_POST['login'])) {
         } else if ($row['access_level'] == 2) {
             session_start();
             header("Location: ../user/_index.php");
-            exit();
+            exit;
         }
     } else {
         echo '<script>alert("Login failed.")</script>';
