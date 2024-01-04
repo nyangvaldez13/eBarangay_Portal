@@ -3,18 +3,7 @@
 
 <?php 
 
-$hostname = 'localhost';
-$username = 'ebar_admin'; 
-$password = 'Ae2-8N39CvbJ2ngn';    
-$database = 'ebar_ebardb'; 
-
-$db = new mysqli($hostname, $username, $password, $database);
-
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
-
-session_start();
+include '../backend/db.php';
 
 //Update Password process
 if (isset($_POST['updatepass-button'])) {

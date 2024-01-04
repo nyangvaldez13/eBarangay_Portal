@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php 
+
+include '../backend/db.php';
+
+// Fetch data from the 'activity' table
+$sql = "SELECT * FROM activity WHERE activity IN ('event', 'announcement') ORDER BY date DESC";
+$result = $conn->query($sql);
+
+$displayedCount = 0;
+
+?>
+
 <style>
 
 .user-dropdown-button {
@@ -242,77 +254,123 @@
 
         <!-- Gallery Items -->
         <div class="gallery">
-            <div class="gallery-item">
-                <p>
-                    <span class="title">Event</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
-                </p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
+            <?php
+                while ($row = $result->fetch_assoc()) {
+                    $type = $row['activity'];
+                    $title = $row['title'];
+                    $date = $row['date'];
 
-            <div class="gallery-item">
-                <p>Title 2</p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
+                    $activity_id = $row['activity_id'];
 
-            <div class="gallery-item">
-                <p>
-                    <span class="title">Event</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
-                </p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
+                    $itemClass = ($type == 'event') ? 'E' : ''; 
+                    $link = "certain_" . $type . ".php";
 
-            <div class="gallery-item">
-                <p>Title 4</p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
+                    $displayedCount++;
 
-            <div class="gallery-item">
-                <p>
-                    <span class="title">Event</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
-                </p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
+                    if ($displayedCount > 6) {
+                        break;
+                    }
+                ?>
 
-            <div class="gallery-item">
-                <p>
-                    <span class="title">Event</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
-                </p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
+        <div class="gallery-item<?php echo $itemClass; ?>">
+            <a href="<?php echo $link. '?activity_id=' . $activity_id; ?>">
+            <p>
+                <span class="title"><?php echo ucfirst($type); ?></span>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
+            </p>
+            <div class="item-details<?php echo $itemClass; ?>">
+                <p class="caption<?php echo $itemClass; ?>"><?php echo $title; ?></p>
             </div>
+            <div class="divider<?php echo $itemClass; ?>"></div>
+            <p class="date<?php echo $itemClass; ?>"><?php echo $date; ?></p>
+            <?php if ($type == 'event'): ?>
+                <div class="backgroundE"></div>
+            <?php endif; ?>
+            </a>
         </div>
 
+            <?php
+        }
+
+        $conn->close();
+        ?>
+            <!-- // <div class="gallery-item"><a href="certain_announcement.php">
+            //     <p>
+            //         <span class="title">Announcement</span>
+            //         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
+            //     </p>
+            //     <div class="item-details">
+            //         <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            //     </div>
+            //     <div class="divider"></div>
+            //     <p class="date">MM-DD-YYYY</p></a>
+            // </div>
+
+            // <div class="gallery-itemE"><a href="certain_event.php">
+            // <div class="backgroundE"></div>
+            //     <p>
+            //         <span class="title">Event</span>
+            //         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAu0lEQVR4nO1VMQ7CMBDLFNSR1wAbA1/of6q+gYW1r+gbKCMPieRcV6ODVCxpaFoJCVRLnmJbuYvkGBMBycI5tyVpY+dBY4OmMFMBoPLeE0CZ0JRBU30MJLnp+/4AoAmmGsBphHXQNOoZnY6kBXBT8RwC6KLhIrKbGzpQM2I7Oy4N1ozvBwNo9cUz2U658dlkQj1r8BPrKv51FfIuoTuASw7VM1pCfNVmt6AnrslOFpF9otyjVE/qG/sNPADRDxOnZM2/oAAAAABJRU5ErkJggg==">
+            //     </p>
+            //     <div class="item-detailsE">
+            //         <p class="captionE">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            //     </div>
+            //     <div class="dividerE"></div>
+            //     <p class="dateE">MM-DD-YYYY</p></a> 
+            // </div> 
+
+            // <div class="gallery-item">
+            //     <p>
+            //         <span class="title">Announcement</span>
+            //         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
+            //         8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
+            //     </p>
+            //     <div class="item-details">
+            //         <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            //     </div>
+            //     <div class="divider"></div>
+            //     <p class="date">MM-DD-YYYY</p>
+            // </div>
+
+            //  <div class="gallery-itemE"><a href="">
+            // <div class="backgroundE"></div>
+            //     <p>
+            //         <span class="title">Event</span>
+            //         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAu0lEQVR4nO1VMQ7CMBDLFNSR1wAbA1/of6q+gYW1r+gbKCMPieRcV6ODVCxpaFoJCVRLnmJbuYvkGBMBycI5tyVpY+dBY4OmMFMBoPLeE0CZ0JRBU30MJLnp+/4AoAmmGsBphHXQNOoZnY6kBXBT8RwC6KLhIrKbGzpQM2I7Oy4N1ozvBwNo9cUz2U658dlkQj1r8BPrKv51FfIuoTuASw7VM1pCfNVmt6AnrslOFpF9otyjVE/qG/sNPADRDxOnZM2/oAAAAABJRU5ErkJggg==">
+            //     </p>
+            //     <div class="item-detailsE">
+            //         <p class="captionE">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            //     </div>
+            //     <div class="dividerE"></div>
+            //     <p class="dateE">MM-DD-YYYY</p></a>
+            // </div> 
+
+            // <div class="gallery-item">
+            //     <p>
+            //         <span class="title">Announcement</span>
+            //         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
+            //         8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
+            //     </p>
+            //     <div class="item-details">
+            //         <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            //     </div>
+            //     <div class="divider"></div>
+            //     <p class="date">MM-DD-YYYY</p>
+            // </div>
+
+            // <div class="gallery-item">
+            //     <p>
+            //         <span class="title">Announcement</span>
+            //         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
+            //         8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
+            //     </p>
+            //     <div class="item-details">
+            //         <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            //     </div>
+            //     <div class="divider"></div>
+            //     <p class="date">MM-DD-YYYY</p>
+            // </div> -->
+        </div>
         <div class="read-more-container">
             <button class="read-more-button">Read More</button>
         </div>
@@ -462,7 +520,7 @@
                     <p>We are dedicated to ushering in a new era of connectivity and empowerment, reimagining the way you engage with your barangay. 
                         Our mission is simple but profound: to make your barangay experience more convenient, engaging, and accessible than ever before.</p>
                     <div class="desc-button">
-                        <button class="about-more-button">Read More</button>
+                        <a href="_about.php"><button class="about-more-button">Read More</button></a> 
                     </div>
                 </div>
                 
