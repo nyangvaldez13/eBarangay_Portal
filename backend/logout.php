@@ -13,5 +13,3 @@ session_destroy();
 header("Location: /eBarangay_Portal");
 exit();
 ?>
-
-<a href="/"></a>
