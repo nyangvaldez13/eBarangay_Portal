@@ -77,8 +77,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($brgyPerson as $person): ?>
+                  
                   <tr>
+                    <?php foreach($brgyPerson as $person): ?>
                    <td><?= $person['firstname'] ?> <?= $person['committee'] ?></td>
                    <td><?= $person['committee'] ?></td>
                    <td><?= $person['position'] ?></td>
@@ -88,6 +89,23 @@
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
+                  <!-- Modal for each brgy official -->
+                   <div class="modal fade" id="deleteModal<?= $person['id']; ?>" tabindex="-1">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <span class="card-title fs-6"> Are you sure you want to delete this barangay official?</span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-primary" onclick="deleteOfficial(<?= $person['id']; ?>)">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                   <?php endforeach; ?>
                 </tbody>
               </table>
@@ -102,7 +120,7 @@
 
 
 
-    <div class="modal fade" id="deleteModal" tabindex="-1">
+    <!-- <div class="modal fade" id="deleteModal" tabindex="-1">
                 <div class="modal-dialog modal-sm">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -118,22 +136,29 @@
                     </div>
                   </div>
                 </div>
-              </div><!-- End Small Modal-->
+              </div>End Small Modal -->
 
-    <script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-        document.getElementById('addBtn').addEventListener('click', function(){
-          window.location.href = "add-barangay-official.php";
+<script>
+     function deleteOfficial($personId) {
+        fetch(`../backend/delete-barangay-officials.php?id=${$personId}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Barangay official deleted successfully');
+              
+                location.reload();
+            } else {
+                alert('Failed to delete barangay official'); 
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to delete arangay official');
         });
-
-        document.getElementById('viewBtn').addEventListener('click', function(){
-          window.location.href = "view-barangay-official.php";
-        });
-
-        document.getElementById('editBtn').addEventListener('click', function(){
-          window.location.href = "edit-barangay-official.php";
-        });
-        
-    </script>
+    }
+</script>
 
     <?php require('../includes/footer.php') ?>

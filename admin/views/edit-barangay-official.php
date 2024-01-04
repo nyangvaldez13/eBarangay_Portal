@@ -23,7 +23,17 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">Barangay Official Details</h5>
-            <?php include '../backend/db.php';
+            <div id="toast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Updating Information.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+
+            <form class="row g-3 mt-2" name="update-barangay-official" action="../backend/edit-barangay-official.php" method="POST" enctype="multipart/form-data">
+            <?php
             if(isset($_GET['id'])){
               $id = $_GET['id'];
               $sql = "SELECT * FROM brgy_officials WHERE id = $id";
@@ -60,9 +70,11 @@
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Position</label>
-                      <select id="inputState" class="form-select" name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> ">
+                      <select id="inputState" class="form-select" name="position" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> ">
                          <option value="<?= $info['position']?>"><?= $info['committee']?></option>
-                         <option>...</option>
+                         <option>Chairman</option>
+                         <option>Deputy</option>
+                         <option>Barangay Security Officer</option>
                       </select>
                     </div>
                
@@ -153,7 +165,7 @@
 
                 <div class="text-left">
                   <a href="dashboard_admin.php" style = "width: 120px;" class="btn btn-outline-secondary">Cancel</a>
-                  <button style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
+                  <button style = "width: 120px;" type="save" name="update-barangay-official" class="btn btn-primary">Save</button>               
                 </div>
               </form>
 
@@ -167,6 +179,16 @@
         </div>
       </div>
     </section>
+    <script>
+            document.getElementById('btn').addEventListener('click', function() {
+              var toast = new bootstrap.Toast(document.getElementById('toast'), { autohide: false });
+              toast.show();
+              
+              setTimeout(function(){
+                toast.hide();
+              }, 2000); // Hide the toast after 2 seconds
+            });
+          </script>
 
 
 <?php require('../includes/footer.php') ?>
