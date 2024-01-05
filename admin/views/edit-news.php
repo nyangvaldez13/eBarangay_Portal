@@ -22,13 +22,13 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">General Information</h5>
-          <form class = "row g-3">
+          <form class = "row g-3" name="update-news" action="../backend/edit-news.php" method="POST" enctype="multipart/form-data">
             <div class="col-12">
                         <label for="inputName5" class="form-label mt-2">Title</label>
-                        <input type="text" class= "form-control" id="inputName2" placeholder ="Type news title here. . .">
+                        <input type="text" name="title" class= "form-control" id="inputName2" placeholder ="Type news title here. . .">
                 </div>
                  <div class="col-12">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+                  <label for="inputPassword" name="description" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-12">
                    <div class="quill-editor-default" style = "height: 200px;">
                 <p>Type your description here...</p>
@@ -37,18 +37,18 @@
                 </div>
                   <div class="col-4">
                        <label for="inputName5" class="form-label">News Type</label>
-                      <select id="inputState" placeholder = "Select a type" class="form-select">
+                      <select id="inputState" name="type"  placeholder = "Select a type" class="form-select">
                          <option selected="">Select a type</option>
                          <option>...</option>
                       </select>
                     </div>
                     <div class="col-4">
                         <label for="inputDate" class="form-label">Date</label>
-                        <input type="date" class="form-control" >
+                        <input type="date"name="date" class="form-control" >
                     </div>
                     <div class="col-4">
                         <label for="inputName5" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="inputName2" placeholder = "Type location here...">
+                        <input type="text" name="location" class="form-control" id="inputName2" placeholder = "Type location here...">
                     </div>
 
             </form>
@@ -66,7 +66,7 @@
                     <h5 class="card-title mt-3">Media</h5>
                     <p>Photo</p>
                     <div class="file-upload-container ms-4 mt-2 col">
-                        <input type="file" id="file-upload" class="file-upload-input">
+                        <input type="file" name="media" id="file-upload" class="file-upload-input">
                         <label for="file-upload" class="file-upload-label">
                             <span class="upload-icon">
                                 <i class="bi bi-image"></i>
@@ -126,8 +126,18 @@
     <section>
       <div class="mt-2" style = "text-align: right;">
         <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-outline-primary btn-lg">Cancel</button>
-        <button style = "width: 120px;" type="save" class="btn btn-primary btn-lg">Save</button>               
+        <button style = "width: 120px;" type="save" name="update-news"  class="btn btn-primary btn-lg">Save</button>               
       </div>
     </section>
+    <script>
+            document.getElementById('btn').addEventListener('click', function() {
+              var toast = new bootstrap.Toast(document.getElementById('toast'), { autohide: false });
+              toast.show();
+              
+              setTimeout(function(){
+                toast.hide();
+              }, 2000); // Hide the toast after 2 seconds
+            });
+          </script>
 
 <?php require('../includes/footer.php') ?>
