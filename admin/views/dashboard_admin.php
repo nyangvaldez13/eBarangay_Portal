@@ -1,4 +1,9 @@
 <?php require('../includes/header.php') ?>
+<?php
+require '../backend/dashboard_admin.php';
+
+
+ ?>
 
 <div class="grid gap-0">
     <div class="fs-1 fw-bold">Welcome, <span class="text-warning"><?= $firstname; ?></span></div>
@@ -80,13 +85,13 @@
                   
                   <tr>
                     <?php foreach($brgyPerson as $person): ?>
-                   <td><?= $person['firstname'] ?> <?= $person['committee'] ?></td>
+                   <td><?= $person['firstname'] ?> <?= $person['lastname'] ?></td>
                    <td><?= $person['committee'] ?></td>
                    <td><?= $person['position'] ?></td>
                     <td>
                         <a href="view-barangay-official.php?id=<?= $person['id'] ?>" class="btn"><i class="bi bi-eye"></i></a>
                         <a href="edit-barangay-official.php?id=<?= $person['id'] ?>" class="btn"><i class="bi bi-pencil"></i></a>
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $person['id']; ?>"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
                   <!-- Modal for each brgy official -->
