@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 VALUES (?, ?, ?, ?, ?), ?, ? ?";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $type, $title, $date, $time, $location, $photoData, $description, $desc),  ;
+        $stmt->bind_param("sssss", $type, $title, $date, $time, $location, $photoData, $description, $desc) ;
 
         if ($stmt->execute()) {
             echo "Record inserted successfully";
