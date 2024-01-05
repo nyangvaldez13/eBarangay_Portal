@@ -24,15 +24,15 @@
 
             <h5 class="card-title mt-3">Barangay Official Details</h5>
 
-           <form class="row g-3 mt-2">
+           <form class="row g-3 mt-2" name="add-barangay-official" method="POST" enctype="multipart/form-data" action="../backend/add-barangay-official.php">
                 <div class=" col-9 row">
                     <div class="col-6">
                         <label for="inputName5" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="inputName1">
+                        <input type="text" name="firstname" class="form-control" required id="inputName1">
                     </div>
                     <div class="col-6">
                         <label for="inputName5" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="inputName2">
+                        <input type="text" name="lastname" class="form-control" required id="inputName2">
                     </div>
 
                 <!-- Force next columns to break to new line at md breakpoint and up -->
@@ -40,16 +40,19 @@
 
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Committee</label>
-                      <select id="inputState" class="form-select">
+                      <select required id="inputState" name="committee" class="form-select">
                          <option selected="">         </option>
                          <option>...</option>
                       </select>
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Position</label>
-                      <select id="inputState" class="form-select">
+                      <select required id="inputState" name="position" class="form-select">
                          <option selected="">         </option>
-                         <option>...</option>
+                         
+                         <option>Chairman</option>
+                         <option>Deputy</option>
+                         <option>Barangay Security Officer</option>
                       </select>
                     </div>
                
@@ -58,7 +61,7 @@
                 <span class="card-title ms-4">Photo</span>
                 <br>
            <div class="file-upload-container ms-4 mt-2">
-                <input type="file" id="file-upload" class="file-upload-input">
+                <input type="file" id="file-upload" name="photo" class="file-upload-input">
                     <label for="file-upload" class="file-upload-label">
                 <span class="upload-icon">
                     <i class="bi bi-image"></i>
@@ -140,7 +143,7 @@
 
                 <div class="text-left">
                   <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-secondary">Cancel</button>
-                  <button style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
+                  <button id="btn" style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
                 </div>
               </form>
 
@@ -155,5 +158,14 @@
       </div>
     </section>
 
-
+    <script>
+            document.getElementById('btn').addEventListener('click', function() {
+              var toast = new bootstrap.Toast(document.getElementById('toast'), { autohide: false });
+              toast.show();
+              
+              setTimeout(function(){
+                toast.hide();
+              }, 2000); // Hide the toast after 2 seconds
+            });
+          </script>
 <?php require('../includes/footer.php') ?>
