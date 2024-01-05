@@ -218,12 +218,12 @@ require_once('../backend/auth.php')
           <span>News</span>
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="projects.php">
         <i class="bi bi-flag-fill"></i>
           <span>Projects</span>
         </a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="settings.php">
         <i class="bi bi-gear-fill"></i>
