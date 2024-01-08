@@ -30,6 +30,7 @@
   </thead>
   <tbody>
     <?php 
+    $notifications = [];
     foreach ($tables as $table => $tableLabel) {
         $sql = "SELECT *, users.* 
                 FROM $table 
@@ -51,6 +52,9 @@
                 $toDisplay = $isProcess ? 'Approved' : 'Processing';
                 $toDisplayClass = $isProcess ? 'text-success border border-success rounded bg-light text-center ' : 'text-warning border border-warning rounded bg-light col-4 text-center';
 
+                $notification[] = [
+                  
+                ]
    
             ?>
               <tr>
