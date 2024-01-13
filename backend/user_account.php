@@ -7,7 +7,7 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
-   
+
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND user_password = ?");
     $stmt->bind_param("ss", $email, $pass);
     $stmt->execute();
@@ -15,13 +15,14 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        session_start();
+        // session_start();
+        $_SESSION['id'] = $row['id'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['access_level'] = $row['access_level'];
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
-        $_SESSION['id'] = $row['id'];
-
+      
+ 
         // Redirect based on access level = admin
         if ($row['access_level'] == 1) {
             header("Location: ../admin/index.php");

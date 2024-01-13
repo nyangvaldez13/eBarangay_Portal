@@ -10,10 +10,12 @@ if (!isset($_SESSION['access_level'])) {
     header("Location: /eBarangay_Portal");
     exit();
 } else {
+      
+    $id =  $_SESSION['id'];
+    $email = $_SESSION['email'];
+    $access_level = $_SESSION['access_level'];
     $firstname = $_SESSION['firstname'];
     $lastname = $_SESSION['lastname'];
- 
-    
 }
 
 // Proceed with the rest of your code for the protected page

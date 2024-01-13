@@ -1,7 +1,19 @@
 <?php 
 include 'db.php';
+include 'helpers.php';
 
-$_SESSION['id'] = $id;
+session_start();
+if (isset($_SESSION['id'])) {
+   
+    $id = $_SESSION['id'];
+    $email = $_SESSION['email'];
+    $access_level = $_SESSION['access_level'];
+    $firstname = $_SESSION['firstname'];
+    $lastname = $_SESSION['lastname'];
+    // echo "User ID: " . $id;
+} else {
+    echo "Session variable 'id' not set.";
+}
 
 $tables = array(
     "brgy_cert_submission" => "Barangay Submission",
@@ -13,6 +25,7 @@ $tables = array(
 );
 $notifications = [];
 foreach ($tables as $table => $tableLabel) {
+    
     $sql = "SELECT *, users.* 
             FROM $table 
             LEFT JOIN users ON $table.request_id = users.id WHERE request_id = $id";
@@ -20,27 +33,29 @@ foreach ($tables as $table => $tableLabel) {
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+
             $time = timeAgo($row['request_date']);
             $name = $row['firstname'] . ' ' . $row['lastname'];
             $status = $row['status'];
             if ($status == 1){
-                $icon = 'bi bi-check-circle text-success';
+                $wait = 'Approved';
             } else {
-                $icon = 'bi bi-exclamation-circle text-warning';
+                $wait = 'Pending';
             }
 
             // Add each notification as an associative array to $notifications
             $notifications[] = [
+            
                 'time' => $time,
                 'tableLabel' => $tableLabel,
                 'name' => $name,
-                'icon' => $icon,
+                'wait' => $wait,
                 'request_date' => $row['request_date'] // Storing request_date for sorting
             ];
         }
     } else {
         // No records found for this table
-        echo "No record found.";  // Commented to avoid displaying this multiple times
+        // echo "No record found.";   Commented to avoid displaying this multiple times
     }
 }
 
@@ -49,7 +64,7 @@ usort($notifications, function($a, $b) {
     return strtotime($b['request_date']) - strtotime($a['request_date']);
 });
 
-// print_r($notifications);
+// print_r($notifications);   <h4 style="color: gray;">' . $notification['tableLabel'] . '</h4>
 
 // Iterate through the sorted notifications to build the HTML
 $notificationsHTML = '';
@@ -59,19 +74,15 @@ foreach ($notifications as $notification) {
     if ($notificationCounter < 10) {
         $notificationsHTML .= '
             <li class="notification-item">
-                <i class="'. $notification['icon'] .'"></i>
-                <div>
-                    <h4>' . $notification['tableLabel'] . '</h4>
-                    <p>' . $notification['time'] . '</p>
-                    <!-- Access user-related data -->
-                    <p>Requested by: ' . $notification['name'] . '</p>
-                </div>
+                <h4 class="label">' . $notification['tableLabel'] . '</h4>
+                <div class="time">' . $notification['time'] . '</div>
+                <div class="wait">' . $notification['wait'] . '</div>
+                <div class="name">' . $notification['name'] . '</div>
             </li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
+           
         ';
         $notificationCounter++;
     }
 }
 ?>
+
