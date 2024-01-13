@@ -5,7 +5,7 @@
 
 include '../backend/db.php';
 include '../backend/auth.php';
-
+include '../backend/notification.php';
 
 
   
@@ -19,150 +19,7 @@ $displayedCount = 0;
 
 ?>
 
-<style>
-
-.user-dropdown-button {
-    background-color: transparent;
-    color: #000000;
-    cursor: pointer;
-    font-size: 15px;
-    position: relative;
-}
-
-.user-profile{
-    margin-top: 20px;
-    margin-bottom: 30px;
-    justify-content: center;
-    align-items: center;
-}
-
-.dot {
-  height: 78px;
-  width: 78px;
-  align-items: center;
-  background-color: #bbb;
-  border-radius: 50%;
-  margin-left: 29%;
-  margin-bottom: 3px;
-  display: inline-block;
-}
-
-.user-profile p{
-    color: #000000;
-}
-
-.user-dropdown-content {
-    display: none;
-    position: absolute;
-    margin-top: 5px;
-    margin-left: -125px;
-    background-color: #f4f4f4;
-    min-width: 195.5px;
-    border-radius: 8px;
-    border: 1px solid #9B9988;
-    z-index: 10;
-}
-
-.user-dropdown-option {
-    font-size: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 16px;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.user-dropdown-option a{
-    text-decoration: none;
-    color: #000000;
-}
-
-.user-notif-button {
-    background-color: transparent;
-    color: #000000;
-    cursor: pointer;
-    font-size: 15px;
-    position: relative;
-}
-
-.user-notif{
-    margin-top: 20px;
-    margin-bottom: 30px;
-    justify-content:center;
-    align-items: center;
-    
-}
-
-.user-notif p{
-    padding-top: 50%;
-    color: #000000;
-}
-
-.legal_doc-logo{
-    width: 295px; 
-    height: 60px;
-    padding: 15px;
-    margin: 15px;
-    margin-top: 20px;
-    background-color: #2D167417;
-    box-sizing: border-box;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    display: none;
-    overflow: hidden;
-}
-
-.doc-details{
-    display: flex;
-    flex-direction: column;
-    padding-left: 10px;
-}
-
-.doc-details p{
-    font-size: 14px;
-    text-align: left;
-    color: #262626E5;
-}
-
-.doc-status{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 5px;
-}
-
-.doc-status .stat{
-    padding-left: 7px;
-    color: #FF0000;
-}
-
-.user-notif-content {
-    display: none;
-    position: absolute;
-    margin-top: 5px;
-    margin-left: -265px;
-    background-color: rgba(244, 244, 244, 0.8);
-    min-width: 295.5px;
-    min-height: 400px;
-    border-radius: 8px;
-    border: 1px solid #9B9988;
-    z-index: 10;
-    overflow-y: auto;
-    
-}
-
-/* Optional: Add styling for the scrollbar */
-.user-notif-content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.user-notif-content::-webkit-scrollbar-thumb {
-    background-color: #9B9988;
-    border-radius: 4px;
-}
-
-</style>
+<link rel="stylesheet" href="../css/header.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -196,36 +53,10 @@ $displayedCount = 0;
             </div>
 
             <?php 
-                include '../backend/notification.php';
+                
             ?>
 
             <style>
-.notification-list {
-    list-style-type: none;
-    padding: 0;
-    max-height: 300px; /* Adjust the maximum height as needed */
-    overflow-y: auto; /* Add vertical scroll when content exceeds max-height */
-}
-
-.notification-item {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-}
-
-.notification-item h4.label {
-    color: #333;
-}
-
-.notification-item div {
-    margin-top: 5px;
-    color: #777;
-}
-
-.dropdown-divider {
-    border-top: 1px solid #ddd;
-}
 
 
             </style>

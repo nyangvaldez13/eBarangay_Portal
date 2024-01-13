@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        // session_start();
+        session_start();
         $_SESSION['id'] = $row['id'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['access_level'] = $row['access_level'];
