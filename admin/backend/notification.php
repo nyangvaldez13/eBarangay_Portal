@@ -9,7 +9,11 @@ $tables = array(
     "medical_assistance_submission" => "Medical Assistance",
     "senior_citizen_application" => "Senior Citizen Application"
 );
+
 $notifications = [];
+
+$notifications_user = [];
+
 foreach ($tables as $table => $tableLabel) {
     $sql = "SELECT *, users.* 
             FROM $table 

@@ -7,7 +7,7 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
-   
+
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND user_password = ?");
     $stmt->bind_param("ss", $email, $pass);
     $stmt->execute();
@@ -16,12 +16,13 @@ if (isset($_POST['login'])) {
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         session_start();
+        $_SESSION['id'] = $row['id'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['access_level'] = $row['access_level'];
         $_SESSION['firstname'] = $row['firstname'];
         $_SESSION['lastname'] = $row['lastname'];
-        $_SESSION['id'] = $row['id'];
-
+      
+ 
         // Redirect based on access level = admin
         if ($row['access_level'] == 1) {
             header("Location: ../admin/index.php");
@@ -42,7 +43,8 @@ if (isset($_POST['login'])) {
 
 //Signup process
 if (isset($_POST['signup'])) {
-    $name = $_POST['name'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -72,7 +74,7 @@ if (isset($_POST['signup'])) {
             echo "<script>location.href='../sign-up.php';</script>";
         } else {
 
-            $insertQuery = "INSERT INTO users (name, phone, email, user_password, access_level) VALUES ('$name', '$phone', '$email', '$password', '$access_level')";
+            $insertQuery = "INSERT INTO users (firstname, lastname, phone, email, user_password, access_level) VALUES ('$firstname', '$lastname', '$phone', '$email', '$password', '$access_level')";
 
             if (mysqli_query($db, $insertQuery)) {
                  echo "<script>alert('Registration successful.');</script>";

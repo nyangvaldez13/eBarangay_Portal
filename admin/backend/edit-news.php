@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $media = $_POST['media'];
         $desc = "";
 
-    $photoData = file_get_contents($_FILES["media"]["tmp_name"]);
+        $photoData = file_get_contents($_FILES["media"]["tmp_name"]);
 
         $check = getimagesize($_FILES["media"]["tmp_name"]);
         if ($check === false) {

@@ -50,13 +50,13 @@ require '../backend/news.php';
                     <td><?= $act['date'] ?></td>
                     <td><?= $act['heading'] ?></td>
                     <td>
-                        <a href="view-news.php?id=<?= $act['id'] ?>" class="btn"><i class="bi bi-eye"></i></a>
-                        <a href="edit-news.php?id=<?= $act['id'] ?>" class="btn"><i class="bi bi-pencil"></i></a>
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="deleteModal<?= $act['id']; ?>"><i class="bi bi-trash3"></i></button>
+                        <a href="view-news.php?id=<?= $act['activity_id'] ?>" class="btn"><i class="bi bi-eye"></i></a>
+                        <a href="edit-news.php?id=<?= $act['activity_id'] ?>" class="btn"><i class="bi bi-pencil"></i></a>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="deleteModal<?= $act['activity_id']; ?>"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
 
-                  <div class="modal fade" id="deleteModal<?= $act['id']; ?>" tabindex="-1">
+                  <div class="modal fade" id="deleteModal<?= $act['activity_id']; ?>" tabindex="-1">
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -67,7 +67,7 @@ require '../backend/news.php';
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
-                                    <button type="button" class="btn btn-primary" onclick="deleteNews(<?= $act['id']; ?>)">Yes</button>
+                                    <button type="button" class="btn btn-primary" onclick="deleteNews(<?= $act['activity_id']; ?>)">Yes</button>
                                 </div>
                             </div>
                         </div>
