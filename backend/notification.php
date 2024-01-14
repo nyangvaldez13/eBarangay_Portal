@@ -39,13 +39,18 @@ foreach ($tables as $table => $tableLabel) {
             $status = $row['status'];
             if ($status == 1){
                 $wait = 'Approved';
+                $design = 'style = "color:#5edb86;"';
             } else {
                 $wait = 'Pending';
+                $design = 'style = "color:#f2b46d;"';
             }
+
+            
+
 
             // Add each notification as an associative array to $notifications
             $notifications[] = [
-            
+                'design' => $design,
                 'time' => $time,
                 'tableLabel' => $tableLabel,
                 'name' => $name,
@@ -76,7 +81,7 @@ foreach ($notifications as $notification) {
             <li class="notification-item">
                 <h4 class="label">' . $notification['tableLabel'] . '</h4>
                 <div class="time">' . $notification['time'] . '</div>
-                <div class="wait">' . $notification['wait'] . '</div>
+                <div class="wait" '. $notification['design'] .'>' . $notification['wait'] . '</div>
                 <div class="name">' . $notification['name'] . '</div>
             </li>
            
