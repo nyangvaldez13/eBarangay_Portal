@@ -32,7 +32,7 @@
                   </div>
                 </div>
 
-           <form class="row g-3 mt-2 " name="add-admin" method="POST" action="../backend/add-admin.php">
+           <form class="row g-3 mt-2 " name="add-admin" method="POST" enctype="multipart/form-data" action="../backend/add-admin.php">
                 <div class=" col-9 row">
                     <div class="col-4">
                         <label for="inputName5" class="form-label">First Name</label>
@@ -69,7 +69,7 @@
                 <span class="card-title ms-4">Photo</span>
                 <br>
            <div class="file-upload-container ms-4 mt-2">
-                <input type="file" id="file-upload" class="file-upload-input">
+                <input type="file" id="file-upload" name="photo" class="file-upload-input">
                     <label for="file-upload" class="file-upload-label">
                 <span class="upload-icon">
                     <i class="bi bi-image"></i>
@@ -150,7 +150,8 @@
 
 
                 <div class="text-left">
-                  <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-secondary">Cancel</button>
+                  <!-- <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-secondary">Cancel</button> -->
+                  <a href="admin.php" style = "width: 120px;" class="btn btn-outline-secondary">Cancel</a>
                   <button id="btn" style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
                 </div>
               </form>
