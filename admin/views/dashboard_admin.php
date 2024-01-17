@@ -64,7 +64,7 @@ require '../backend/dashboard_admin.php';
     </div>
     <div class="col-auto">
         <div class="">
-        <button type="button" class="btn btn-primary" id = "addBtn"><i class="bi bi-plus"></i> Add Barangay Official</button>
+        <a href="add-barangay-official.php" class="btn btn-primary"><i class="bi bi-plus"></i>Add Barangay Official</a>
         </div>
     </div>
     </div>
@@ -147,7 +147,7 @@ require '../backend/dashboard_admin.php';
 
 <script>
      function deleteOfficial($personId) {
-        fetch(`../backend/delete-barangay-officials.php?id=${$personId}`, {
+        fetch(`../backend/delete-barangay-official.php?id=${$personId}`, {
             method: 'DELETE',
         })
         .then(response => {

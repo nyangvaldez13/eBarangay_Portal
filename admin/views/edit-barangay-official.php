@@ -1,4 +1,5 @@
 <?php require('../includes/header.php') ?>
+<?php require '../backend/db.php';?>
 
 <section class="section pt-2">
     <div class="row align-items-center">
@@ -47,7 +48,8 @@
             
                
              ?> 
-           <form class="row g-3 mt-2">
+           <!-- <form class="row g-3 mt-2"> -->
+           <input type="hidden" name="id" value="<?= $info['id'] ?>">
                 <div class=" col-9 row">
                     <div class="col-6">
                         <label for="inputName5" class="form-label">First Name</label>
@@ -70,8 +72,9 @@
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Position</label>
-                      <select id="inputState" class="form-select" name="position" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> " name="" value="<?= $info['']?> ">
-                         <option value="<?= $info['position']?>"><?= $info['committee']?></option>
+                      
+                      <select id="inputState" class="form-select" name="position">
+                         <option value="<?= $info['position']?>"><?= $info['position']?></option>
                          <option>Chairman</option>
                          <option>Deputy</option>
                          <option>Barangay Security Officer</option>

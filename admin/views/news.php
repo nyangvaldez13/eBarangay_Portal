@@ -34,10 +34,9 @@ require '../backend/news.php';
                 <thead>
                   <tr>
                     <th>Title</th>
-                    <th>Location</th>
                     <th>Type</th>
+                    <th>Location</th>
                     <th>Date</th>
-                    <th>Description</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -45,14 +44,13 @@ require '../backend/news.php';
                   <tr>
                     <?php foreach($activities as $act): ?>
                     <td><?= $act['title'] ?></td>
-                    <td><?= $act['place'] ?></td>
                     <td><?= $act['activity'] ?></td>
+                    <td><?= $act['place'] ?></td>
                     <td><?= $act['date'] ?></td>
-                    <td><?= $act['heading'] ?></td>
                     <td>
                         <a href="view-news.php?id=<?= $act['activity_id'] ?>" class="btn"><i class="bi bi-eye"></i></a>
                         <a href="edit-news.php?id=<?= $act['activity_id'] ?>" class="btn"><i class="bi bi-pencil"></i></a>
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="deleteModal<?= $act['activity_id']; ?>"><i class="bi bi-trash3"></i></button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $act['activity_id']; ?>"><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
 
@@ -88,22 +86,22 @@ require '../backend/news.php';
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-     function deleteNews(newsID) {
+     function deleteNews(newsId) {
         fetch(`../backend/delete-news.php?id=${newsId}`, {
             method: 'DELETE',
         })
         .then(response => {
             if (response.ok) {
-                alert('Resident deleted successfully');
+                alert('News deleted successfully');
               
                 location.reload();
             } else {
-                alert('Failed to delete resident'); 
+                alert('Failed to delete news'); 
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Failed to delete resident');
+            alert('Failed to delete news');
         });
     }
 </script>

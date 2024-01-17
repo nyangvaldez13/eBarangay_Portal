@@ -28,7 +28,7 @@
                     <th>Residents Name</th>
                     <th>Phone</th>
                     <th>Email</th>
-                    <th>Created</th>
+                    <th>Address</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -49,7 +49,8 @@
                     <td><?= $resident['firstname']; $resident['lastname']; ?></td>
                     <td><?= $resident['phone']; ?></td>
                     <td><?= $resident['email']; ?></td>
-                    <td><?=  $formatted_date; ?></td>
+                    <td><?= $resident['address']; ?></td>
+                    <!-- <td><?=  $formatted_date; ?></td> -->
                     
                     <td>
                         <!-- <button type="button" class="btn" id="viewBtn"><i class="bi bi-eye"></i></button> -->

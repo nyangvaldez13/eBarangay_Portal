@@ -23,6 +23,14 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">Barangay Official Details</h5>
+            <div id="toast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Creating Information.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
 
            <form class="row g-3 mt-2" name="add-barangay-official" method="POST" enctype="multipart/form-data" action="../backend/add-barangay-official.php">
                 <div class=" col-9 row">
@@ -41,18 +49,18 @@
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Committee</label>
                       <select required id="inputState" name="committee" class="form-select">
-                         <option selected="">         </option>
-                         <option>...</option>
+                         <option value="" selected disabled>Select a committee</option>
+                         <option value="1">1</option>
+                         <option value="2">2</option>
                       </select>
                     </div>
                 <div class="col-6">
                     <label for="inputName5" class="form-label">Position</label>
                       <select required id="inputState" name="position" class="form-select">
-                         <option selected="">         </option>
-                         
-                         <option>Chairman</option>
-                         <option>Deputy</option>
-                         <option>Barangay Security Officer</option>
+                         <option value="" selected disabled>Select a position</option>
+                         <option value="Chairman">Chairman</option>
+                         <option value="Deputy">Deputy</option>
+                         <option value="Barangay Security Officer">Barangay Security Officer</option>
                       </select>
                     </div>
                
@@ -142,7 +150,8 @@
 
 
                 <div class="text-left">
-                  <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-secondary">Cancel</button>
+                  <!-- <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-secondary">Cancel</button> -->
+                  <a href="dashboard_admin.php" style = "width: 120px;" class="btn btn-outline-secondary">Cancel</a>
                   <button id="btn" style = "width: 120px;" type="save" class="btn btn-primary">Save</button>               
                 </div>
               </form>

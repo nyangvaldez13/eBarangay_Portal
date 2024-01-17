@@ -1,6 +1,5 @@
 <?php require('../includes/header.php') ?>
 
-
 <section class="section pt-2">
     <div class="row align-items-center">
     <div class="col-xl">
@@ -22,34 +21,36 @@
           <div class="card">
             <div class="card-body">
 
-            <h5 class="card-title mt-3">General Information</h5>
+            <h5 class="card-title mt-3">View News Information</h5>
+            <?php include_once('../backend/view-news.php'); ?>
+
           <form class = "row g-3">
             <div class="col-12">
                         <label for="inputName5" class="form-label mt-2">Title</label>
-                        <input type="text" class= "form-control" id="inputName2" placeholder ="Type news title here. . .">
+                        <input type="text" value="<?= $activity['title'] ?>" class= "form-control" id="inputName2" disabled placeholder ="News Title">
                 </div>
                  <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-12">
-                   <div class="quill-editor-default" style = "height: 200px;">
-                <p>Type your description here...</p>
+                   <div class="quill-editor-default" id="description-editor" name="description" style = "height: 200px;" placeholder ="News Description">
+                   <!-- <input type="text" name="description" class= "form-control" style = "height: 200px;" disabled placeholder ="News Description"> -->
               </div>
                   </div>
                 </div>
                   <div class="col-4">
                        <label for="inputName5" class="form-label">News Type</label>
-                      <select id="inputState" placeholder = "Select a type" class="form-select">
-                         <option selected="">Select a type</option>
+                      <select id="inputState" disabled placeholder = "" class="form-select">
+                         <option selected=""></option>
                          <option>...</option>
                       </select>
                     </div>
                     <div class="col-4">
                         <label for="inputDate" class="form-label">Date</label>
-                        <input type="date" class="form-control" >
+                        <input disabled type="date" class="form-control" >
                     </div>
                     <div class="col-4">
                         <label for="inputName5" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="inputName2" placeholder = "Type location here...">
+                        <input disabled type="text" class="form-control" id="inputName2" placeholder = "">
                     </div>
 
             </form>
@@ -67,16 +68,17 @@
                     <h5 class="card-title mt-3">Media</h5>
                     <p>Photo</p>
                     <div class="file-upload-container ms-4 mt-2 col">
-                        <input type="file" id="file-upload" class="file-upload-input">
+                        <input disabled type="file" id="file-upload" class="file-upload-input">
                         <label for="file-upload" class="file-upload-label">
                             <span class="upload-icon">
                                 <i class="bi bi-image"></i>
                             </span>
-                            <span class="upload-text">Click add image</span>
+                            <span class="upload-text">Image</span>
                         </label>
                     </div>
-                     <p class = "mt-3">Video</p>
-                    <div class="file-upload-container ms-4 mt-2 col">
+                    
+                    <!-- <p class = "mt-3">Video</p>
+                     <div class="file-upload-container ms-4 mt-2 col">
                         <input type="file" id="file-upload" class="file-upload-input">
                         <label for="file-upload" class="file-upload-label">
                             <span class="upload-icon">
@@ -84,12 +86,13 @@
                             </span>
                             <span class="upload-text">Click add video</span>
                         </label>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 
 <style>
@@ -125,10 +128,10 @@
 </style>
    
     <section>
-      <div class="mt-2" style = "text-align: right;">
-        <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-outline-primary btn-lg">Cancel</button>
-        <button style = "width: 120px;" type="save" class="btn btn-primary btn-lg">Save</button>               
+      <div class="mt-2" style = "text-align: left;">
+      <a href="news.php"><button style = "width: 120px; margin-left: 10px;" type="cancel" class="btn btn-outline-primary btn-lg">Back</button></a>
       </div>
     </section>
+
 
 <?php require('../includes/footer.php') ?>

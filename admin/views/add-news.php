@@ -22,36 +22,47 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">General Information</h5>
+            <div id="toast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Creating Information.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+
           <form class = "row g-3" name="add-news" method="POST" enctype="multipart/form-data" action="../backend/add-news.php">
             <div class="col-12">
                         <label for="inputName5" class="form-label mt-2">Title</label>
-                        <input type="text" name="title" class= "form-control" id="inputName2" placeholder ="Type news title here. . .">
+                        <input type="text" name="title" class= "form-control" required id="inputName2" placeholder ="Type news title here. . .">
                 </div>
                  <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-12">
-                   <div class="quill-editor-default" name="description" style = "height: 200px;">
-                <p>Type your description here...</p>
+                   <div class="quill-editor-default" name="description" style = "height: 200px;" placeholder ="Type your description here...">
+                   <!-- <input type="text" name="description" class= "form-control" required id="inputName2" placeholder ="Type your description here..."> -->
+                
               </div>
                   </div>
                 </div>
                   <div class="col-4">
                        <label for="inputName5" class="form-label">News Type</label>
-                      <select id="inputState" name="type" placeholder = "Select a type" class="form-select">
-                         <option selected="">Select a type</option>
-                         <option>...</option>
+                      <select required id="inputState" name="type" placeholder = "Select a type" class="form-select">
+                         <option value="" selected disabled>Select a type</option>
+                         <option value="Event">Event</option>
+                         <option value="Announcement">Announcement</option>
                       </select>
                     </div>
                     <div class="col-4">
                         <label for="inputDate" class="form-label">Date</label>
-                        <input type="date" name="date" class="form-control" >
+                        <input type="date" required name="date" class="form-control" >
                     </div>
                     <div class="col-4">
                         <label for="inputName5" class="form-label">Location</label>
-                        <input type="text"name="location" class="form-control" id="inputName2" placeholder = "Type location here...">
+                        <input type="text" required name="location" class="form-control" id="inputName2" placeholder = "Type location here...">
                     </div>
 
-            </form>
+            
             </div>
           </div>
         
@@ -66,7 +77,7 @@
                     <h5 class="card-title mt-3">Media</h5>
                     <p>Photo</p>
                     <div class="file-upload-container ms-4 mt-2 col">
-                        <input type="file" name="media" id="file-upload" class="file-upload-input">
+                        <input type="file" name="photo" id="file-upload" class="file-upload-input">
                         <label for="file-upload" class="file-upload-label">
                             <span class="upload-icon">
                                 <i class="bi bi-image"></i>
@@ -74,7 +85,7 @@
                             <span class="upload-text">Click add image</span>
                         </label>
                     </div>
-                     <p class = "mt-3">Video</p>
+                     <!-- <p class = "mt-3">Video</p>
                     <div class="file-upload-container ms-4 mt-2 col">
                         <input type="file" id="file-upload" class="file-upload-input">
                         <label for="file-upload" class="file-upload-label">
@@ -83,7 +94,7 @@
                             </span>
                             <span class="upload-text">Click add video</span>
                         </label>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -125,10 +136,11 @@
    
     <section>
       <div class="mt-2" style = "text-align: right;">
-        <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-outline-primary btn-lg">Cancel</button>
+        <a href="news.php"> <button style = "width: 120px; margin-right: 10px;" type="cancel" class="btn btn-outline-primary btn-lg">Cancel</button></a>
         <button id="btn" style = "width: 120px;" type="save" class="btn btn-primary btn-lg">Save</button>               
       </div>
     </section>
+    </form>
 
     <script>
             document.getElementById('btn').addEventListener('click', function() {

@@ -54,6 +54,7 @@
             <div class="col-2">
                 <span class="card-title ms-4">Photo</span>
                 <br>
+               
            <div class="file-upload-container ms-4 mt-2">
                 <input type="file" id="file-upload" class="file-upload-input">
                     <label for="file-upload" class="file-upload-label">
