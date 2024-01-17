@@ -28,29 +28,27 @@
             <div class="col-12">
                         <label for="inputName5" class="form-label mt-2">Title</label>
                         <input type="text" value="<?= $activity['title'] ?>" class= "form-control" id="inputName2" disabled placeholder ="News Title">
-                </div>
+            </div>
                  <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-12">
-                   <div class="quill-editor-default" id="description-editor" name="description" style = "height: 200px;" placeholder ="News Description">
+                  
+                   <textarea type="text" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" disabled rows ="5"> <?= $activity['description'] ?> </textarea>        
                    <!-- <input type="text" name="description" class= "form-control" style = "height: 200px;" disabled placeholder ="News Description"> -->
-              </div>
+              <!--</div>-->
                   </div>
                 </div>
                   <div class="col-4">
                        <label for="inputName5" class="form-label">News Type</label>
-                      <select id="inputState" disabled placeholder = "" class="form-select">
-                         <option selected=""></option>
-                         <option>...</option>
-                      </select>
+                      <input type="text" value="<?= $activity['activity'] ?>" class= "form-control" id="inputName2" disabled placeholder ="News Title">
                     </div>
                     <div class="col-4">
                         <label for="inputDate" class="form-label">Date</label>
-                        <input disabled type="date" class="form-control" >
+                        <input disabled type="date" value="<?= $activity['date'] ?>"class="form-control" >
                     </div>
                     <div class="col-4">
                         <label for="inputName5" class="form-label">Location</label>
-                        <input disabled type="text" class="form-control" id="inputName2" placeholder = "">
+                        <input disabled type="text" value="<?= $activity['place'] ?>"class="form-control" id="inputName2" placeholder = "">
                     </div>
 
             </form>
@@ -68,7 +66,7 @@
                     <h5 class="card-title mt-3">Media</h5>
                     <p>Photo</p>
                     <div class="file-upload-container ms-4 mt-2 col">
-                        <input disabled type="file" id="file-upload" class="file-upload-input">
+                        <input disabled type="file" value="<?= $activity['image'] ?>"id="file-upload" class="file-upload-input">
                         <label for="file-upload" class="file-upload-label">
                             <span class="upload-icon">
                                 <i class="bi bi-image"></i>
