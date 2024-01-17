@@ -1,79 +1,55 @@
-<?php 
+<?php
 include('db.php');
 sleep(2);
-if($_SERVER["REQUEST_METHOD"] === "POST"){
-  
-    if(isset($_POST['id'])){
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['id'])) {
         echo "test sad";
         $id = (int)$_POST['id'];
         $title = $_POST['title'];
         $description = $_POST['description'];
-        $type = $_POST['type'];
+        $activity = $_POST['type'];
         $date = $_POST['date'];
         $time = "";
         $location = $_POST['location'];
-        $media = $_POST['media'];
+        $media = $_POST['image'];
         $desc = "";
 
-        $photoData = file_get_contents($_FILES["media"]["tmp_name"]);
+        // Check if a new image file is uploaded
+        if (isset($_FILES['media']) && !empty($_FILES['media']['tmp_name'])) {
+            $photoData = file_get_contents($_FILES["media"]["tmp_name"]);
 
-        $check = getimagesize($_FILES["media"]["tmp_name"]);
-        if ($check === false) {
-            echo "File is not an image.";
-            exit();
-        }
+            $check = getimagesize($_FILES["media"]["tmp_name"]);
+            if ($check === false) {
+                echo "File is not an image.";
+                exit();
+            }
 
-        $allowedFormats = array("jpg", "jpeg", "png", "gif");
-        $imageFileType = strtolower(pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION));
-        if (!in_array($imageFileType, $allowedFormats)) {
-            echo "Sorry, only JPG, JPEG, PNG, and GIF files are allowed.";
-            exit();
-        }
-       
-    $sql = "UPDATE brgy_officials SET activity = '$type', title = '$title', date = '$date', time = '$time', place = '$location', 
-            image = '$photoData', heading = '$description', description = '$desc' WHERE id = $id";
- 
-        if($conn->query($sql) === TRUE){
-            echo "Record Updated Successfully";
-            header('location: ../views/edit-news.php?id='. $id);
+            $allowedFormats = array("jpg", "jpeg", "png");
+            $imageFileType = strtolower(pathinfo($_FILES["media"]["name"], PATHINFO_EXTENSION));
+            if (!in_array($imageFileType, $allowedFormats)) {
+                echo "Sorry, only JPG, JPEG, and PNG files are allowed.";
+                exit();
+            }
+
+            $sql = "UPDATE activity SET activity = ?, title = ?, date = ?, time = ?, place = ?, image = ?, description = ? WHERE activity_id = $id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssssss", $activity, $title, $date, $time, $location, $media, $description);
+            if ($stmt->execute()) {
+                echo "Record updated successfully";
+                header('location: ../views/edit-admin.php?id=' . $id);
+                exit();
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+            $stmt->close();
         } else {
-            echo "Error updating record: " . $conn->error;
-          }
-
+            $sql = "UPDATE activity SET activity = '$activity', title = '$title', date = '$date', time = '$time', place = '$location', image = '$media', description = '$description' WHERE activity_id = $id";
+            if ($conn->query($sql) === TRUE) {
+                echo "Record updated successfully";
+                header('location: ../views/edit-news.php?id=' . $id);
+            } else {
+                echo "Error updating record: " . $conn->error;
+            }
+        }
     }
-   
-
-    // header('location: ../views/edit-admin.php?id='. $id);
 }
-
-// $id = (int)$_POST['id'];
-// $firstname = $_POST['firstname'];
-// $lastname = $_POST['lastname'];
-// $address = $_POST['address'];
-// $phone = $_POST['phone'];
-// // validation here if may string
-// $phone = preg_replace("/[^0-9]/", "", $phone);
-// $email = $_POST['email'];
-
-// // File handling
-// $file_name = $_FILES['photo']['name'];
-// $file_tmp = $_FILES['photo']['tmp_name'];
-// $file_destination = "/files/upload_pictures/" . $file_name;
-
-
-
-// if(move_uploaded_file($file_tmp, $file_destination)){
-//     $stmt = $conn->prepare("UPDATE users SET firstname=?, lastname=?, address=?, phone=?, email=?, photo=? WHERE id=?");
-//     $stmt->bind_param("sss", $firstname, $lastname, $address, $phone, $email, $file_destination, $id);
-
-//     if($stmt->execute()){
-       
-//     } else {
-//         echo "Error on Updating.";
-//     }
-// } else {
-//     echo "Missing credentials field!";
-// }
-
-
-?>

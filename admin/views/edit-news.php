@@ -29,6 +29,7 @@
              ?>
              
 </section>
+ 
 <section class="section mt-2">
       <div class="row">
         <div class="col-lg-12">
@@ -37,18 +38,23 @@
             <div class="card-body">
 
             <h5 class="card-title mt-3">General Information</h5>
-          <form class = "row g-3" name="update-news" action="../backend/edit-news.php" method="POST" enctype="multipart/form-data">
-            <div class="col-12">
+             <div id="toast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Updating Information.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+              <input type="hidden" name="id" value="<?= $activity['activity_id'] ?>"> 
+                <div class="col-12">
                         <label for="inputName5" class="form-label mt-2">Title</label>
                         <input type="text" value="<?= $activity['title'] ?>"name="title" class= "form-control" id="inputName2" placeholder ="Type news title here. . .">
                 </div>
                 <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
                 <div class="col-12">
-                  
-                   <textarea type="text" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"> <?= $activity['description'] ?> </textarea>        
-                   <!-- <input type="text" name="description" class= "form-control" style = "height: 200px;" disabled placeholder ="News Description"> -->
-              <!--</div>-->
+                   <textarea type="text" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"> <?= $activity['description'] ?> </textarea>  
                   </div>
                 </div>
                   <div class="col-4">
@@ -67,8 +73,6 @@
                         <label for="inputName5" class="form-label">Location</label>
                         <input type="text" value="<?= $activity['place'] ?>"name="location" class="form-control" id="inputName2" placeholder = "Type location here...">
                     </div>
-
-            </form>
             </div>
           </div>
         
@@ -136,7 +140,7 @@
         <button style = "width: 120px;" type="save" name="update-news"  class="btn btn-primary btn-lg">Save</button>               
       </div>
     </section>
-
+  </form>
     <script>
             document.getElementById('btn').addEventListener('click', function() {
               var toast = new bootstrap.Toast(document.getElementById('toast'), { autohide: false });
