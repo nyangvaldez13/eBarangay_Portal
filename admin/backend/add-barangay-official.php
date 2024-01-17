@@ -22,10 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit();
         }
 
-        $allowedFormats = array("jpg", "jpeg", "png", "gif");
+        $allowedFormats = array("jpg", "jpeg", "png");
         $imageFileType = strtolower(pathinfo($_FILES["photo"]["name"], PATHINFO_EXTENSION));
         if (!in_array($imageFileType, $allowedFormats)) {
-            echo "Sorry, only JPG, JPEG, PNG, and GIF files are allowed.";
+            echo "Sorry, only JPG, JPEG, and PNG files are allowed.";
             exit();
         }
 
