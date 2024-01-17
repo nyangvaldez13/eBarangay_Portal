@@ -10,8 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $committee = $_POST['committee'];
         $position = $_POST['position'];
 
-        // Use prepared statements to prevent SQL injection
-        $sql = "UPDATE brgy_officials SET firstname = ?, lastname = ?, committee = ?, position = ? WHERE id = $id";
+        $sql = "UPDATE brgy_officials SET firstname = '$firstname', lastname = '$lastname', committee = '$committee', position = '$position' WHERE id = $id";
         if($conn->query($sql) === TRUE){
             echo "Record Updated Successfully";
             header('location: ../views/edit-barangay-official.php?id='. $id);

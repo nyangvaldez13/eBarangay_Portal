@@ -5,9 +5,9 @@ if ($dbConnect){
     $console_message = "User Table Connected!";
 }
 
-if(isset($_GET['id'])){
-    $newsId = $_GET['id'];
-    $sql = "DELETE FROM activity WHERE id = $id";
+if(isset($_GET['activity_id'])){
+    $newsId = $_GET['activity_id'];
+    $sql = "DELETE FROM activity WHERE activity_id = $newsId";
     $result = $conn->query($sql);
 }
 

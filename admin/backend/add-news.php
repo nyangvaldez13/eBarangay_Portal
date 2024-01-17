@@ -7,21 +7,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         isset($_POST['description']) &&
         isset($_POST['type']) &&
         isset($_POST['date']) &&
-        isset($_FILES['location']) &&
-        isset($_FILES['media'])   
+        isset($_POST['location']) &&
+        isset($_FILES['photo'])   
     ) {
         $title = $_POST['title'];
         $description = $_POST['description'];
         $type = $_POST['type'];
         $date = $_POST['date'];
-        $time = "";
         $location = $_POST['location'];
-        $media = $_POST['media'];
-        $desc = "";
+        //$media = $_POST['photo'];
         
-        $photoData = file_get_contents($_FILES["media"]["tmp_name"]);
+        $photoData = file_get_contents($_FILES["photo"]["tmp_name"]);
 
-        $check = getimagesize($_FILES["media"]["tmp_name"]);
+        $check = getimagesize($_FILES["photo"]["tmp_name"]);
         if ($check === false) {
             echo "File is not an image.";
             exit();
@@ -34,11 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit();
         }
 
-        $sql = "INSERT INTO activity (activity, title, date, time, place, image, heading, description)
-                VALUES (?, ?, ?, ?, ?), ?, ? ?";
+        $sql = "INSERT INTO activity (activity, title, date, place, image, description)
+                VALUES (?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $type, $title, $date, $time, $location, $photoData, $description, $desc) ;
+        $stmt->bind_param("sssss", $type, $title, $date, $location, $photoData, $description) ;
 
         if ($stmt->execute()) {
             echo "Record inserted successfully";
