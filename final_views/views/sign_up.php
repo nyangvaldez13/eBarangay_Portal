@@ -27,7 +27,7 @@ height: 100%;
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-          <form style="width: 23rem;"  method="POST" name="register" action="test_backend/login&register/register.php">
+          <form style="width: 23rem;"  method="POST" name="register" action="test_backend/login/register.php">
 
           <div class="d-flex align-items-center mb-3 pb-3">
       <img src="../assets/branding/logo-lightmode.png" height="50px" width="70px" alt="logo" class="img-fluid me-3" />
@@ -75,9 +75,23 @@ height: 100%;
         </div>
 
       </div>
+      <?php 
+    $pictureAdress = [
+      'https://github.com/loop2113/IMAGE/blob/main/COVERPAGE.png?raw=true',
+      'https://github.com/loop2113/IMAGE/blob/main/cover1.png?raw=true',
+      'https://github.com/loop2113/IMAGE/blob/main/CP6.png?raw=true',
+      'https://github.com/loop2113/IMAGE/blob/main/CP5.png?raw=true',
+      'https://github.com/loop2113/IMAGE/blob/main/CP4.png?raw=true',
+    ];
+
+    $random_number = rand(0,4);
+
+
+    ?>
+
       <div class="col-sm-6 px-0 d-none d-sm-block">
-        <img src="https://marketplace.canva.com/EADZ4M2277o/1/0/1143w/canva-honeydew-house-moving-announcement-9NIUDOrbEt0.jpg"
-          alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+        <img src="<?= $pictureAdress[$random_number]; ?>"
+        alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
       </div>
     </div>
   </div>

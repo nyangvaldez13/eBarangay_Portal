@@ -3,6 +3,15 @@
 <?php 
 
 include 'test_head.php';
+include '../final_backend/login/auth.php';
+include '../final_backend/helper/helpers.php';
+include '../final_backend/login/notification.php';
+
+
+
+
+
+
 
 ?>
 
@@ -14,7 +23,7 @@ include 'test_head.php';
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px;
 }
 
@@ -54,7 +63,7 @@ include 'test_head.php';
             <div class="links">
                 <ul class="justify-content-between align-items-center">
                 &nbsp;
-                    <li><a href="#home" id="home-link">Home</a></li>
+                    <li><a href="../final_views/main.php">Home</a></li>
                     <li><a href="#events" id="events-link">Events</a></li>
                     <li><a href="#request" id="request-link">Request</a></li>
                     <li><a href="#about" id="about-link">About</a></li>
@@ -64,9 +73,18 @@ include 'test_head.php';
                 <a class="nav-link" href="#">
                     <i class="bi bi-bell-fill text-white"></i>
                     <div class="notification-area text-dark">
-                        Notification 1<br>
-                        Notification 2<br>
-                        Notification 3
+                      <?php 
+
+                      
+              
+                      if($notificationCounter == 0){
+                        echo "No notification";
+                      } else {
+                        echo $notificationsHTML;
+                      }
+
+                     
+                      ?>
                     </div>
                 </a>
             </li>
@@ -75,6 +93,7 @@ include 'test_head.php';
                 <a class="nav-link" href="#">
                 <i class="bi bi-person-circle text-white"></i>
                     <div class="profile-area">
+                        <span class="text-dark"><?= $firstname ?> <?= $lastname ?></span>
                         <a href="" class="text-dark">Edit Profile</a><br>
                         <a href="" onclick="logout()" class="text-dark cursor-pointer" >Logout</a>
                     </div>
@@ -90,12 +109,10 @@ include 'test_head.php';
 </nav>
 
 <script>
-function direct(){
-    window.location.href="test_index.php";
-}
+
 
 function logout(){
-  window.location.href="../final_backend/login&register/logout.php"
+  window.location.href="../final_backend/login/logout.php"
 }
 
 

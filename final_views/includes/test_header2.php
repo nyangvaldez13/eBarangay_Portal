@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'test_head.php'; ?>
+<?php 
+include 'test_head.php'; 
+$id = null;
+
+?>
 
 <body>
 <nav id="top-navbar" class="top-navbar">
@@ -29,7 +33,7 @@
 
 <script>
 function direct(){
-    window.location.href="final_views/index.php";
+  window.location.href="final_views/index.php";
 }
 
 
