@@ -57,7 +57,7 @@
                 ]
    
             ?>
-              <tr>
+              <tr data-table="<?= $table ?>" data-id="<?= $row['ID'] ?>">
                 <td><?= $name ?></td>
                 <td><?= $tableLabel ?></td>
                 
@@ -67,8 +67,9 @@
 
                 <td><?= $date ?></td>
                 <td>
-                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="bi bi-eye"></i></button>
-                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
+                  
+                  <button type="button" class="btn btn-view" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn btn-delete" data-table="<?= $table ?>" data-id="<?= $row['ID'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                 </td>
               </tr>
     <?php
@@ -78,6 +79,35 @@
     ?>
   </tbody>
 </table>
+
+
+<script>
+      $('.btn-delete').on('click', function(){
+
+        // var dataId = $(this).closest('tr').data('id');
+        // var dataTable = $(this).closest('tr').data('table');
+
+        var dataId = $(this).data('id');
+        var dataTable = $(this).data('table');
+
+        if(confirm('Are you sure you want to delete?')) {
+          $.ajax({
+            url: './backend/data-request.php',
+            method: 'POST',
+            data: {table: dataTable, id: dataId},
+            success: function (response){
+
+            },
+            error: function(error){
+              console.log('Error deleting data', error);
+            }
+          });
+        }
+      });
+        
+    </script>
+
+
               <!-- End Table with stripped rows -->
 
             </div>
@@ -172,11 +202,6 @@
                   </div>
                 </div>
               </div><!-- End Large Modal-->
-
-    <script>
-
-        
-    </script>
 
 
 <?php require('../includes/footer.php') ?>
