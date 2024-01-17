@@ -56,18 +56,12 @@
                     </div>
                
                 </div>
-            <div class="col-2">
+                <div class="col-2">
                 <span class="card-title ms-4">Photo</span>
                 <br>
-           <div class="file-upload-container ms-4 mt-2">
-                <input type="file" id="file-upload" class="file-upload-input">
+                <div class="file-upload-container ms-4 mt-2">
                     <label for="file-upload" class="file-upload-label">
-                <span class="upload-icon">
-                    <i class="bi bi-image"></i>
-                </span>
-                <span class="upload-text">
-                        Click to upload
-                </span>
+                    <img src="data:image;base64,<?= base64_encode($resident['photo']) ?>" alt="User Image" class="uploaded-image">
             </div>
             </div>
 
@@ -89,9 +83,10 @@
                 width: 60px; /* Adjust as needed */
                 height: 60px; /* Adjust as needed */
                 border-radius: 50%;
+                border: 2.5px solid #6969674d;
                 background: rgba(45, 22, 116, 0.15);
                 color: white;
-                cursor: pointer;
+                
                 position: relative;
                 }
 
@@ -123,7 +118,7 @@
                 border-radius: 50%;
                 background: rgba(45, 22, 116, 0.15);
                 color: white;
-                cursor: pointer;
+                overflow: hidden;
                 position: relative;
                 }
 

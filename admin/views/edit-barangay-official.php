@@ -67,7 +67,8 @@
                     <label for="inputName5" class="form-label">Committee</label>
                       <select id="inputState" class="form-select" name="committee">
                          <option value="<?= $info['committee']?>"><?= $info['committee']?> </option>
-                         <option>...</option>
+                         <option value="1">1</option>
+                         <option value="2">2</option>
                       </select>
                     </div>
                 <div class="col-6">
@@ -86,7 +87,8 @@
                 <span class="card-title ms-4">Photo</span>
                 <br>
            <div class="file-upload-container ms-4 mt-2">
-                <input type="file" id="file-upload" class="file-upload-input">
+                <input type="file" id="file-upload" name="photo" class="file-upload-input">
+                
                     <label for="file-upload" class="file-upload-label">
                 <span class="upload-icon">
                     <i class="bi bi-image"></i>
@@ -105,6 +107,8 @@
 
                 .file-upload-input {
                 display: none;
+                position: relative;
+                overflow: hidden;
                 }
 
                 .file-upload-label {
@@ -149,19 +153,35 @@
                 border-radius: 50%;
                 background: rgba(45, 22, 116, 0.15);
                 color: white;
-                cursor: pointer;
+                overflow: hidden;
                 position: relative;
+                }
+
+                .file-upload-label::before {
+                content: "";
+                background-image: url('data:image;base64,<?= base64_encode($info['photo']) ?>');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 80%;
                 }
 
                 .upload-icon {
                 font-size: 50px;
-                color: grey;
+                color: #252523;
+                z-index: 1;
                 }
 
                 .upload-text {
                 font-size: 15px;
-                color: grey;
+                color: #252523;
                 margin-top: 2px; /* Adjust as needed */
+                z-index: 1;
 }
             </style>
 

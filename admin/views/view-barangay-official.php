@@ -26,6 +26,7 @@
             
             <?php 
             require '../backend/view-barangay-official.php';
+            
             foreach($result as $info): ?>
            <form class="row g-3 mt-2">
                 <div class=" col-9 row">
@@ -56,14 +57,15 @@
                 <br>
                
            <div class="file-upload-container ms-4 mt-2">
-                <input type="file" id="file-upload" class="file-upload-input">
+                <!-- <input type="file" id="file-upload" class="file-upload-input"> -->
                     <label for="file-upload" class="file-upload-label">
-                <span class="upload-icon">
+                    <img src="data:image;base64,<?= base64_encode($info['photo']) ?>" alt="Brgy Official Image" class="uploaded-image">
+                <!-- <span class="upload-icon">
                     <i class="bi bi-image"></i>
                 </span>
                 <span class="upload-text">
                         Click to upload
-                </span>
+                </span> -->
             </div>
             </div>
             <?php endforeach; ?>
@@ -88,7 +90,7 @@
                 border-radius: 50%;
                 background: rgba(45, 22, 116, 0.15);
                 color: white;
-                cursor: pointer;
+                
                 position: relative;
                 }
 
@@ -118,10 +120,17 @@
                 width: 180px; /* Adjust as needed */
                 height: 180px; /* Adjust as needed */
                 border-radius: 50%;
+                border: 2.5px solid #6969674d;
                 background: rgba(45, 22, 116, 0.15);
                 color: white;
-                cursor: pointer;
+                overflow: hidden;
                 position: relative;
+                }
+
+                .uploaded-image {
+                width: 100%; 
+                height: auto; 
+                border-radius: 50%; 
                 }
 
                 .upload-icon {
