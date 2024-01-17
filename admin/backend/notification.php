@@ -27,8 +27,10 @@ foreach ($tables as $table => $tableLabel) {
             $status = $row['status'];
             if ($status == 1){
                 $icon = 'bi bi-check-circle text-success';
-            } else {
+            } else if($status == 2){
                 $icon = 'bi bi-exclamation-circle text-warning';
+            } else {
+                $icon = 'bi bi-x-circle text-danger';
             }
 
             // Add each notification as an associative array to $notifications
@@ -42,7 +44,7 @@ foreach ($tables as $table => $tableLabel) {
         }
     } else {
         // No records found for this table
-        echo "No record found.";  // Commented to avoid displaying this multiple times
+        // echo "No record found.";  // Commented to avoid displaying this multiple times
     }
 }
 

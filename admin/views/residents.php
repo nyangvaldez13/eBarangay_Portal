@@ -101,11 +101,11 @@
         })
         .then(response => {
             if (response.ok) {
-                alert('Resident deleted successfully');
-              
+                
+                
                 location.reload();
             } else {
-                alert('Failed to delete resident');
+                
             }
         })
         .catch(error => {
