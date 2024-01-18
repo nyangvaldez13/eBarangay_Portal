@@ -38,15 +38,15 @@
               <!--</div>-->
                   </div>
                 </div>
-                  <div class="col-4">
+                  <div class="col-12">
                        <label for="inputName5" class="form-label">News Type</label>
                       <input type="text" value="<?= $activity['activity'] ?>" class= "form-control" id="inputName2" disabled placeholder ="News Title">
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputDate" class="form-label">Date</label>
                         <input disabled type="date" value="<?= $activity['date'] ?>"class="form-control" >
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputName5" class="form-label">Location</label>
                         <input disabled type="text" value="<?= $activity['place'] ?>"class="form-control" id="inputName2" placeholder = "">
                     </div>

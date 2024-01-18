@@ -46,18 +46,24 @@
                     <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                   </div>
                 </div>
-              <input type="hidden" name="id" value="<?= $activity['activity_id'] ?>"> 
+                <input type="hidden" name="id" value="<?= $activity['activity_id'] ?>"> 
                 <div class="col-12">
                         <label for="inputName5" class="form-label mt-2">Title</label>
                         <input type="text" value="<?= $activity['title'] ?>"name="title" class= "form-control" id="inputName2" placeholder ="Type news title here. . .">
                 </div>
                 <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+<<<<<<< HEAD
                 <div class="col-12">
                    <textarea type="text" name="description" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"> <?= $activity['description'] ?> </textarea>  
                   </div>
                 </div>
                   <div class="col-4">
+=======
+                  <textarea type="text" value = "<?= $activity['description'] ?>" name = "description" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"><?= $activity['description'] ?></textarea>  
+               </div>
+                  <div class="col-12">
+>>>>>>> b43a5d401d5b85a1194c64842ca40ed31fdcce3a
                        <label for="inputName5" class="form-label">News Type</label>
                       <select id="inputState" name="type"  placeholder = "Select a type" class="form-select">
                          <option selected=""><?= $activity['activity'] ?></option>
@@ -65,11 +71,11 @@
                          <option>Announcement</option>
                       </select>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputDate" class="form-label">Date</label>
                         <input type="date"name="date"value="<?= $activity['date'] ?>" class="form-control" >
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputName5" class="form-label">Location</label>
                         <input type="text" value="<?= $activity['place'] ?>"name="location" class="form-control" id="inputName2" placeholder = "Type location here...">
                     </div>
