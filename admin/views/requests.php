@@ -10,6 +10,7 @@
 </section>
 
 
+
 <section class="section mt-5">
       <div class="row">
         <div class="col-lg-12">
@@ -42,22 +43,26 @@
             while ($row = $result->fetch_assoc()) {
                 $name = $row['firstname'] . ' ' . $row['lastname'];
                 $status = $row['status'];
-                if($status == 2 ){
-                  $isProcess = false;
+
+                if($status == 1 ){
+                  $toDisplay = 'Approved';
+                  $toDisplayClass = 'text-success border border-success rounded bg-light text-center ';
+                } else if($status == 2){
+                  $toDisplay = 'Processing';
+                  $toDisplayClass = 'text-warning border border-warning rounded bg-light col-4 text-center';
                 } else {
-                  $isProcess = true;
+                  $toDisplay = 'Declined';
+                  $toDisplayClass = 'text-danger border border-danger rounded bg-light col-4 text-center';
                 }
                
                 $date = date('d M Y', strtotime($row['request_date']));
-                $toDisplay = $isProcess ? 'Approved' : 'Processing';
-                $toDisplayClass = $isProcess ? 'text-success border border-success rounded bg-light text-center ' : 'text-warning border border-warning rounded bg-light col-4 text-center';
-
+                
                 $notification[] = [
                   
                 ]
    
             ?>
-              <tr>
+              <tr data-table="<?= $table ?>" data-id="<?= $row['id'] ?>" >
                 <td><?= $name ?></td>
                 <td><?= $tableLabel ?></td>
                 
@@ -67,8 +72,9 @@
 
                 <td><?= $date ?></td>
                 <td>
-                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="bi bi-eye"></i></button>
-                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
+                  
+                  <button type="button" class="btn btn-view" onclick="showRequest('<?= $table ?>', '<?= $row['ID'] ?>', '<?= $tableLabel ?>')"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn btn-delete" onclick="showDeleteModal('<?= $table ?>', '<?= $row['ID'] ?>', '<?= $tableLabel ?>')"><i class="bi bi-trash3"></i></button>
                 </td>
               </tr>
     <?php
@@ -87,31 +93,59 @@
       </div>
     </section>
 
-<div class="modal fade" id="deleteModal" tabindex="-1">
-                <div class="modal-dialog modal-sm">
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                  <button type="button" onclick="deleteClose()" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body" id="deleteModalBody">
+
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" onclick="deleteClose()" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" onclick="deleteRequest()">Delete</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+
+            
+    <div class="modal fade" id="requestModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                     
+                      <h5 class="card-title" id="card-title"></h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <span class="card-title fs-6"> Are you sure you want to delete?</span>
+                      <div class="grid d-flex">
+
+                        <form class = "row g-3 formRequest">
+                        
+
+
+
+            </form>
+
+                      </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
-                      <button type="button" class="btn btn-primary">Yes</button>
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="declineRequest()">Decline</button>
+                      <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="holdRequest()">Hold</button>
+                      <button type="button" id="approveRequest" class="btn btn-info" onclick="approvedRequest()">Approve</button>
                     </div>
                   </div>
                 </div>
-              </div><!-- End Small Modal-->
-
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
-                Large Modal
-              </button>
+              </div>
 
               <!-- Barangay Cert Modal-->
 
-              <div class="modal fade" id="largeModal" tabindex="-1">
+              <div class="modal fade" id="brgy_cert_submission" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -177,7 +211,7 @@
 
               <!-- Business Permit Modal-->
 
-              <div class="modal fade" id="largeModal2" tabindex="-1">
+              <div class="modal fade" id="business_permit_submission" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -234,7 +268,7 @@
 
               <!-- Medical Assistance Modal-->
 
-              <div class="modal fade" id="largeModal3" tabindex="-1">
+              <div class="modal fade" id="medical_assistance_submission" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -295,7 +329,7 @@
 
               <!-- Burial Assistance Modal-->
 
-              <div class="modal fade" id="largeModal3" tabindex="-1">
+              <div class="modal fade" id="burial_assistance_submission" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -364,7 +398,7 @@
 
               <!-- Financial Assistance Modal-->
 
-              <div class="modal fade" id="largeModal3" tabindex="-1">
+              <div class="modal fade" id="financial_assistance_submission" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -469,9 +503,200 @@
                 </div>
               </div><!-- End Large Modal-->
 
-    <script>
+      <script>
+      function deleteClose(){
+        $('#deleteModal').modal('hide')
+      }
 
+      function showDeleteModal(table, id, request){
+  
+        var modalBody = document.getElementById('deleteModalBody');
+        modalBody.innerHTML = `Are you sure do you want to delete this ${request} Request`;
         
+        $('#deleteModal').modal('show');
+
+        $('#deleteModal').data('table', table);
+        $('#deleteModal').data('id', id);
+      }
+      
+      function deleteRequest(){
+        var table = $('#deleteModal').data('table');
+        var id = $('#deleteModal').data('id');
+
+        fetch(`../backend/delete-request.php?table=${table}&id=${id}`, {
+        }).then(response => {
+          if (response.ok) {
+               
+
+                $('#deleteModal').modal('hide')
+                location.reload();
+            } else {
+              
+            }
+          }
+        ).catch(error => {
+            console.error('Error:', error);
+            alert('Failed to delete request');
+        });
+      }
+      
+      function showRequest(table, id, request){
+        var title = document.getElementById('card-title');
+        title.innerHTML = `${request}`;
+        
+
+
+        $('#requestModal').data('table', table);
+        $('#requestModal').data('id', id);
+
+
+
+        fetch(`../backend/view-request.php?table=${table}&id=${id}`,{
+        }).then(response => {
+         
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+
+          
+        }).then(data => {
+
+         
+          var lastname = document.getElementById('last_name');
+          var age = document.getElementById('age');
+          var sex = document.getElementById('sex');
+          var phone_number = document.getElementById('phone_number');
+          var email = document.getElementById('email');
+          var address = document.getElementById('address');
+          var purpose = document.getElementById('purpose');
+
+var formData = data.data;
+
+
+var form = document.querySelector('.formRequest');
+
+
+var excludedKeys = ["ID", "request_id", "request_date", "created_at", "status"];
+
+
+for (var key in formData) {
+    if (formData.hasOwnProperty(key) && !excludedKeys.includes(key)) {
+    
+        var newDiv = document.createElement("div");
+        newDiv.classList.add("col-6");
+
+   
+        var newLabel = document.createElement("label");
+        newLabel.setAttribute("for", key); 
+        newLabel.classList.add("form-label", "mt-2");
+        newLabel.textContent = key.charAt(0).toUpperCase() + key.slice(1); 
+
+
+        var newInput = document.createElement("input");
+        newInput.setAttribute("type", "text");
+        newInput.setAttribute("disabled", "disabled");
+        newInput.classList.add("form-control");
+        newInput.setAttribute("id", key);
+        newInput.value = formData[key];
+
+
+        newDiv.appendChild(newLabel);
+        newDiv.appendChild(newInput);
+
+    
+        form.appendChild(newDiv);
+    }
+}
+
+
+
+          
+          // firstname.value = data.data.firstname;
+          
+          $('#requestModal').modal('show');
+        })
+
+       
+
+      }
+
+        // Wait for the document to be ready
+        $(document).ready(function() {
+          // Attach an event listener for the modal hidden event
+          $('#requestModal').on('hidden.bs.modal', function (e) {
+            // Reload the page when the modal is hidden
+            location.reload();
+          });
+        });
+
+      function approvedRequest(){
+        var table = $('#requestModal').data('table');
+        var id = $('#requestModal').data('id');
+        var type = '1';
+
+        fetch(`../backend/accept-decline.php?table=${table}&id=${id}&type=${type}`, {
+        }).then(response => {
+          if (response.ok) {
+               
+
+                $('#requestModal').modal('hide')
+                location.reload();
+            } else {
+              
+            }
+          }
+        ).catch(error => {
+            console.error('Error:', error);
+            alert('Failed to approve request');
+        });
+      }
+
+      function declineRequest(){
+        var table = $('#requestModal').data('table');
+        var id = $('#requestModal').data('id');
+        var type = '3';
+
+        fetch(`../backend/accept-decline.php?table=${table}&id=${id}&type=${type}`, {
+        }).then(response => {
+          if (response.ok) {
+               
+
+                $('#requestModal').modal('hide')
+                location.reload();
+            } else {
+              
+            }
+          }
+        ).catch(error => {
+            console.error('Error:', error);
+            alert('Failed to approve request');
+        });
+      }
+
+      function holdRequest(){
+        var table = $('#requestModal').data('table');
+        var id = $('#requestModal').data('id');
+        var type = '2';
+
+        fetch(`../backend/accept-decline.php?table=${table}&id=${id}&type=${type}`, {
+        }).then(response => {
+          if (response.ok) {
+               
+
+                $('#requestModal').modal('hide')
+                location.reload();
+            } else {
+              
+            }
+          }
+        ).catch(error => {
+            console.error('Error:', error);
+            alert('Failed to approve request');
+        });
+      }
+
+
     </script>
 
 

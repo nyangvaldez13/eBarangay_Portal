@@ -38,16 +38,8 @@
                 </div>
                 <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
-<<<<<<< HEAD
-                  <div class="col-12">
-                  <div class="quill-editor-default" name="description" style = "height: 200px;" placeholder ="Type your description here...">
-                   <!-- <input type="text" name="description" class= "form-control" required id="inputName2" placeholder ="Type your description here..."> -->
-                
-              </div>
-=======
                 <div class="col-12">
                    <textarea type="text" name = "description" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"></textarea>  
->>>>>>> b43a5d401d5b85a1194c64842ca40ed31fdcce3a
                   </div>
                 </div>
                   <div class="col-12">
