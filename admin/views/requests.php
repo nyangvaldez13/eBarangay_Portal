@@ -42,26 +42,22 @@
             while ($row = $result->fetch_assoc()) {
                 $name = $row['firstname'] . ' ' . $row['lastname'];
                 $status = $row['status'];
-
-                if($status == 1 ){
-                  $toDisplay = 'Approved';
-                  $toDisplayClass = 'text-success border border-success rounded bg-light text-center ';
-                } else if($status == 2){
-                  $toDisplay = 'Processing';
-                  $toDisplayClass = 'text-warning border border-warning rounded bg-light col-4 text-center';
+                if($status == 2 ){
+                  $isProcess = false;
                 } else {
-                  $toDisplay = 'Declined';
-                  $toDisplayClass = 'text-danger border border-danger rounded bg-light col-4 text-center';
+                  $isProcess = true;
                 }
                
                 $date = date('d M Y', strtotime($row['request_date']));
-                
+                $toDisplay = $isProcess ? 'Approved' : 'Processing';
+                $toDisplayClass = $isProcess ? 'text-success border border-success rounded bg-light text-center ' : 'text-warning border border-warning rounded bg-light col-4 text-center';
+
                 $notification[] = [
                   
                 ]
    
             ?>
-              <tr data-table="<?= $table ?>" data-id="<?= $row['id'] ?>" >
+              <tr>
                 <td><?= $name ?></td>
                 <td><?= $tableLabel ?></td>
                 
@@ -71,9 +67,8 @@
 
                 <td><?= $date ?></td>
                 <td>
-                  
-                  <button type="button" class="btn btn-view" onclick="showRequest('<?= $table ?>', '<?= $row['ID'] ?>', '<?= $tableLabel ?>')"><i class="bi bi-eye"></i></button>
-                  <button type="button" class="btn btn-delete" onclick="showDeleteModal('<?= $table ?>', '<?= $row['ID'] ?>', '<?= $tableLabel ?>')"><i class="bi bi-trash3"></i></button>
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="bi bi-eye"></i></button>
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3"></i></button>
                 </td>
               </tr>
     <?php
@@ -92,74 +87,76 @@
       </div>
     </section>
 
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-                  <button type="button" onclick="deleteClose()" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-              <div class="modal-body" id="deleteModalBody">
+<div class="modal fade" id="deleteModal" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                     
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <span class="card-title fs-6"> Are you sure you want to delete?</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">No</button>
+                      <button type="button" class="btn btn-primary">Yes</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Small Modal-->
 
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" onclick="deleteClose()" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary" onclick="deleteRequest()">Delete</button>
-              </div>
-          </div>
-      </div>
-    </div>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
+                Large Modal
+              </button>
 
-             
+              <!-- Barangay Cert Modal-->
 
-              <div class="modal fade" id="requestModal" tabindex="-1">
+              <div class="modal fade" id="largeModal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="card-title" id="card-title"></h5>
+                      <h5 class="card-title"> Barangay Certificate Request Form</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       <div class="grid d-flex">
 
                         <form class = "row g-3">
-            <div class="col-6">
+                <div class="col-6">
                         <label for="inputName5" class="form-label mt-2">First Name</label>
-                        <input type="text" class= "form-control" id="first_name">
+                        <input type="text" disabled placeholder = "" class= "form-control" id="inputName2">
                 </div>
                 <div class="col-6">
                         <label for="inputName5" class="form-label mt-2">Last Name</label>
-                        <input type="text" class= "form-control" id="last_name">
+                        <input type="text" disabled placeholder = "" class= "form-control" id="inputName2">
                 </div>
                 <div class="col-2">
                         <label for="inputName5" class="form-label mt-2">Age</label>
-                        <input type="text" class= "form-control" id="age">
+                        <input type="text" disabled placeholder = "" class= "form-control" id="inputName2">
                 </div>
                 <div class="col-3">
                        <label for="inputName5" class="form-label mt-2">Sex</label>
-                      <select id="sex" placeholder = "Select a type" class="form-select">
-                         <option selected="">Select a type</option>
+                      <select id="inputState" disabled placeholder = "" placeholder = "Select a type" class="form-select">
+                         <option selected=""></option>
                          <option>...</option>
                       </select>
                     </div>
                 <div class="col-7">
                         <label for="inputName5" class="form-label mt-2">Phone Number</label>
-                        <input type="number" min = "0" class= "form-control" id="phone_number">
+                        <input type="number" disabled placeholder = "" min = "0" class= "form-control" id="inputName2">
                 </div>
                 <div class="col-12">
                         <label for="inputName5" class="form-label mt-2">Email</label>
-                        <input type="text" class= "form-control" id="email">
+                        <input type="text" disabled placeholder = "" class= "form-control" id="inputName2">
                 </div>
                 <div class="col-8">
                         <label for="inputName5" class="form-label mt-2">Address</label>
-                        <input type="text" class= "form-control" id="address">
+                        <input type="text" disabled placeholder = "" class= "form-control" id="inputName2">
                 </div>
                 <div class="col-4">
                        <label for="inputName5" class="form-label mt-2">Purpose</label>
-                      <select id="purpose" placeholder = "Select a type" class="form-select">
-                         <option selected="">Select a type</option>
+                      <select id="inputState" disabled placeholder = "" placeholder = "Select a type" class="form-select">
+                         <option selected=""></option>
                          <option>...</option>
                       </select>
                     </div>
@@ -171,155 +168,310 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="declineRequest()">Decline</button>
-                      <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onclick="holdRequest()">Hold</button>
-                      <button type="button" id="approveRequest" class="btn btn-info" onclick="approvedRequest()">Approve</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+                      <button type="button" class="btn btn-primary">Approve</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Large Modal-->
+
+              <!-- Business Permit Modal-->
+
+              <div class="modal fade" id="largeModal2" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="card-title"> Barangay Certificate Request Form</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="grid d-flex">
+
+                        <form class = "row g-3">
+                        <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">Business Name</label>
+                        <input type="text" class= "form-control" id="business_name">
+                </div>
+                <div class="col-4">
+                       <label for="inputName5" class="form-label mt-2">Business Type</label>
+                      <select id="type" placeholder = "Select a type" class="form-select">
+                         <option selected="">Select a type</option>
+                         <option>...</option>
+                      </select>
+                </div>
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">Business Address</label>
+                        <input type="text" class= "form-control" id="business_address">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Owner's Name</label>
+                        <input type="text" class= "form-control" id="owner">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Owner's Address</label>
+                        <input type="text" class= "form-control" id="owner_address">
+                </div>
+                <div class="col-7">
+                        <label for="inputName5" class="form-label mt-2">Phone Number</label>
+                        <input type="number" min = "0" class= "form-control" id="phone_number">
+                </div>
+                <div class="col-12">
+                        <label for="inputName5" class="form-label mt-2">Email</label>
+                        <input type="text" class= "form-control" id="email">
+                </div>
+
+            </form>
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+                      <button type="button" class="btn btn-primary">Approve</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Large Modal-->
+
+              <!-- Medical Assistance Modal-->
+
+              <div class="modal fade" id="largeModal3" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="card-title">Medical Assistance Request Form</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="grid d-flex">
+
+                        <form class = "row g-3">
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">First Name</label>
+                        <input type="text" class= "form-control" id="medic_fname">
+                </div>
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">Last Name</label>
+                        <input type="text" class= "form-control" id="medic_lname">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Age</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="medic_age">
+                </div>
+                <div class="col-3">
+                       <label for="inputName5" class="form-label mt-2">Sex</label>
+                      <select id="medic_sex" disabled placeholder = "" placeholder = "Select a type" class="form-select">
+                         <option selected=""></option>
+                         <option>...</option>
+                      </select>
+                    </div>
+                <div class="col-7">
+                        <label for="inputName5" class="form-label mt-2">Phone Number</label>
+                        <input type="number" disabled placeholder = "" min = "0" class= "form-control" id="medic_phone">
+                </div>
+                <div class="col-12">
+                        <label for="inputName5" class="form-label mt-2">Email</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="medic_email">
+                </div>
+                <div class="col-8">
+                        <label for="inputName5" class="form-label mt-2">Address</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="medic_address">
+                </div>
+                <div class="col-8">
+                        <label for="inputName5" class="form-label mt-2">Disease</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="medic_disease">
+                </div>
+
+            </form>
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+                      <button type="button" class="btn btn-primary">Approve</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Large Modal-->
+
+              <!-- Burial Assistance Modal-->
+
+              <div class="modal fade" id="largeModal3" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="card-title">Burial Assistance Request Form</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="grid d-flex">
+
+                        <form class = "row g-3">
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">Name of Deceased</label>
+                        <input type="text" class= "form-control" id="burial_name">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Age</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="burial_age">
+                </div>
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">Birthday</label>
+                        <input type="text" class= "form-control" id="burial_birth">
+                </div>
+                <div class="col-3">
+                       <label for="inputName5" class="form-label mt-2">Sex</label>
+                      <select id="burial_sex" disabled placeholder = "" placeholder = "Select a type" class="form-select">
+                         <option selected=""></option>
+                         <option>...</option>
+                      </select>
+                    </div>
+                <div class="col-8">
+                        <label for="inputName5" class="form-label mt-2">Address</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="burial_address">
+                </div>
+                <div class="col-7">
+                        <label for="inputName5" class="form-label mt-2">Cause of Death</label>
+                        <input type="number" disabled placeholder = "" min = "0" class= "form-control" id="burial_death">
+                </div>
+                <div class="col-7">
+                        <label for="inputName5" class="form-label mt-2">Date of Death</label>
+                        <input type="number" disabled placeholder = "" min = "0" class= "form-control" id="death_date">
+                </div>
+                <div class="col-12">
+                        <label for="inputName5" class="form-label mt-2">Name of Beneficiary</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="burial_beneficiary">
+                </div>
+                <div class="col-8">
+                        <label for="inputName5" class="form-label mt-2">Phone Number</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="burial_phone">
+                </div>
+                <div class="col-8">
+                        <label for="inputName5" class="form-label mt-2">Email</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="burial_email">
+                </div>
+
+            </form>
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+                      <button type="button" class="btn btn-primary">Approve</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Large Modal-->
+
+              <!-- Financial Assistance Modal-->
+
+              <div class="modal fade" id="largeModal3" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="card-title">Financial Assistance Request Form</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="grid d-flex">
+
+                        <form class = "row g-3">
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">First Name</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="financial_fname">
+                </div>
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">Last Name</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="financial_lname">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Age</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="financial_age">
+                </div>
+                <div class="col-3">
+                       <label for="inputName5" class="form-label mt-2">Sex</label>
+                      <select id="financial_sex" disabled placeholder = "" placeholder = "Select a type" class="form-select">
+                         <option selected=""></option>
+                         <option>...</option>
+                      </select>
+                    </div>
+                <div class="col-7">
+                        <label for="inputName5" class="form-label mt-2">Phone Number</label>
+                        <input type="number" disabled placeholder = "" min = "0" class= "form-control" id="financial_phone">
+                </div>
+                <div class="col-12">
+                        <label for="inputName5" class="form-label mt-2">Email</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="financial_email">
+                </div>
+                <div class="col-8">
+                        <label for="inputName5" class="form-label mt-2">Address</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="financial_address">
+                </div>
+
+            </form>
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+                      <button type="button" class="btn btn-primary">Approve</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Large Modal-->
+
+              <!-- Senior Citizen Modal-->
+
+              <div class="modal fade" id="largeModal3" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="card-title">Senior Citize Form</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="grid d-flex">
+
+                        <form class = "row g-3">
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">First Name</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="senior_fname">
+                </div>
+                <div class="col-6">
+                        <label for="inputName5" class="form-label mt-2">Last Name</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="senior_lname">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Age</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="senior_age">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Birthday</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="senior_birthday">
+                </div>
+                <div class="col-2">
+                        <label for="inputName5" class="form-label mt-2">Barangay Certificate</label>
+                        <input type="file" disabled placeholder = "" class= "form-control" id="senior_cert">
+                </div>
+                <div class="col-8">
+                        <label for="inputName5" class="form-label mt-2">Address</label>
+                        <input type="text" disabled placeholder = "" class= "form-control" id="senior_address">
+                </div>
+
+            </form>
+
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Decline</button>
+                      <button type="button" class="btn btn-primary">Approve</button>
                     </div>
                   </div>
                 </div>
               </div><!-- End Large Modal-->
 
     <script>
-      function deleteClose(){
-        $('#deleteModal').modal('hide')
-      }
 
-      function showDeleteModal(table, id, request){
-  
-        var modalBody = document.getElementById('deleteModalBody');
-        modalBody.innerHTML = `Are you sure do you want to delete this ${request} Request`;
         
-        $('#deleteModal').modal('show');
-
-        $('#deleteModal').data('table', table);
-        $('#deleteModal').data('id', id);
-      }
-      
-      function deleteRequest(){
-        var table = $('#deleteModal').data('table');
-        var id = $('#deleteModal').data('id');
-
-        fetch(`../backend/delete-request.php?table=${table}&id=${id}`, {
-        }).then(response => {
-          if (response.ok) {
-               
-
-                $('#deleteModal').modal('hide')
-                location.reload();
-            } else {
-              
-            }
-          }
-        ).catch(error => {
-            console.error('Error:', error);
-            alert('Failed to delete request');
-        });
-      }
-      
-      function showRequest(table, id, request){
-        var title = document.getElementById('card-title');
-        title.innerHTML = `${request}`;
-
-        $('#requestModal').data('table', table);
-        $('#requestModal').data('id', id);
-
-
-
-        fetch(`../backend/view-request.php?table=${table}&id=${id}`,{
-        }).then(response => {
-         
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-
-          
-        }).then(data => {
-
-          var firstname = document.getElementById('first_name');
-          var lastname = document.getElementById('last_name');
-          var age = document.getElementById('age');
-          var sex = document.getElementById('sex');
-          var phone_number = document.getElementById('phone_number');
-          var email = document.getElementById('email');
-          var address = document.getElementById('address');
-          var purpose = document.getElementById('purpose');
-
-          firstname.value = data.data.firstname;
-          $('#requestModal').modal('show');
-        })
-
-       
-
-      }
-
-      function approvedRequest(){
-        var table = $('#requestModal').data('table');
-        var id = $('#requestModal').data('id');
-        var type = '1';
-
-        fetch(`../backend/accept-decline.php?table=${table}&id=${id}&type=${type}`, {
-        }).then(response => {
-          if (response.ok) {
-               
-
-                $('#requestModal').modal('hide')
-                location.reload();
-            } else {
-              
-            }
-          }
-        ).catch(error => {
-            console.error('Error:', error);
-            alert('Failed to approve request');
-        });
-      }
-
-      function declineRequest(){
-        var table = $('#requestModal').data('table');
-        var id = $('#requestModal').data('id');
-        var type = '3';
-
-        fetch(`../backend/accept-decline.php?table=${table}&id=${id}&type=${type}`, {
-        }).then(response => {
-          if (response.ok) {
-               
-
-                $('#requestModal').modal('hide')
-                location.reload();
-            } else {
-              
-            }
-          }
-        ).catch(error => {
-            console.error('Error:', error);
-            alert('Failed to approve request');
-        });
-      }
-
-      function holdRequest(){
-        var table = $('#requestModal').data('table');
-        var id = $('#requestModal').data('id');
-        var type = '2';
-
-        fetch(`../backend/accept-decline.php?table=${table}&id=${id}&type=${type}`, {
-        }).then(response => {
-          if (response.ok) {
-               
-
-                $('#requestModal').modal('hide')
-                location.reload();
-            } else {
-              
-            }
-          }
-        ).catch(error => {
-            console.error('Error:', error);
-            alert('Failed to approve request');
-        });
-      }
-
-
     </script>
 
 
