@@ -1,5 +1,43 @@
 
 
+<style>
+.event-announcement {
+    color: #2d1674;
+    position: relative;
+    transition: color 0.3s, border 0.3s;
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px; /* Border thickness */
+    background-color: #2d1674;
+    transition: width 0.3s, border-width 0.3s, left 0.3s;
+}
+
+.event-announcement:hover {
+    color: #F2921D;
+    text-decoration: none;
+}
+
+.gallery-item:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* You can customize the border properties on hover */
+.gallery-item:hover::after {
+    border-width: 4px; /* Increase border thickness on hover */
+    background-color: #ffc107; /* Change border color on hover */
+}
+
+
+    
+</style>
+
 <?php 
 if ($id === null ){
     $id = false;
@@ -31,112 +69,46 @@ if(!$checkSession){
 <section id="events" class="events">
     <div class="event-heading">
         <h1>Events & Announcements</h1>
-        <div class="filter-dropdown">
-            <button class="dropdown-button" id="dropdown-btn">Filter by category &#9660;</button>
-            <div class="dropdown-content" id="dropdown-content">
-                <div class="dropdown-option" data-filter="all">
-                    <span>All</span>
-                    <span class="check-icon">&#10004;</span>
-                </div>
-                <div class="dropdown-option" data-filter="events">
-                    <span>Events</span>
-                    <span class="check-icon">&#10004;</span>
-                </div>
-                <div class="dropdown-option" data-filter="announcements">
-                    <span>Announcements</span>
-                    <span class="check-icon">&#10004;</span>
-                </div>
-            </div>
-        </div>
+       
     </div>
 
       <!-- Gallery Items -->
   <div class="gallery">
+
+    <?php  foreach($events as $event){
+        if($event['activity'] == 1){
+            $title = "Event";
+            $icon = "bi bi-calendar4-event";
+            
+        } else {
+            $title = "Announcement";
+            $icon = "bi bi-megaphone";
+        }
+    ?>
+
             <div class="gallery-item">
+                <a href="specific-event.php?event-id=<?= $event['activity_id']; ?>" class="event-announcement">
                 <p>
-                    <span class="title">Announcement</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
+                    <span class="title" style="font-weight:bold;"><?= $title ?> <i class="<?= $icon ?>"></i></span>
+                    
                 </p>
+
+                <h2><?= $event['title'] ?></h2>
                 <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p class="caption"><?= $event['heading'] ?></p>
                 </div>
                 <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
+                <p class="date"><?= $event['date'] ?></p></a>
             </div>
+           
+      <?php  } ?>
+      </div>
 
-            <div class="gallery-item">
-                <p>Event</p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
-
-            <div class="gallery-item">
-                <p>
-                    <span class="title">Announcement</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
-                </p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
-
-            <!-- <div class="gallery-itemE">
-            <div class="backgroundE"></div>
-                <p>Event</p>
-                <div class="item-detailsE">
-                    <p class="captionE">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="dividerE"></div>
-                <p class="dateE">MM-DD-YYYY</p>
-            </div> -->
-
-            <div class="gallery-item">
-                <p>Event</p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
-
-            <div class="gallery-item">
-                <p>
-                    <span class="title">Announcement</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
-                </p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
-
-            <div class="gallery-item">
-                <p>
-                    <span class="title">Announcement</span>
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nGNgGCggICDgD
-                    8LUUkcfC0RFRSX4+PjcYZpIxSC9IDNwWkCJ4QJIlhD0LqWYYdQCAUqDiKgkhwWMWkAQjAYRQTAaRJQHEc2La1FaVzijgAELAADOwV4xqxkl/AAAAABJRU5ErkJggg==">
-                </p>
-                <div class="item-details">
-                    <p class="caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </div>
-                <div class="divider"></div>
-                <p class="date">MM-DD-YYYY</p>
-            </div>
-        </div>
-
-        <div class="read-more-container">
-            <button class="read-more-button">Read More</button>
+        <div class="read-more-container"><center>
+            <button class="read-more-button">Read More</button></center>
         </div>
 </section>
+
 
 
  <!-- Projects Section -->
@@ -145,49 +117,18 @@ if(!$checkSession){
         <h1>Recent Projects</h1>
     </div>
     <div class="projects-gallery">
+    <?php  foreach($events as $event){ ?>
     <div class="projects-item">
         <div class="prj">
             <div class="small-image">
-                <img src="assets/projects/Project 1.png" alt="Project 1">
+                <img src="assets/projects/<?= $event['image'] ?>" alt="Project 1">
                
             </div>
         </div>
-        <div class="prj">
-            <div class="larger-image">
-                <img src="assets/projects/Project 2.png" alt="Project 2">
-               
-            </div>
-        </div>
+       
     </div>
-    <div class="projects-item">
-    <div class="prj">
-            <div class="larger-image">
-                <img src="assets/projects/Project 3.png" alt="Project 1">
-                
-            </div>
-        </div>
-        <div class="prj">
-            <div class="small-image">
-                <img src="assets/projects/Project 4.png" alt="Project 2">
-               
-            </div>
-        </div>
-    </div>
-
-    <div class="projects-item">
-    <div class="prj">
-            <div class="small-image">
-                <img src="assets/projects/Project 5.png" alt="Project 1">
-              
-            </div>
-        </div>
-        <div class="prj">
-            <div class="larger-image">
-                <img src="assets/projects/Project 6.png" alt="Project 2">
-               
-            </div>
-        </div>
-    </div>
+    <?php } ?>
+   
 </div>
 </section>
 
@@ -223,7 +164,7 @@ if(!$checkSession){
                 <li>Business Permit</li>
             </ul>
             <div class="request-button-container">
-                <button class="request-button-button" data-target-page="request_mainpage.php" name="accessForm-button">Request</button>
+                <a href="request.php" class="btn btn-secondary"  name="accessForm-button">Request</a>
             </div>
         </div>
         <div class="request-container">
@@ -244,7 +185,7 @@ if(!$checkSession){
                 <li>Financial Assistance</li>
             </ul>
             <div class="request-button-container">
-                <button class="request-button-button" data-target-page="request_mainpage.php" name="accessForm-button">Request</button>
+            <a href="request.php" class="btn btn-secondary"  name="accessForm-button">Request</a>
             </div>
         </div>
         <div class="request-container">
@@ -263,7 +204,7 @@ if(!$checkSession){
                 <li>Senior Citizen Form</li>
             </ul>
             <div class="request-button-container">
-                <button class="request-button-button" data-target-page="request_mainpage.php" name="accessForm-button">Request</button>
+            <a href="request.php" class="btn btn-secondary"  name="accessForm-button">Request</a>
             </div>
         </div>
     </div>
@@ -295,5 +236,9 @@ if(!$checkSession){
 <script>
     function login(){
         window.location.href="/final_views/index.php";
+    }
+
+    function request(){
+        window.localion.href="/final_views/request.php";
     }
 </script>

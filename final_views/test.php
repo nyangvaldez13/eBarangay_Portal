@@ -3,254 +3,207 @@
 
 <?php 
 
-$db = mysqli_connect("localhost", "root", "", "ebarangay_portal");
-session_start();
+include '../backend/db.php';
 
-if (isset($_POST['submit-button'])) {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $age = $_POST['age'];
-    $sex = $_POST['sex'];
-    $phone_no = $_POST['phone_no'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
-    $purpose = $_POST['purpose'];
+if (isset($_GET['activity_id'])) {
+    $activityId = $_GET['activity_id'];
 
-    // Validate the form data (check for empty required fields)
-    if (empty($first_name) || empty($last_name) || empty($age) || empty($sex) || empty($phone_no) || empty($address) || empty($purpose)) {
-        // Display an error message and handle the error as needed
-        echo "Please fill in all required fields.";
-    } else {
-        
-        if ($db->connect_error) {
-            die("Connection failed: " . $db->connect_error);
-        }
+    $sql = "SELECT * FROM activity WHERE activity_id = '$activityId' ORDER BY date";
+    $result = $conn->query($sql);
 
-        // Sanitize data and use prepared statements to prevent SQL injection
-        $stmt = $db->prepare("INSERT INTO brgy_cert_submission (firstname, lastname, age, sex, phone_no, address, purpose) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssissss", $first_name, $last_name, $age, $sex, $phone_no, $address, $purpose);
-
-        if ($stmt->execute()) {
-            // Insertion successful
-            echo "Request submitted successfully!";
-        } else {
-            // Insertion failed
-            echo "Request submission failed. Please try again.";
-        }
-
-        $stmt->close();
-        $db->close();
-    }
+} else {
+    echo "Invalid URL. Please provide an activity type.";
 }
+
+
 ?>
+
 <style>
 
-/* Home */
-.brgy-form {
+/* Event */
+.event{
     min-height: 100vh;
-    background-color: #2D1674;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-}
-
-.brgy-form-background {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 70%;
-    overflow: hidden;
-}
-
-.container-form{
-    height: 88vh;
-    width: 800px;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: 15px;
-    margin-top: 100px;
     margin-bottom: 50px;
-    z-index: 5;
-    padding: 30px;
-}
-
-.container-form h1{
-    text-align: center;
-    color: #2D1674;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.back-button p{
-    text-align: left;
-    color: #2D1674;
-    padding-left: 20px;
-}
-
-.container-column{
     display: flex;
     flex-direction: row;
-    padding-left: 20px;
-    margin-top: 16px;
 }
 
-.firstname{
-    width: 70vh;
-    margin-right: 20px;
-}
-
-.firstname p{
-    text-align: left;
-    color: #9B9988;
-    padding-bottom: 5px;
-}
-
-.firstname input{
-    height: 5vh;
-}
-
-.lastname{
-    width: 70vh;
-    margin-right: 20px;
-}
-
-.lastname p{
-    text-align: left;
-    color: #9B9988;
-    padding-bottom: 5px;
-}
-
-.lastname input{
-    height: 5vh;
-}
-
-.age{
-    width: 10vh;
-    margin-right: 40px;
-}
-
-.age p{
-    text-align: left;
-    color: #9B9988;
-    padding-bottom: 5px;
-}
-
-.age input{
-    height: 5vh;
-}
-
-.sex select {
-    margin-top: 5px;
-    margin-left: 20px;
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-
-
-.phone_no{
-    width: 88vh;
-    margin-right: 10px;
-    margin-left: 40px;
-}
-
-.phone_no p{
-    text-align: left;
-    color: #9B9988;
-    padding-bottom: 5px;
-}
-
-.phone_no input{
-    height: 5vh;
-}
-
-.email{
-    width: 47.8vh;
-    margin-right: 24px;
-}
-
-.email p{
-    text-align: left;
-    color: #9B9988;
-    padding-bottom: 5px;
-}
-
-.email input{
-    height: 5vh;
-}
-
-.name{
-    width: 35vh;
-    margin-right: 32px;
-}
-
-.name p{
-    text-align: left;
-    color: #9B9988;
-    padding-bottom: 5px;
-}
-
-.name input{
-    height: 5vh;
-}
-
-.address{
-    width: 150vh;
-    margin-right: -6px;
-}
-
-.address p{
-    text-align: left;
-    color: #9B9988;
-    padding-bottom: 5px;
-}
-
-.purpose select {
-    margin-top: 5px;
-    margin-left: 10px;
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.address input{
-    height: 5vh;
-}
-
-.submit-request {
-    text-align: right;
-    margin-top: 30px;
-}
-.submit-button {
-    font-weight: 600;
-    font-size: 14px;
-    background-color: #2D1674;
-    color: #f4f4f4;
-    border: none;
-    margin-left: 94.7vh;
-    padding: 12px 20px;
+.event_desc{
+    width: 130vh;
+    padding-top: 15vh;
+    padding-left: 20vh;
     display: flex;
-    border-radius: 8px;
+    flex-direction: column;
+}
+
+.event-back-button img {
+    width: 20px; 
+    height: 20px;
+    vertical-align: middle;
+    float: left;
+    margin-right: 10px; 
+    
+}
+
+.event-back-button p{
+    text-align: left;
+    color: #2D1674;
+    font-size: 15px;
+    padding-top: 7vh;
+}
+
+.event-back-button a {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.event_title p{
+    text-align: left;
+    color: #5a5950;
+    
+}
+
+.event_title .title{
+    font-size: 18.3px;
+    color: #2D1674;
+    padding-top: 6vh;
+}
+
+.event_title .event_name{
+    font-size: 33px;
+    font-weight:600;
+    color: #2D1674;
+    padding-top: 2vh;
+}
+
+.place-date{
+    display: flex;
+    flex-direction: row;
+    padding-top: 2.5vh;
+    padding-right: 16px;
+}
+
+.place-date p{
+    padding-right: 26px;
+}
+
+.event_title img{
+    width: 740px;
+    height: 360px;
+    border-radius: 10px; 
+    margin-top: 5vh;
+}
+
+.event_title .heading{
+    width: 93vh;
+    font-size: 22px;
+    font-weight: 600;
+    color: #140A32;
+    padding-top: 5vh;
+}
+
+.join_button{
+    padding-top: 3vh;
+}
+
+.join {
+    text-decoration: none;
+    background-color: #C5BBD3;
+    color: #2D1674;
+    padding: 12px 17.6px;
+    margin-top: 2vh;
+    border: none;
+    box-shadow: #5a5950;
+    border-radius: 11px;
+    font-size: 16.6px;
+    font-weight: 600;
+    transition: background-color 0.6s;
     cursor: pointer;
 }
 
+.join:hover {
+    background-color: #2D1674;
+    color: #C5BBD3;
+}
+
+.title_desc{
+    width: 710px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title_desc a{
+    color: #2D1674;
+    font-weight: 500;
+}
+
+.title_desc p{
+    text-align: left;
+    color: #140A32;
+    font-size: 18.7px;
+    padding-top: 3vh;
+}
+
+.highlights p{
+    font-size: 18.7px;
+    color: #140A32;
+}
+
+.highlights ul{
+    padding-left: 6vh;
+    padding-top: 1vh;
+}
+
+.highlights ul li{
+    font-size: 18.5px;
+    color: #140A32;
+    padding-top: 4px;
+}
+
+.highlights ul dd{
+    font-size: 18.5px;
+    color: #140A32;
+    padding-top: 4px;
+    margin-left: -10px;
+}
+
+/* Other desc */
+.other_desc{
+    padding-top: 50vh;
+    padding-left: 10vh;
+}
+
+.other_desc h4{
+    color: #2D1674;
+}
+
+.other_events{
+    width: 30vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.category{
+    margin-bottom: 25px;
+}
+
+.category p{
+    text-align: left;
+    color: #9B9988;
+}
+
+.category .title{
+    color: #2D1674;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
 </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Webpage Title -->
-    <title>eBarangay Form Page</title>
+    <title>eBarangay Event Page</title>
 
     <!-- Branding -->
     <link rel="icon" href="../assets/branding/logo-lightmode.png">
@@ -264,66 +217,89 @@ if (isset($_POST['submit-button'])) {
     require_once('../partials/user_topnav.html');
     ?>
 
-    <!-- Home Section -->
-    <section id="brgy-form" class="brgy-form">
-            <div class="brgy-form-background">
-                <img src="../assets/home/signup-bg.png" alt="">
+    <!-- Event Section -->
+    <section id="event" class="event">
+        <div class="event_desc">
+            <div class="event-back-button">
+            
+                <a href="_index.php">
+                <!--<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAE0lEQVR4nGPQECmQ1JIsl2OAMQAcZwM7EW5bDAAAAABJRU5ErkJggg==">-->
+                    <p>Back</p></a>
             </div>
-            <div class="container-form">
-                <div class="back-button">
-                    <a href="request_mainpage.php"><p>Back</p></a>
+            <?php
+                while ($row = $result->fetch_assoc()) {
+                    $type = $row['activity'];
+                    $title = $row['title'];
+                    $place = $row['place'];
+                    $date = $row['date'];
+                    $formattedDate = date("F j, Y", strtotime($row['date']));
+                    $time = $row['time'];
+                    $heading = $row['heading'];
+                    $description = $row['description'];
+
+                ?>
+            <div class="event_title">
+                <p class="title"><?php echo $type; ?></p>
+                <p class="event_name"><?php echo $title; ?></p>
+                <div class="place-date">
+                    <p><?php echo $place; ?></p>
+                    <p><?php echo $formattedDate; ?> at <?php echo $time; ?></p>
                 </div>
-                <h1>Senior Citizen Application Form</h1>
-                <form method="POST">
-                <div class="container-column">
-                    <div class="firstname">
-                        <p>First Name</p>
-                        <input type="text" id="firstname" required name="first_name">
-                    </div>
-                    <div class="lastname">
-                        <p>Last Name</p>
-                        <input type="text" required name="last_name">
-                    </div>
+                <div class="event_img">
+                    <img src="../assets/events/certain_event.png" alt="Event picture">
                 </div>
-                <div class="container-column">
-                    <div class="age">
-                        <p>Age</p>
-                        <input type="text" id="age" required name="age">
-                    </div>
-                    <div class="email">
-                        <p>Birthday</p>
-                        <input type="text" id="email" required name="email" placeholder="Date">
-                    </div>
-                    <div class="email">
-                        <p>Barangay Certificate</p>
-                        <input type="text" id="email" required name="email" placeholder="Upload a file...">
-                    </div>
-                </div>
-                <div class="container-column">
-                    <div class="name">
-                        <p>Last Name</p>
-                        <input type="text" id="address" required name="address">
-                    </div>
-                    <div class="name">
-                        <p>First Name</p>
-                        <input type="text" id="address" required name="address">
-                    </div>
-                    <div class="name">
-                        <p>Middle Name</p>
-                        <input type="text" id="address" required name="address">
-                    </div>
-                </div>
-                <div class="container-column">
-                    <div class="address">
-                        <p>Address</p>
-                        <input type="text" id="address" required name="address">
-                    </div>
-                </div>
-                <div class="submit-request">
-                    <button class="submit-button" type="submit-button" name="submit-button">SUBMIT REQUEST</button>
-                </div>
-                </form>
+                
+                <p class="heading"><?php echo $heading; ?></p>
+                
             </div>
+            <div class="title_desc">
+                <p>
+                <?php echo $description; ?>
+                </p>
+                <!-- <div class="highlights">
+                    <p>How You Can Help:</p>
+                    <ul>
+                        <li>Monetary Donations: The family is open to receiving monetary donations to cover funeral costs. You can send your contributions via Gcash to the following number: <a href="#">[GCash Number]</a>.</li>
+                        <li>Material Support: If you have access to any resources that can aid the family during this period, such as funeral supplies or services, please reach out to <a href="#">[Contact Person's Name]</a>.</li>
+                       
+                    </ul>
+                </div>
+                <div class="highlights">
+                    <p>Funeral Details:</p>
+                    <ul>
+                        <dd>The funeral service for <a href="#">[Deceased's Name]</a> will be held at <a href="#">[Location]</a> on <a href="#">[Date and Time]</a>. Your presence and support would mean a lot to the grieving family.</dd>
+                    </ul>
+                </div> -->
+                
+            </div>
+                <?php
+            }
+
+            $conn->close();
+            ?>
+            <!-- <div class="join_button">
+            <button class="join">Donate Now</button></div> -->
+        </div>
+        <div class="other_desc">
+            <h4>Other</h4>
+            <div class="other_events">
+                <div class="category">
+                    <p>Announcement</p>
+                    <p class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p>Fri, 29 Sep 2023</p>
+                </div>
+                <div class="category">
+                    <p>Event</p>
+                    <p class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p>Fri, 29 Sep 2023</p>
+                </div>
+                <div class="category">
+                    <p>Announcement</p>
+                    <p class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p>Fri, 29 Sep 2023</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
