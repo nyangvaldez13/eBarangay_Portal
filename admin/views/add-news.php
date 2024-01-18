@@ -36,16 +36,13 @@
                         <label for="inputName5" class="form-label mt-2">Title</label>
                         <input type="text" name="title" class= "form-control" required id="inputName2" placeholder ="Type news title here. . .">
                 </div>
-                 <div class="col-12">
+                <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
-                  <div class="col-12">
-                   <div class="quill-editor-default" name="description" style = "height: 200px;" placeholder ="Type your description here...">
-                   <!-- <input type="text" name="description" class= "form-control" required id="inputName2" placeholder ="Type your description here..."> -->
-                
-              </div>
+                <div class="col-12">
+                   <textarea type="text" name = "description" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"></textarea>  
                   </div>
                 </div>
-                  <div class="col-4">
+                  <div class="col-12">
                        <label for="inputName5" class="form-label">News Type</label>
                       <select required id="inputState" name="type" placeholder = "Select a type" class="form-select">
                          <option value="" selected disabled>Select a type</option>
@@ -53,11 +50,11 @@
                          <option value="Announcement">Announcement</option>
                       </select>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputDate" class="form-label">Date</label>
                         <input type="date" required name="date" class="form-control" >
                     </div>
-                    <div class="col-4">
+                    <div class="col-12">
                         <label for="inputName5" class="form-label">Location</label>
                         <input type="text" required name="location" class="form-control" id="inputName2" placeholder = "Type location here...">
                     </div>
