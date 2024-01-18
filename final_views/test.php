@@ -7,16 +7,17 @@ $db = mysqli_connect("localhost", "root", "", "ebarangay_portal");
 session_start();
 
 if (isset($_POST['submit-button'])) {
-    $business = $_POST['business'];
-    $type = $_POST['type'];
-    $business_address = $_POST['business_address'];
-    $owner = $_POST['owner'];
-    $owner_address = $_POST['owner_address'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $age = $_POST['age'];
+    $sex = $_POST['sex'];
     $phone_no = $_POST['phone_no'];
     $email = $_POST['email'];
+    $address = $_POST['address'];
+    $purpose = $_POST['purpose'];
 
     // Validate the form data (check for empty required fields)
-    if (empty($business) || empty($type) || empty($business_address) || empty($owner) || empty($owner_address) || empty($phone_no) || empty($email)) {
+    if (empty($first_name) || empty($last_name) || empty($age) || empty($sex) || empty($phone_no) || empty($address) || empty($purpose)) {
         // Display an error message and handle the error as needed
         echo "Please fill in all required fields.";
     } else {
@@ -26,8 +27,8 @@ if (isset($_POST['submit-button'])) {
         }
 
         // Sanitize data and use prepared statements to prevent SQL injection
-        $stmt = $db->prepare("INSERT INTO business_permit_submission (business, type, business_address, owner, owner_address, phone_no, email) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssissss", $business, $type, $business_address, $owner, $owner_address, $phone_no, $email);
+        $stmt = $db->prepare("INSERT INTO brgy_cert_submission (firstname, lastname, age, sex, phone_no, address, purpose) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssissss", $first_name, $last_name, $age, $sex, $phone_no, $address, $purpose);
 
         if ($stmt->execute()) {
             // Insertion successful
@@ -66,7 +67,7 @@ if (isset($_POST['submit-button'])) {
 }
 
 .container-form{
-    min-height: 82vh;
+    height: 88vh;
     width: 800px;
     display: flex;
     flex-direction: column;
@@ -99,8 +100,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .firstname{
-    width: 66vh;
-    margin-right: 26px;
+    width: 70vh;
+    margin-right: 20px;
 }
 
 .firstname p{
@@ -114,7 +115,7 @@ if (isset($_POST['submit-button'])) {
 }
 
 .lastname{
-    width: 66vh;
+    width: 70vh;
     margin-right: 20px;
 }
 
@@ -130,7 +131,7 @@ if (isset($_POST['submit-button'])) {
 
 .age{
     width: 10vh;
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .age p{
@@ -153,11 +154,7 @@ if (isset($_POST['submit-button'])) {
     font-size: 16px;
 }
 
-.sex p{
-    text-align: left;
-    color: #9B9988;
-    margin-left: 20px;
-}
+
 
 .phone_no{
     width: 88vh;
@@ -176,8 +173,8 @@ if (isset($_POST['submit-button'])) {
 }
 
 .email{
-    width: 150vh;
-    
+    width: 47.8vh;
+    margin-right: 24px;
 }
 
 .email p{
@@ -190,8 +187,24 @@ if (isset($_POST['submit-button'])) {
     height: 5vh;
 }
 
+.name{
+    width: 35vh;
+    margin-right: 32px;
+}
+
+.name p{
+    text-align: left;
+    color: #9B9988;
+    padding-bottom: 5px;
+}
+
+.name input{
+    height: 5vh;
+}
+
 .address{
-    width: 94.7vh;
+    width: 150vh;
+    margin-right: -6px;
 }
 
 .address p{
@@ -208,12 +221,6 @@ if (isset($_POST['submit-button'])) {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-}
-
-.purpose p{
-    text-align: left;
-    color: #9B9988;
-    margin-left: 10px;
 }
 
 .address input{
@@ -266,47 +273,50 @@ if (isset($_POST['submit-button'])) {
                 <div class="back-button">
                     <a href="request_mainpage.php"><p>Back</p></a>
                 </div>
-                <h1>Business Permit Request Form</h1>
+                <h1>Senior Citizen Application Form</h1>
                 <form method="POST">
                 <div class="container-column">
-                    <div class="address">
-                        <p>Business Name</p>
-                        <input type="text" id="business" required name="business">
-                    </div>
-                    <div class="purpose">
-                        <p>Business Type</p>
-                        <select id="type" required name="type">
-                            <option value="type1">Business 1</option>
-                            <option value="type2">Business 2</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="container-column">
-                    <div class="email">
-                        <p>Business Address</p>
-                        <input type="text" id="business_address" required name="business_address">
-                    </div>
-                </div>
-                <div class="container-column">
-                    <div class="email">
-                        <p>Owner's Name</p>
-                        <input type="text" id="owner" required name="owner">
-                    </div>
-                </div>
-                <div class="container-column">
-                    <div class="email">
-                        <p>Owner's Address</p>
-                        <input type="text" id="owner_address" required name="owner_address">
-                    </div>
-                </div>
-                <div class="container-column">
                     <div class="firstname">
-                        <p>Phone Number</p>
-                        <input type="text" id="phone_no" required name="phone_no">
+                        <p>First Name</p>
+                        <input type="text" id="firstname" required name="first_name">
                     </div>
                     <div class="lastname">
-                        <p>Email</p>
-                        <input type="email" required name="email">
+                        <p>Last Name</p>
+                        <input type="text" required name="last_name">
+                    </div>
+                </div>
+                <div class="container-column">
+                    <div class="age">
+                        <p>Age</p>
+                        <input type="text" id="age" required name="age">
+                    </div>
+                    <div class="email">
+                        <p>Birthday</p>
+                        <input type="text" id="email" required name="email" placeholder="Date">
+                    </div>
+                    <div class="email">
+                        <p>Barangay Certificate</p>
+                        <input type="text" id="email" required name="email" placeholder="Upload a file...">
+                    </div>
+                </div>
+                <div class="container-column">
+                    <div class="name">
+                        <p>Last Name</p>
+                        <input type="text" id="address" required name="address">
+                    </div>
+                    <div class="name">
+                        <p>First Name</p>
+                        <input type="text" id="address" required name="address">
+                    </div>
+                    <div class="name">
+                        <p>Middle Name</p>
+                        <input type="text" id="address" required name="address">
+                    </div>
+                </div>
+                <div class="container-column">
+                    <div class="address">
+                        <p>Address</p>
+                        <input type="text" id="address" required name="address">
                     </div>
                 </div>
                 <div class="submit-request">

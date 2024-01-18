@@ -54,7 +54,7 @@
                 <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
                 <div class="col-12">
-                   <textarea type="text" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"> <?= $activity['description'] ?> </textarea>  
+                   <textarea type="text" name="description" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"> <?= $activity['description'] ?> </textarea>  
                   </div>
                 </div>
                   <div class="col-4">

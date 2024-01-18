@@ -39,7 +39,7 @@
                  <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-12">
-                   <div class="quill-editor-default" name="description" style = "height: 200px;" placeholder ="Type your description here...">
+                  <div class="quill-editor-default" name="description" style = "height: 200px;" placeholder ="Type your description here...">
                    <!-- <input type="text" name="description" class= "form-control" required id="inputName2" placeholder ="Type your description here..."> -->
                 
               </div>
