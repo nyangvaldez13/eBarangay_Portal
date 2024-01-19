@@ -79,11 +79,17 @@ $notificationCounter = 0;
 foreach ($notifications as $notification) {
     if ($notificationCounter < 10) {
         $notificationsHTML .= '
-          
-                <h4 class="label">' . $notification['tableLabel'] . '</h4>
-                <div class="time">' . $notification['time'] . '</div>
-                <div class="wait" '. $notification['design'] .'>' . $notification['wait'] . '</div>
-                <div class="name">' . $notification['name'] . '</div>
+
+
+        <div class="notification-inside" style="box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); cursor: pointer; padding:10px;">
+        <a href="your-link-url" style="text-decoration: none; color: inherit;">
+            <h6 class="label">' . $notification['tableLabel'] . '</h6>
+            <div class="time">' . $notification['time'] . '</div>
+            <div class="wait" '. $notification['design'] .'>' . $notification['wait'] . '</div>
+            <div class="name">' . $notification['name'] . '</div>
+        </a>
+    </div>
+    
         ';
         $notificationCounter++;
     }

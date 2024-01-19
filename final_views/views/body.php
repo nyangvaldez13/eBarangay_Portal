@@ -45,16 +45,15 @@ if ($id === null ){
 $checkSession = $id ? true : false;
 
 if(!$checkSession){
-    echo ' <section id="home" class="home">
-    <div class="background"></div>
-    <div class="content">
-        <div class="column">
-            <h1>eBarangay Portal:</h1>
+    echo ' <section id="home" class="home" >
+    <div class="background" ></div>
+    <div class="content" >
+        <div class="column" >
+            <h1 >eBarangay Portal:</h1>
             <h2>Connect Communities, One Click at a Time</h2>
             <p>Welcome to the eBarangay Portal, your vibrant digital hub where community meets technology. Get ready to unlock the 
                 full potential of your barangay with seamless access to essential services and a vibrant online community.</p>
-                <button onclick="login()" class="btn btn-warning text-white" style="font-weight: bold; cursor: pointer;">GET STARTED</button>
- 
+     
                 
             
         </div>
@@ -121,7 +120,7 @@ if(!$checkSession){
     <div class="projects-item">
         <div class="prj">
             <div class="small-image">
-                <img src="assets/projects/<?= $event['image'] ?>" alt="Project 1">
+                <img src="../assets/projects/<?= $event['image'] ?>" alt="Project 1">
                
             </div>
         </div>
@@ -163,8 +162,8 @@ if(!$checkSession){
                 <li>Barangay certificate</li>
                 <li>Business Permit</li>
             </ul>
-            <div class="request-button-container">
-                <a href="request.php" class="btn btn-secondary"  name="accessForm-button">Request</a>
+            <div class="request-button-container" onclick="request()">
+                <a href="request.php" class="btn btn-secondary "  name="accessForm-button">Request</a>
             </div>
         </div>
         <div class="request-container">

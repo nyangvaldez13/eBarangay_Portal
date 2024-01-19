@@ -4,7 +4,7 @@
 <section id="brgy-form" class="brgy-form">
     <div class="container ">
         <div class="back-button">
-            <a href="request_mainpage.php" class="btn btn-secondary">Back</a>
+        <a href="request.php" class="btn btn-secondary">Back</a>
         </div>
         <h1 class="mt-4">Financial Assistance Request Form</h1>
         <form method="POST">

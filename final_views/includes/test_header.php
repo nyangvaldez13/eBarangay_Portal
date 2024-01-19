@@ -20,12 +20,18 @@ include '../final_backend/login/notification.php';
 .profile-area {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: rgba(249, 249, 249);
     min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    padding: 3px;
     border-radius: 5px;
 }
+
+.notification-inside:hover {
+            color:#11009E;
+            background-color:#FAE7F3 ;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
 .nav-item:hover .notification-area,
 .nav-item:hover .profile-area {
@@ -38,7 +44,7 @@ include '../final_backend/login/notification.php';
         right: 0;
         left: 0;
         top: 100%;
-        min-width: 80%;
+        min-width: 50%;
     }
 }
 
@@ -48,7 +54,7 @@ include '../final_backend/login/notification.php';
         right: 0;
         left: 0;
         top: 100%;
-        min-width: 80%;
+        min-width: 50%;
     }
 }
 
@@ -94,8 +100,10 @@ include '../final_backend/login/notification.php';
                 <i class="bi bi-person-circle text-white"></i>
                     <div class="profile-area">
                         <span class="text-dark"><?= $firstname ?> <?= $lastname ?></span>
-                        <a href="" class="text-dark">Edit Profile</a><br>
-                        <a href="" onclick="logout()" class="text-dark cursor-pointer" >Logout</a>
+                        <div class="notification-inside"> <a href="" class="text-dark">Edit Profile</a></div>
+                        <div class="notification-inside"> <a href="" onclick="logout()" class="text-dark cursor-pointer" >Logout</a></div>
+                       
+                        
                     </div>
                 </a>
             </li>
