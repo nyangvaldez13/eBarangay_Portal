@@ -64,15 +64,8 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mt-3">Media</h5>
-                    <p>Photo</p>
                     <div class="file-upload-container ms-4 mt-2 col">
-                        <input disabled type="file" value="<?= $activity['image'] ?>"id="file-upload" class="file-upload-input">
-                        <label for="file-upload" class="file-upload-label">
-                            <span class="upload-icon">
-                                <i class="bi bi-image"></i>
-                            </span>
-                            <span class="upload-text">Image</span>
-                        </label>
+                    <img src="data:image;base64,<?= base64_encode($activity['photo']) ?>" alt="Brgy Official Image" class="uploaded-image">
                     </div>
                     
                     <!-- <p class = "mt-3">Video</p>
@@ -96,18 +89,22 @@
 <style>
     .file-upload-container {
         width: 95%;
-        height: 200px;
+        height: 400px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         background: rgba(45, 22, 116, 0.15);
         color: white;
-        cursor: pointer;
+        overflow: hidden;
         position: relative;
         border-radius: 10px;
-        padding: 20px;
     }
+
+    .uploaded-image {
+                width: 100%; 
+                height: auto; 
+                }
 
     .file-upload-input {
         display: none;

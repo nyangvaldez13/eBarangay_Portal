@@ -53,17 +53,11 @@
                 </div>
                 <div class="col-12">
                   <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
-<<<<<<< HEAD
                 <div class="col-12">
                    <textarea type="text" name="description" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"> <?= $activity['description'] ?> </textarea>  
                   </div>
                 </div>
                   <div class="col-4">
-=======
-                  <textarea type="text" value = "<?= $activity['description'] ?>" name = "description" style = "display: inline-block; height: auto;  text-wrap: break-word;" class= "form-control" id="inputName2" rows ="5"><?= $activity['description'] ?></textarea>  
-               </div>
-                  <div class="col-12">
->>>>>>> b43a5d401d5b85a1194c64842ca40ed31fdcce3a
                        <label for="inputName5" class="form-label">News Type</label>
                       <select id="inputState" name="type"  placeholder = "Select a type" class="form-select">
                          <option selected=""><?= $activity['activity'] ?></option>
@@ -93,7 +87,7 @@
                     <h5 class="card-title mt-3">Media</h5>
                     <p>Photo</p>
                     <div class="file-upload-container ms-4 mt-2 col">
-                        <input type="file" value="<?= $activity['image'] ?>"name="media" id="file-upload" class="file-upload-input">
+                        <input type="file" name="photo" id="file-upload" class="file-upload-input">
                         <label for="file-upload" class="file-upload-label">
                             <span class="upload-icon">
                                 <i class="bi bi-image"></i>
@@ -111,7 +105,7 @@
 <style>
     .file-upload-container {
         width: 95%;
-        height: 200px;
+        height: 400px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -124,19 +118,38 @@
         padding: 20px;
     }
 
+    .file-upload-label::before {
+                content: "";
+                background-image: url('data:image;base64,<?= base64_encode($activity['photo']) ?>');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 80%;
+                }
+
     .file-upload-input {
         display: none;
     }
 
     .upload-icon {
         font-size: 50px;
-        color: grey;
+        color: #252523;
+  
+        z-index: 1;
     }
 
     .upload-text {
         font-size: 15px;
-        color: grey;
+        color: #252523;
         margin-top: 10px;
+
+        z-index: 1;
     }
 </style>
    
