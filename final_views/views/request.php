@@ -31,7 +31,7 @@
 </div>
 <hr class="mb-5">
 
-<div class="container">
+<div class="container"><p><a href="/final_views/main" class="btn btn-secondary">Back</a></p>
     <div class="row mb-4">
     <?php foreach ($tables as $table => $tableLabel) {
     $withoutUnderscores = str_replace('_', ' ', $table);
@@ -42,7 +42,7 @@
     
 
 <div class="col-12 col-md-6 mt-2 text-center">
-    <a href="<?= $table ?>.php">
+    <a href="<?= $table ?>">
         <div class="border p-3 d-flex justify-content-center align-items-center">
             <div class="col-10 d-flex flex-column align-items-center">
                 <i class="bi bi-file-earmark-fill"></i>

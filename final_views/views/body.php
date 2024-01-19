@@ -85,8 +85,9 @@ if(!$checkSession){
         }
     ?>
 
+
             <div class="gallery-item">
-                <a href="specific-event.php?event-id=<?= $event['activity_id']; ?>" class="event-announcement">
+                <a href="#" onclick="specific(<?= $event['activity_id'] ?>)" class="event-announcement">
                 <p>
                     <span class="title" style="font-weight:bold;"><?= $title ?> <i class="<?= $icon ?>"></i></span>
                     
@@ -163,7 +164,7 @@ if(!$checkSession){
                 <li>Business Permit</li>
             </ul>
             <div class="request-button-container" onclick="request()">
-                <a href="request.php" class="btn btn-secondary "  name="accessForm-button">Request</a>
+                <a href="request" class="btn btn-secondary "  name="accessForm-button">Request</a>
             </div>
         </div>
         <div class="request-container">
@@ -184,7 +185,7 @@ if(!$checkSession){
                 <li>Financial Assistance</li>
             </ul>
             <div class="request-button-container">
-            <a href="request.php" class="btn btn-secondary"  name="accessForm-button">Request</a>
+            <a href="request" class="btn btn-secondary"  name="accessForm-button">Request</a>
             </div>
         </div>
         <div class="request-container">
@@ -203,7 +204,7 @@ if(!$checkSession){
                 <li>Senior Citizen Form</li>
             </ul>
             <div class="request-button-container">
-            <a href="request.php" class="btn btn-secondary"  name="accessForm-button">Request</a>
+            <a href="request" class="btn btn-secondary"  name="accessForm-button">Request</a>
             </div>
         </div>
     </div>
@@ -223,7 +224,7 @@ if(!$checkSession){
                 <p>We are dedicated to ushering in a new era of connectivity and empowerment, reimagining the way you engage with your barangay. 
                     Our mission is simple but profound: to make your barangay experience more convenient, engaging, and accessible than ever before.</p>
                 <div class="desc-button">
-                    <a href="_about.php"><button class="about-more-button">Read More</button></a> 
+                    <a href="about"><button class="about-more-button">Read More</button></a> 
                 </div>
             </div>
             
@@ -234,10 +235,13 @@ if(!$checkSession){
 
 <script>
     function login(){
-        window.location.href="/final_views/index.php";
+        window.location.href="/final_views/index";
     }
 
     function request(){
-        window.localion.href="/final_views/request.php";
+        window.localion.href="/final_views/request";
     }
+    const specific = (id) => {
+            window.location.href=`/final_views/specific-event?event-id=${id}`
+        }
 </script>

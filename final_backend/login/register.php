@@ -14,9 +14,10 @@ if (isset($_POST['register'])) {
     $access_level = 2;
 
     if (
-        strlen($password) < 8 ||                // Minimum length of 8 characters
-        !preg_match('/\d/', $password) ||       // Contains at least one digit
-        !preg_match('/[A-Z]/', $password)       // Contains at least one uppercase letter
+        strlen($password) < 8 
+                        // Minimum length of 8 characters
+        // || !preg_match('/\d/', $password) ||        Contains at least one digit
+        // !preg_match('/[A-Z]/', $password)       Contains at least one uppercase letter
     ) {
         echo "<script>alert('Password complexity requirements not met.');</script>";
         

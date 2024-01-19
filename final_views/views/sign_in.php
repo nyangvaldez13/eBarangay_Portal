@@ -28,7 +28,7 @@ height: 70%;
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
          
 
-          <form style="width: 23rem;"  method="POST" name="login" action="../final_backend/login/login.php">
+          <form style="width: 23rem;"  method="POST" name="login" action="../final_backend/login/login">
           <a href="/" class="btn btn-secondary">Back</a>
           <div class="d-flex align-items-center mb-3 mt-4 pb-3">
       <img src="../assets/branding/logo-lightmode.png" height="50px" width="70px" alt="logo" class="img-fluid me-3" />
@@ -50,7 +50,7 @@ height: 70%;
             </div>
 
             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
-            <p>Don't have an account? <a href="register.php" class="link-info">Register here</a></p>
+            <p>Don't have an account? <a href="register" class="link-info">Register here</a></p>
 
           </form>
 

@@ -28,16 +28,16 @@ if (isset($_POST['login'])) {
  
         // Redirect based on access level = admin
         if ($row['access_level'] == 1) {
-            header("Location: /admin/views/dashboard_admin.php");
+            header("Location: /admin/views/dashboard_admin");
             exit;
          // Redirect based on access level = user
         } else if ($row['access_level'] == 2) {
-            header("Location: /final_views/main.php");
+            header("Location: /final_views/main");
             exit();
         }
     } else {
         echo '<script>alert("Login failed.")</script>';
-        echo "<script>location.href='/final_views/login.php';</script>";
+        echo "<script>location.href='/final_views/index';</script>";
         exit();
     }
 }

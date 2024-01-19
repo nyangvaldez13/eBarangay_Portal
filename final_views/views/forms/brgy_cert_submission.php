@@ -4,7 +4,7 @@
     </div>
     <div class="container">
         <div class="back-button">
-            <a href="request.php" class="btn btn-secondary">Back</a>
+            <a href="request" class="btn btn-secondary">Back</a>
         </div>
         <h1 class="mt-4">Barangay Certificate Request Form</h1>
         <form method="POST">

@@ -39,11 +39,11 @@ function convertTime($time){
       return "Invalid date/time";
   }
 }
-  ?>
+  ?><br><br><br><br>
 <section class="announcement" id="announcement">
   <div class="container">
     <!-- Your content goes here -->
-
+    
     <a href="../final_views/main.php" class="btn btn-secondary">Back</a>
     <h3 class="mt-5"><?php // Your content here ?></h3>
     <h1><?= $title ?> (<?= convertTime($event['date']); ?>)</h1>
@@ -84,7 +84,7 @@ function convertTime($time){
       <h3><?= $table['heading'] ?></h3>
       <p class="fs-4"><?= $table['description'] ?></p>
       <br><br><hr>
-      <button class="btn btn-info">Donate Now</button>
+     
     </div>
 
   </div>

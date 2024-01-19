@@ -33,7 +33,7 @@ $id = null;
 
 <script>
 function direct(){
-  window.location.href="final_views/index.php";
+  window.location.href="final_views/index";
 }
 
 

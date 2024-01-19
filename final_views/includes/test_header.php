@@ -26,7 +26,10 @@ include '../final_backend/login/notification.php';
     padding: 3px;
     border-radius: 5px;
 }
-
+.notification-area {
+  max-height: 300px;
+  overflow-y: auto;
+}
 .notification-inside:hover {
             color:#11009E;
             background-color:#FAE7F3 ;
@@ -69,12 +72,18 @@ include '../final_backend/login/notification.php';
             <div class="links">
                 <ul class="justify-content-between align-items-center">
                 &nbsp;
-                    <li><a href="../final_views/main.php">Home</a></li>
+                    <li><a href="#main" onclick="home()">Home</a></li>
                     <li><a href="#events" id="events-link">Events</a></li>
                     <li><a href="#request" id="request-link">Request</a></li>
                     <li><a href="#about" id="about-link">About</a></li>
                     <li></li>
                     <li>
+                      <?php if($id == null){
+                        echo '<li><a class="btn btn-warning text-white fw-bold" onclick="direct()">Sign In</a></li>';
+                      } else {
+                        echo '';
+                      }?>
+
                     <li class="nav-item">
                 <a class="nav-link" href="#">
                     <i class="bi bi-bell-fill text-white"></i>
@@ -120,9 +129,12 @@ include '../final_backend/login/notification.php';
 
 
 function logout(){
-  window.location.href="../final_backend/login/logout.php"
+  window.location.href="../final_backend/login/logout"
 }
 
+const home = () => {
+  window.location.href="main"
+}
 
  const homeLink = document.getElementById("home-link");
 const eventsLink = document.getElementById("events-link");

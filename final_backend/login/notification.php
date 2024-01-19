@@ -41,9 +41,12 @@ foreach ($tables as $table => $tableLabel) {
             if ($status == 1){
                 $wait = 'Approved';
                 $design = 'style = "color:#5edb86;"';
-            } else {
+            } else if ($status == 2) {
                 $wait = 'Pending';
                 $design = 'style = "color:#f2b46d;"';
+            } else {
+                $wait = 'Decline';
+                $design = 'style = "color:#b30600;"';
             }
 
             

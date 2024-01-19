@@ -27,7 +27,7 @@ height: 100%;
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-          <form style="width: 23rem;"  method="POST" name="register" action="test_backend/login/register.php">
+          <form style="width: 23rem;"  method="POST" name="register" action="test_backend/login/register">
 
           <div class="d-flex align-items-center mb-3 pb-3">
       <img src="../assets/branding/logo-lightmode.png" height="50px" width="70px" alt="logo" class="img-fluid me-3" />
@@ -68,7 +68,7 @@ height: 100%;
               <button class="btn btn-warning btn-lg btn-block text-white fw-bold" type="submit" name="register">Register</button>
             </div>
 
-            <p>Already have an account? <a href="index.php" class="link-info">Login here</a></p>
+            <p>Already have an account? <a href="index" class="link-info">Login here</a></p>
 
           </form>
 
