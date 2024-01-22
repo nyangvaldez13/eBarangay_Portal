@@ -29,6 +29,7 @@ include '../final_backend/login/notification.php';
 .notification-area {
   max-height: 300px;
   overflow-y: auto;
+  margin-right: 100px;
 }
 .notification-inside:hover {
             color:#11009E;
@@ -63,19 +64,38 @@ include '../final_backend/login/notification.php';
 
 </style>
 
+<?php 
+if (isset($_GET['header']) == 1) {
+  $eventLink = 'onclick="event_link()"';
+  $requestLink = 'onclick="request_link()"';
+  $aboutLink = 'onclick="about_link()"';
+  $homeLink = 'onclick="home()"';
+} else {
+  $eventLink = 'class="none"';
+  $requestLink = 'class="none"';
+  $aboutLink = 'class="none"';
+  $homeLink = 'class="none"';
+}
+
+
+
+?>
+
+
 <body>
 <nav id="top-navbar" class="top-navbar">
         <div class="row">
-            <div class="logo">
+           
+            <div class="links">
+                <ul class="justify-content-around align-items-center">
+                &nbsp;
+                <div class="logo">
                 <img src="../assets/branding/logo-darkmode.png" alt="">
             </div>
-            <div class="links">
-                <ul class="justify-content-between align-items-center">
-                &nbsp;
-                    <li><a href="#main" onclick="home()">Home</a></li>
-                    <li><a href="#events" id="events-link">Events</a></li>
-                    <li><a href="#request" id="request-link">Request</a></li>
-                    <li><a href="#about" id="about-link">About</a></li>
+                    <li><a href="#home" <?= $homeLink ?> id="home-link">Home</a></li>
+                    <li><a href="#events" <?=  $eventLink ?> id="events-link">Events</a></li>
+                    <li><a href="#request"<?=  $requestLink ?>  id="request-link">Request</a></li>
+                    <li><a href="#about" <?=  $aboutLink ?> id="about-link">About</a></li>
                     <li></li>
                     <li>
                       <?php if($id == null){
@@ -134,6 +154,15 @@ function logout(){
 
 const home = () => {
   window.location.href="main"
+}
+const event_link = () => {
+  window.location.href="events?query=1&header=1"
+}
+const request_link = () => {
+  window.location.href="request?header=1"
+}
+const about_link = () => {
+  window.location.href="about?header=1"
 }
 
  const homeLink = document.getElementById("home-link");

@@ -25,7 +25,7 @@
             <div class="row mb-3">
                 <div class="col-md-2">
                     <label for="businessAddress" class="form-label">Sex</label>
-                    <select name="sex" id="sex">
+                    <select class="form-select" name="sex" id="sex">
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>

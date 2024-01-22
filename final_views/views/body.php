@@ -35,7 +35,44 @@
 }
 
 
-    
+
+.background-event {
+            width: 100vw; /* Full width of the viewport */
+            height: 100vh; /* Full height of the viewport */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(0deg, rgba(45, 22, 116, 0.4) 0%, rgba(45, 22, 116, 0.4) 100%),
+                        url('../assets/home/home-bg.png') center/cover no-repeat;
+            flex-shrink: 0;
+            overflow: hidden; /* Hide content overflow */
+        }
+
+        .event-title {
+            color: #FFF;
+            font-size: 3rem; /* Adjust the font size as needed */
+            font-weight: 400;
+            text-align: center;
+            letter-spacing: -0.55px;
+        }
+        .header1 {
+        font-size: larger; 
+        font-weight: bold;
+    }
+
+    .header1 br {
+        display: none; 
+    }
+
+    @media (max-width: 768px) {
+        .header1 br {
+            display: block; 
+        }
+        .header-text{
+            font-size: 40px;
+        }
+    }
+
 </style>
 
 <?php 
@@ -59,6 +96,14 @@ if(!$checkSession){
         </div>
     </div>
  </section>';
+} else {
+    echo '<section id="home" class="home" >
+    <div class="background-event">
+        <div class="event-title">
+            <div class="header-text"><span class="header1"> Home</span></div>
+        </div>
+    </div>
+</section>';
 }
 ?>
 
@@ -105,7 +150,7 @@ if(!$checkSession){
       </div>
 
         <div class="read-more-container"><center>
-            <button class="read-more-button">Read More</button></center>
+            <button class="read-more-button" onclick="events()">Read More</button></center>
         </div>
 </section>
 
@@ -121,7 +166,7 @@ if(!$checkSession){
     <div class="projects-item">
         <div class="prj">
             <div class="small-image">
-                <img src="../assets/projects/<?= $event['image'] ?>" alt="Project 1">
+                <img src="../assets/projects/<?= $event['image'] ?>" alt="<?= $event['image'] ?>">
                
             </div>
         </div>
@@ -164,7 +209,7 @@ if(!$checkSession){
                 <li>Business Permit</li>
             </ul>
             <div class="request-button-container" onclick="request()">
-                <a href="request" class="btn btn-secondary "  name="accessForm-button">Request</a>
+                <a href="request?header=1" class="btn btn-secondary "  name="accessForm-button">Request</a>
             </div>
         </div>
         <div class="request-container">
@@ -185,7 +230,7 @@ if(!$checkSession){
                 <li>Financial Assistance</li>
             </ul>
             <div class="request-button-container">
-            <a href="request" class="btn btn-secondary"  name="accessForm-button">Request</a>
+            <a href="request?header=1" class="btn btn-secondary"  name="accessForm-button">Request</a>
             </div>
         </div>
         <div class="request-container">
@@ -204,7 +249,7 @@ if(!$checkSession){
                 <li>Senior Citizen Form</li>
             </ul>
             <div class="request-button-container">
-            <a href="request" class="btn btn-secondary"  name="accessForm-button">Request</a>
+            <a href="request?header=1" class="btn btn-secondary"  name="accessForm-button">Request</a>
             </div>
         </div>
     </div>
@@ -224,7 +269,7 @@ if(!$checkSession){
                 <p>We are dedicated to ushering in a new era of connectivity and empowerment, reimagining the way you engage with your barangay. 
                     Our mission is simple but profound: to make your barangay experience more convenient, engaging, and accessible than ever before.</p>
                 <div class="desc-button">
-                    <a href="about"><button class="about-more-button">Read More</button></a> 
+                    <a href="about?header=1"><button class="about-more-button">Read More</button></a> 
                 </div>
             </div>
             
@@ -239,9 +284,13 @@ if(!$checkSession){
     }
 
     function request(){
-        window.localion.href="/final_views/request";
+        window.localion.href="/final_views/request?header=1";
     }
     const specific = (id) => {
-            window.location.href=`/final_views/specific-event?event-id=${id}`
-        }
+        window.location.href=`/final_views/specific-event?event-id=${id}&header=1`;
+    }
+
+    const events = () => {
+        window.location.href=`/final_views/events?query=1&header=1`;
+    }
 </script>

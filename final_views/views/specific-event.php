@@ -51,7 +51,7 @@ function convertTime($time){
 
     <div class="row text-start ">
       <div class="col-lg-8 col-md-12 mb-4">
-        <img src="assets/projects/<?= $event['image'] ?>" alt="project" class="img-fluid">
+        <img src="../assets/projects/<?= $event['image'] ?>" alt="<?= $event['image'] ?>" class="img-fluid">
       </div>
       <div class="col-lg-4 col-md-12">
         <div class="col-12  d-none d-md-block" style="font-size: 15px;">

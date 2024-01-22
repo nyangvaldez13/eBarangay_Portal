@@ -155,10 +155,10 @@ color: #2D1674;
 .title-type-event{
     color: rgba(38, 38, 38, 0.90);
 font-feature-settings: 'clig' off, 'liga' off;
-font-family: Inter;
+
 font-size: 15px;
 font-style: normal;
-font-weight: 300;
+font-weight: bold;
 line-height: 15px; /* 100% */
 margin: 10px 10px 10px 10px;
 
@@ -166,7 +166,7 @@ margin: 10px 10px 10px 10px;
 
 .heading-event{
     color: #2D1674;
-font-family: Inter;
+
 font-size: 20px;
 font-style: normal;
 font-weight: 700;
@@ -179,7 +179,7 @@ margin: 10px 10px 10px 10px;
     color: rgba(38, 38, 38, 0.70);
 
 font-feature-settings: 'clig' off, 'liga' off;
-font-family: Inter;
+
 font-size: 15px;
 font-style: normal;
 font-weight: 600;
@@ -190,7 +190,7 @@ margin: 10px 10px 10px 10px;
 .description-event{
     color: #262626;
 font-feature-settings: 'clig' off, 'liga' off;
-font-family: Inter;
+
 font-size: 15px;
 font-style: normal;
 font-weight: 500;
@@ -210,15 +210,29 @@ margin: 10px 10px 10px 10px;
     <section>
         <div class="container">
             <ul class="list-site">
-                <li >Featured</li>
-                <li >This Week</li>
-                <li >Ongoing</li>
+                <li onclick="featured()">Featured</li>
+                <li onclick="thisWeek()">This Week</li>
+                <li onclick="ongoing()">Ongoing</li>
             </ul>
         </div>
         <div class="box-container">
 
-        <?php 
-        foreach($events as $event){
+        <?php
+        if (isset($_GET['query'])) {
+            $query = $_GET['query'];
+        }
+        
+        
+        
+        if ($query == 1) {
+            $output = $featured;
+        } elseif ($query == 2) {
+            $output = $thisWeek;
+        } else {
+            $output = $ongoing;
+        }
+
+        foreach($output as $event){
             if($event['activity'] == 1){
                 $title = "Event";
                 $icon = "bi bi-calendar4-event";
@@ -232,18 +246,14 @@ margin: 10px 10px 10px 10px;
             $formattedDate = date('D, d M Y', $timestamp);
             $formattedDateMonth = date('M', $timestamp);
             $formattedDateDay = date('d', $timestamp);
-            
-            $limitText = substr($event['description'], 0, 50);
-
+            $imageName = $event['image'];
+            $limitText = substr($event['description'], 0, 80);
+            $image = "/assets/projects/$imageName";
         ?>
-    <style>
-       .image-event{
-        background: lightgray url('/assets/projects/<?= $event['image'] ?>') center/cover no-repeat;    
-       }
-        </style>
+
         <?php
         echo '<div class="box" onclick="eventInfo('.$event['activity_id'].')">';
-        echo '  <div class="image-event">
+        echo '  <div class="image-event"  style=" background: lightgray url('.$image.') center/cover no-repeat;    ">
         <div class="upper-date">
             <div class="text-upper-event">
             '.$formattedDateMonth.' <br> '. $formattedDateDay .'
@@ -251,7 +261,7 @@ margin: 10px 10px 10px 10px;
                 </div>
         </div>';
         echo '<div class="title-type-event">
-        '. $title .'
+        '. $title .' <i class="'.$icon.'"></i>
         </div>';
         echo '
         <div class="heading-event">
@@ -275,6 +285,16 @@ margin: 10px 10px 10px 10px;
 
    <script>
     function eventInfo(id){
-        window.location.href=`specific-event?event-id=${id}`;
+        window.location.href=`specific-event?event-id=${id}&header=1`;
+    }
+
+    const featured = () => {
+        window.location.href=`/final_views/events?query=1`;
+    }
+    const ongoing = () => {
+        window.location.href=`/final_views/events?query=3`;
+    }
+    const thisWeek = () => {
+        window.location.href=`/final_views/events?query=2`;
     }
    </script>
