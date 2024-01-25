@@ -7,7 +7,7 @@
         <a href="request" class="btn btn-secondary">Back</a>
         </div>
         <h1 class="mt-4">Business Permit Request Form</h1>
-        <form method="POST">
+        <form method="POST" action="../final_backend/forms/business_permit_submission.php" >
             <div class="row mb-3">
                 <div class="col-md-10">
                     <label for="businessName" class="form-label">Business Name</label>

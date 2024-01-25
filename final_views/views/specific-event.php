@@ -1,6 +1,6 @@
 <style>
 .announcement {
-height: 80vh;
+height: 100vh;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -17,6 +17,13 @@ justify-content: center;
 .event-announcement:hover {
     color: #F2921D;
     text-decoration: none;
+}
+
+
+.event-image{
+  max-height: 500px;
+  max-width: 100%;
+  width: 100%;
 }
 </style>
 
@@ -51,7 +58,7 @@ function convertTime($time){
 
     <div class="row text-start ">
       <div class="col-lg-8 col-md-12 mb-4">
-        <img src="../assets/projects/<?= $event['image'] ?>" alt="<?= $event['image'] ?>" class="img-fluid">
+        <img src="../assets/projects/<?= $event['image'] ?>" alt="<?= $event['image'] ?>" class="img-fluid event-image">
       </div>
       <div class="col-lg-4 col-md-12">
         <div class="col-12  d-none d-md-block" style="font-size: 15px;">
@@ -64,12 +71,8 @@ function convertTime($time){
               $title = "Announcement";
             }
           ?>  
-          <script>
-            function newpage(){
-              window.location.href="specific-event.php?event-id=<?= $table['activity_id']; ?>";
-            }
-          </script>
-             <a href="#" onclick="newpage()" class="event-announcement">
+     
+             <a href="#" onclick="newpage()" class="event-announcement" style="text-decoration:none;">
             <div class="col-12">
               <h5><?= $title ?> </h5>
               <p><?= $table['heading'] ?></p>
@@ -83,11 +86,17 @@ function convertTime($time){
     <div>
       <h3><?= $table['heading'] ?></h3>
       <p class="fs-4"><?= $table['description'] ?></p>
-      <br><br><hr>
+      <br><br>
      
     </div>
 
-  </div>
+  </div>    <?php } ?>
 </section>
 
-<?php } ?>
+
+
+<script>
+            function newpage(){
+              window.location.href="specific-event.php?event-id=<?= $table['activity_id']; ?>";
+            }
+          </script>

@@ -4,10 +4,11 @@
     </div>
     <div class="container">
         <div class="back-button">
-            <a href="request" class="btn btn-secondary">Back</a>
+            <a href="request?header=1" class="btn btn-secondary">Back</a>
         </div>
         <h1 class="mt-4">Barangay Certificate Request Form</h1>
-        <form method="POST">
+        <form method="POST" action="../final_backend/forms/brgy_cert_submission.php" onsubmit="return submitForm();">
+
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="firstname" class="form-label">First Name</label>
@@ -23,7 +24,15 @@
                     <label for="age" class="form-label">Age</label>
                     <input type="text" class="form-control" id="age" required name="age">
                 </div>
-              
+             
+                <div class="col-md-2">
+                    <label for="sex" class="form-label">Sex</label>
+                    <select class="form-select" name="sex" id="sex">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -49,4 +58,12 @@
         </form>
     </div>
 </section>
+
+<script>
+    
+    function submitForm(){
+        window.location.href=""
+    }
+
+</script>
 

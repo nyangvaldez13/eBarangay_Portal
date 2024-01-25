@@ -7,11 +7,11 @@
         <a href="request" class="btn btn-secondary">Back</a>
         </div>
         <h1 class="mt-4">Financial Assistance Request Form</h1>
-        <form method="POST">
+        <form method="POST" action="../final_backend/forms/financial_assistance_submission.php" >
             <div class="row mb-3">
                 <div class="col-md-5">
                     <label for="firstname" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="businessName" required name="firstname">
+                    <input type="text" class="form-control" id="firstname" required name="firstname">
                 </div>
                 <div class="col-md-5">
                     <label for="lastname" class="form-label">Last Name</label>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-2">
                     <label for="age" class="form-label">Age</label>
-                    <input type="text" class="form-control" required name="age">
+                    <input type="number" min='0' class="form-control" required name="age">
                 </div>
             </div>
             <div class="row mb-3">

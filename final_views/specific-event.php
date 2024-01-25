@@ -8,7 +8,7 @@ include '../final_backend/dashboard/specific-event.php';
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <?php 
 include './views/specific-event.php';
-?><br><br><br><br><br><br><br><br> <?php
+?><br><br><br><br><br><br><br><br><hr> <?php
 include './includes/test_footer.php';
 
 ?>

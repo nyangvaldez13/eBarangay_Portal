@@ -421,15 +421,17 @@
 .small-image img,
 .larger-image img {
   width: 100%; /* Make images responsive within their containers */
- max-height: 200px; /* Maintain aspect ratio */
+ max-height: 400px; /* Maintain aspect ratio */
   border-radius: 10px;
   margin-bottom: 10px; /* Adjust margin for smaller screens */
 }
 
-.small-image {}
+.small-image img{
+  height: 400px;
+}
 
 .larger-image img {
-  max-height: 407px; /* Set a maximum height for larger images */
+  max-height: px; /* Set a maximum height for larger images */
 }
 
 /* ... Your existing styles ... */

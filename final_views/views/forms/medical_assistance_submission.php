@@ -6,8 +6,9 @@
         <div class="back-button">
         <a href="request" class="btn btn-secondary">Back</a>
         </div>
-        <h1 class="mt-4">Financial Assistance Request Form</h1>
-        <form method="POST">
+        <h1 class="mt-4">Medical Assistance Form Form</h1>
+        <form method="POST" action="../final_backend/forms/financial_assistance_submission.php" >
+
             <div class="row mb-3">
                 <div class="col-md-5">
                     <label for="firstname" class="form-label">First Name</label>

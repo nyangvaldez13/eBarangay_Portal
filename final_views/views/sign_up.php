@@ -12,8 +12,10 @@ background-size: auto 100%;
 height: 100%;
 }
 }
+
+
 </style>
-<section class="vh-100">
+<section class="vh-100 register">
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-6 text-black">

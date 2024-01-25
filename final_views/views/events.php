@@ -233,13 +233,6 @@ margin: 10px 10px 10px 10px;
 
 
 
-
-
-
-
-        
-        
-        
         if ($query == 1) {
             $output = $featured;
         } elseif ($query == 2) {
@@ -264,7 +257,7 @@ margin: 10px 10px 10px 10px;
             $formattedDateDay = date('d', $timestamp);
             $imageName = $event['image'];
             $limitText = substr($event['description'], 0, 80);
-            $image = "/assets/projects/$imageName";
+            $image = "../assets/projects/$imageName";
         ?>
 
         <?php
@@ -305,12 +298,12 @@ margin: 10px 10px 10px 10px;
     }
 
     const featured = () => {
-        window.location.href=`/final_views/events?query=1`;
+        window.location.href=`/final_views/events?query=1&header=1`;
     }
     const ongoing = () => {
-        window.location.href=`/final_views/events?query=3`;
+        window.location.href=`/final_views/events?query=3&header=1`;
     }
     const thisWeek = () => {
-        window.location.href=`/final_views/events?query=2`;
+        window.location.href=`/final_views/events?query=2&header=1`;
     }
    </script>

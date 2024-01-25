@@ -2,7 +2,6 @@
 
 include '../indexDB.php';
 
-$message = "hello world";
 
 
 

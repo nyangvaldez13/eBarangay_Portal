@@ -2,9 +2,10 @@
 
 <style>
 .event-announcement {
-    color: #2d1674;
+    color: #262626e5;
     position: relative;
     transition: color 0.3s, border 0.3s;
+    text-decoration: none;
 }
 
 .gallery-item::after {

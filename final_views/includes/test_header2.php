@@ -9,11 +9,12 @@ $id = null;
 <body>
 <nav id="top-navbar" class="top-navbar">
         <div class="row">
-            <div class="logo">
-                <img src="../assets/branding/logo-darkmode.png" alt="">
-            </div>
+           
             <div class="links">
                 <ul class="justify-content-between align-items-center">
+                <div class="logo">
+                <img src="../assets/branding/logo-darkmode.png" alt="">
+            </div>  
                 &nbsp;
                     <li><a href="#home" id="home-link">Home</a></li>
                     <li><a href="#events" id="events-link">Events</a></li>

@@ -70,11 +70,14 @@ if (isset($_GET['header']) == 1) {
   $requestLink = 'onclick="request_link()"';
   $aboutLink = 'onclick="about_link()"';
   $homeLink = 'onclick="home()"';
+  $contactLink = 'onclick"contact_link()"';
+
 } else {
   $eventLink = 'class="none"';
   $requestLink = 'class="none"';
   $aboutLink = 'class="none"';
-  $homeLink = 'class="none"';
+  $homeLink = 'class="none"'; 
+  $contactLink = 'class="none"'; 
 }
 
 
@@ -96,6 +99,7 @@ if (isset($_GET['header']) == 1) {
                     <li><a href="#events" <?=  $eventLink ?> id="events-link">Events</a></li>
                     <li><a href="#request"<?=  $requestLink ?>  id="request-link">Request</a></li>
                     <li><a href="#about" <?=  $aboutLink ?> id="about-link">About</a></li>
+                    
                     <li></li>
                     <li>
                       <?php if($id == null){
@@ -149,22 +153,25 @@ if (isset($_GET['header']) == 1) {
 
 
 function logout(){
-  window.location.href="../final_backend/login/logout"
+  window.location.href="../final_backend/login/logout";
 }
 
 const home = () => {
-  window.location.href="main"
+  window.location.href="main";
 }
 const event_link = () => {
-  window.location.href="events?query=1&header=1"
+  window.location.href="events?query=1&header=1";
 }
 const request_link = () => {
-  window.location.href="request?header=1"
+  window.location.href="request?header=1";
 }
 const about_link = () => {
-  window.location.href="about?header=1"
+  window.location.href="about?header=1";
 }
 
+const contact_link = () => {
+  window.location.href="contact?header=1";
+}
  const homeLink = document.getElementById("home-link");
 const eventsLink = document.getElementById("events-link");
 const requestLink = document.getElementById("request-link");
