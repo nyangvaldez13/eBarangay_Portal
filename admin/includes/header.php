@@ -224,6 +224,28 @@ require_once('../backend/auth.php')
           <span>News</span>
         </a>
       </li>
+      <li>
+      <a class="nav-link " data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+      <i class="bi bi-sliders"></i><span>Web Configuration</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="icons-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="webConfigTheme">
+              <i class="bi bi-circle"></i><span>Web Theme</span>
+            </a>
+          </li>
+          <li>
+            <a href="icons-remix.html">
+              <i class="bi bi-circle"></i><span>Remix Icons</span>
+            </a>
+          </li>
+          <li>
+            <a href="icons-boxicons.html">
+              <i class="bi bi-circle"></i><span>Boxicons</span>
+            </a>
+          </li>
+        </ul>
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="settings.php">
         <i class="bi bi-gear-fill"></i>

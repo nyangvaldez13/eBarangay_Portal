@@ -1,0 +1,553 @@
+
+
+
+
+
+
+
+
+
+  /* Events Section */
+
+  /* Default styling for the events section */
+.events {
+    padding: 20px;
+    min-height: 120vh;
+    background-color: #f4f4f4;
+  }
+  
+  .event-heading {
+    display: flex;
+    flex-direction: column; /* Adjust layout for smaller screens */
+    align-items: center;
+    padding: 20px; /* Adjust padding for smaller screens */
+    margin-top: 50px;
+    margin-bottom: 65px;
+  }
+  
+  .event-heading h1 {
+    font-size: 34px;
+    color: #2d1674;
+  }
+  
+  /* Responsive styling for the filter dropdown */
+  .filter-dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Adjust layout for smaller screens */
+    align-items: center;
+  }
+  
+  .dropdown-button {
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #9b9988;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin: 10px 0; /* Adjust margin for smaller screens */
+    cursor: pointer;
+    font-size: 15px;
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    margin-top: 10px; /* Adjust margin for smaller screens */
+    margin-left: 0; /* Adjust margin for smaller screens */
+    background-color: #f4f4f4;
+    min-width: 100%; /* Full width for smaller screens */
+    border-radius: 8px;
+    border: 1px solid #9b9988;
+    z-index: 1;
+  }
+  
+  /* Responsive styling for dropdown options */
+  .dropdown-option {
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    cursor: pointer;
+  }
+  
+  /* Show check icon on smaller screens */
+  .check-icon {
+    color: #2d1674;
+    display: inline-block;
+  }
+  
+  /* Media query for tablets and smaller screens */
+  @media only screen and (max-width: 768px) {
+    .event-heading {
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    .dropdown-button {
+      margin: 0; /* Remove margin for smaller screens */
+    }
+  
+    .dropdown-content {
+      margin-left: 0; /* Adjust margin for smaller screens */
+    }
+  }
+
+  
+  /* Default styling for the gallery section */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px 0;
+  padding: 0 10px; /* Adjust padding for smaller screens */
+}
+
+.gallery-item,
+.gallery-itemE {
+  width: calc(33.33% - 20px); /* Initially, three items per row */
+  margin-bottom: 20px;
+  margin-right: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Common styling for gallery items */
+.gallery-item,
+.gallery-itemE {
+  padding: 20px;
+  position: relative;
+  border: 1px solid #9b9988;
+  border-radius: 15px;
+}
+
+/* Styling for gallery items with background image */
+.gallery-itemE {
+  background-image: url("../assets/home/events-bg.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Styling for text content inside gallery items */
+.gallery-item p,
+.gallery-itemE p,
+.gallery-item .caption,
+.gallery-itemE .captionE,
+.gallery-item .date,
+.gallery-itemE .dateE {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Styling for headings inside gallery items */
+.gallery-item .caption,
+.gallery-itemE .captionE {
+  font-size: 23px;
+  font-weight: 550;
+}
+
+/* Styling for button in gallery items */
+.read-more-button {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Media query for tablets and smaller screens */
+@media only screen and (max-width: 768px) {
+  .gallery {
+    margin-left: -10px;
+    margin-right: -10px;
+    flex-direction: column; /* Change to column layout for smaller screens */
+  }
+
+  .gallery-item,
+  .gallery-itemE {
+    width: 100%; /* Full width for smaller screens */
+    margin-right: 0;
+  }
+}
+
+
+/* PROJECT SECTION */
+
+/* Default styling for the projects section */
+.projects {
+  padding: 20px;
+  min-height: 120vh;
+  background-color: #2d1674;
+}
+
+.projects-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 55px;
+}
+
+.projects-heading h1 {
+  font-size: 34px;
+  color: #ffcc00;
+  margin-top: 50px;
+}
+
+/**********************/
+/*  Project Gallery   */
+/**********************/.projects {
+  padding: 20px;
+  min-height: 100vh; /* Adjusted to ensure full viewport height */
+  background-color: #2d1674;
+}
+
+.projects-heading {
+  text-align: center; /* Center text on all screen sizes */
+  margin-bottom: 20px; /* Reduce margin for smaller screens */
+}
+
+.projects-heading h1 {
+  font-size: 28px; /* Adjusted font size for smaller screens */
+  color: #ffcc00;
+  margin-top: 20px; /* Reduce margin for smaller screens */
+}
+
+/**********************/
+/*  Project Gallery   */
+/**********************/
+.projects-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Improved alignment for responsiveness */
+  margin: 20px 0;
+}
+
+.projects-item {
+  box-sizing: border-box;
+  margin: 13px;
+  width: calc(33.33% - 26px); /* Initially, three items per row */
+}
+
+/* Styling for project images */
+.small-image img,
+.larger-image img {
+  width: 100%; /* Make images responsive within their containers */
+ max-height: 400px; /* Maintain aspect ratio */
+  border-radius: 10px;
+  margin-bottom: 10px; /* Adjust margin for smaller screens */
+}
+
+.small-image img{
+  height: 400px;
+}
+
+.larger-image img {
+  max-height: px; /* Set a maximum height for larger images */
+}
+
+/* ... Your existing styles ... */
+
+.projects-overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    padding: 5px 10px;
+  }
+  
+  /* Media query to remove overlay text on smaller screens */
+  @media only screen and (max-width: 480px) {
+    .projects-overlay-text {
+      display: none;
+    }
+  }
+  
+  
+
+/* Media query for tablets and smaller screens */
+@media only screen and (max-width: 768px) {
+  .projects-item {
+    width: calc(50% - 26px); /* Two items per row for smaller screens */
+  }
+
+  .larger-image img {
+    max-height: 300px; /* Adjust height for smaller screens */
+  }
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 480px) {
+  .projects-item {
+    width: 100%; /* Full width for smaller screens */
+    margin-right: 0;
+  }
+}
+
+
+/* Request Section */
+
+/* Default styling for the request section */
+.request {
+  height: auto; /* Adjust height to auto for responsiveness */
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.request-heading {
+  display: flex;
+  flex-direction: column; /* Stack the headings vertically on smaller screens */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 45px;
+}
+
+.request-heading .a,
+.request-heading .b {
+  font-size: 34px;
+  margin-top: 15px; /* Adjust margin for smaller screens */
+  margin-right: 0; /* Remove right margin on smaller screens */
+}
+
+.request-desc {
+  display: flex;
+  flex-direction: column; /* Stack the description vertically on smaller screens */
+  padding-left: 20px; /* Adjust padding for smaller screens */
+  padding-right: 20px; /* Adjust padding for smaller screens */
+  margin-bottom: 45px;
+}
+
+.request-desc p {
+  font-size: 18px; /* Adjust font size for smaller screens */
+  text-align: center;
+}
+
+/**********************/
+/*   Request Items    */
+/**********************/
+.request-items {
+  display: flex;
+  flex-wrap: wrap; /* Use flex-wrap to create a grid layout on larger screens */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 55px;
+}
+
+.request-container {
+  width: 100%; /* Full width for responsiveness */
+  max-width: 340px; /* Set a maximum width for larger screens */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px;
+  position: relative;
+  background-color: #f4f4f4;
+  box-sizing: border-box;
+  border: 1px solid #9b9988;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 20px; /* Add margin between items */
+}
+
+.request-heading-container {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.request-heading .item-logo {
+  width: 72px;
+  height: 70px;
+  padding: 20px;
+  position: relative;
+  background-color: #2d167417;
+  box-sizing: border-box;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.request-heading p {
+  font-size: 18px; /* Adjust font size for smaller screens */
+  font-weight: 600;
+  color: #262626e5;
+  padding-right: 15px; /* Adjust padding for smaller screens */
+  padding-left: 15px; /* Adjust padding for smaller screens */
+  position: relative;
+}
+
+.divider-container {
+  display: flex;
+  justify-content: center; /* Center the divider horizontally */
+}
+
+.line {
+  margin-top: -20px;
+  height: 1.7px;
+  background-color: #9b9988cc;
+  margin-bottom: 20px;
+  width: 80%; /* Adjust width for responsiveness */
+}
+
+ul.bullet-list {
+  list-style-type: disc;
+  margin-left: 20px; /* Adjust margin for smaller screens */
+  margin-bottom: 20px;
+}
+
+ul.bullet-list li {
+  margin-bottom: 8px;
+  font-size: 16px; /* Adjust font size for smaller screens */
+  color: #262626e5;
+}
+
+.request-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px; /* Adjust margin for smaller screens */
+}
+
+.request-button-button {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 40px; /* Adjust padding for smaller screens */
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Media query for tablets and smaller screens */
+@media only screen and (max-width: 768px) {
+  .request-items {
+    flex-direction: column; /* Stack the items vertically on smaller screens */
+  }
+
+  .request-container {
+    margin-bottom: 20px; /* Add margin between stacked items */
+  }
+
+  .request-heading-container {
+    padding-left: 0; /* Remove left padding on smaller screens */
+  }
+}
+
+
+/* About Section */
+
+.about {
+  position: relative;
+  height: 100vh;
+  background-color: #2d1674;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-row {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.bg-image {
+  flex: 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+.bg-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/**********************/
+/*     About Desc     */
+/**********************/
+
+.about-desc {
+  flex: 1;
+  background-color: #2d1674;
+  color: #fff;
+  display: flex;
+  flex-direction: column; /* Stack the columns vertically on smaller screens */
+}
+
+.desc-column {
+  align-items: center;
+  text-align: left;
+  margin: 0;
+  position: relative; /* Remove absolute positioning for responsiveness */
+  padding: 20px; /* Add padding for better spacing on smaller screens */
+}
+
+.desc-column h1 {
+  font-size: 27px;
+  margin-bottom: 10px;
+  margin-top: 15px; /* Adjust margin for smaller screens */
+}
+
+.desc-column h2 {
+  font-size: 36px;
+  width: 100%; /* Full width for smaller screens */
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.desc-column h3 {
+  font-size: 28px;
+  margin-top: 15px; /* Adjust margin for smaller screens */
+  width: 100%; /* Full width for smaller screens */
+  font-weight: 600;
+}
+
+.desc-column p {
+  text-align: left;
+  font-size: 20px;
+  margin-top: 15px; /* Adjust margin for smaller screens */
+  width: 100%; /* Full width for smaller screens */
+}
+
+.desc-button {
+  margin-top: 20px; /* Adjust margin for smaller screens */
+}
+
+.about-more-button {
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  background-color: #c5bbd3;
+  color: #2d1674;
+  border: none;
+  padding: 10px 21px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Media query for tablets and smaller screens */
+@media only screen and (max-width: 768px) {
+  .about-row {
+    flex-direction: column; /* Stack the rows vertically on smaller screens */
+  }
+
+  .desc-column h1,
+  .desc-column h2,
+  .desc-column h3,
+  .desc-column p {
+    padding-left: 20px; /* Adjust padding for smaller screens */
+    padding-right: 20px; /* Adjust padding for smaller screens */
+  }
+
+  .about-more-button {
+    margin-top: 20px; /* Adjust margin for smaller screens */
+  }
+}
+
+

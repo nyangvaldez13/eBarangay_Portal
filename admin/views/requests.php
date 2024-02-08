@@ -31,11 +31,11 @@
   </thead>
   <tbody>
     <?php 
-    $notifications = [];
+   
     foreach ($tables as $table => $tableLabel) {
-        $sql = "SELECT *, users.* 
+        $sql = "SELECT $table.*, users.* 
                 FROM $table 
-                LEFT JOIN users ON $table.request_id = users.id 
+                LEFT JOIN users ON $table.request_id = users.id ORDER BY $table.created_at
                 ";
         $result = $conn->query($sql);
 
@@ -57,9 +57,7 @@
                
                 $date = date('d M Y', strtotime($row['request_date']));
                 
-                $notification[] = [
-                  
-                ]
+        
    
             ?>
               <tr data-table="<?= $table ?>" data-id="<?= $row['id'] ?>" >
@@ -340,4 +338,69 @@ for (var key in formData) {
     </script>
 
 
-<?php require('../includes/footer.php') ?>
+<?php require('../includes/footer.php') 
+
+
+
+
+?>
+
+
+<?php
+
+// TO UPDATE
+$tables = array(
+    "brgy_cert_submission" => "Barangay Submission",
+    "burial_assistance_submission" => "Burial Assistance",
+    "business_permit_submission" => "Business Permit",
+    "financial_assistance_submission" => "Financial Assistance",
+    "medical_assistance_submission" => "Medical Assistance",
+    "senior_citizen_application" => "Senior Citizen Application"
+);
+
+// Initialize an empty array to store all the results
+$allResults = array();
+
+foreach ($tables as $table => $tableLabel) {
+    $sql = "SELECT $table.*, users.* 
+            FROM $table 
+            LEFT JOIN users ON $table.request_id = users.id";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            // Add each row to the $allResults array
+            $allResults[] = $row;
+        }
+    }
+}
+
+// Sort the array by the 'created_at' date in descending order
+usort($allResults, function($a, $b) {
+    return strtotime($b['created_at']) - strtotime($a['created_at']);
+});
+
+// Now, $allResults is sorted by 'created_at' in descending order
+
+// Display or process the sorted results as needed
+foreach ($allResults as $row) {
+    $name = $row['firstname'] . ' ' . $row['lastname'];
+    $status = $row['status'];
+
+    if($status == 1 ){
+        $toDisplay = 'Approved';
+        $toDisplayClass = 'text-success border border-success rounded bg-light text-center ';
+    } else if($status == 2){
+        $toDisplay = 'Processing';
+        $toDisplayClass = 'text-warning border border-warning rounded bg-light col-4 text-center';
+    } else {
+        $toDisplay = 'Declined';
+        $toDisplayClass = 'text-danger border border-danger rounded bg-light col-4 text-center';
+    }
+
+    $date = date('d M Y', strtotime($row['created_at']));
+
+    // Display or process the sorted data as needed
+    echo "$name - Status: $toDisplay - Date: $date <br>";
+}
+?>
